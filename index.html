@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .quiz-container {
+            max-width: 600px;
+            background: #1e1e1e;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin: auto;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .option {
+            display: block;
+            background: #333;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+        .option:hover {
+            background: #444;
+        }
+        .correct {
+            background: #4CAF50 !important;
+            color: white;
+        }
+        .wrong {
+            background: #F44336 !important;
+            color: white;
+        }
+        .submit-btn {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background: #0056b3;
+        }
+        .explanation {
+            font-size: 14px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            background: #222;
+            color: white;
+            border: 1px solid #444;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>MCQ Quiz</h2>
+        <textarea id="jsonInput" placeholder="Paste JSON here..."></textarea>
+        <button class="submit-btn" onclick="loadQuiz()">Load Quiz</button>
+        <div id="quiz"></div>
+        <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        let questions = [];
+        
+        function loadQuiz() {
+            const input = document.getElementById("jsonInput").value;
+            try {
+                questions = JSON.parse(input);
+                displayQuiz();
+            } catch (error) {
+                alert("Invalid JSON format");
+            }
+        }
+        
+        function displayQuiz() {
+            let quizDiv = document.getElementById("quiz");
+            quizDiv.innerHTML = "";
+            questions.forEach((q, index) => {
+                let questionHTML = `<div class='question'>${index + 1}. ${q.question}</div>`;
+                q.options.forEach((option, i) => {
+                    questionHTML += `<div class='option' onclick='selectOption(${index}, ${i})' id='q${index}-o${i}'>${option}</div>`;
+                });
+                questionHTML += `<div class='explanation' id='explanation${index}' style='display:none;'>${q.explanation}</div>`;
+                quizDiv.innerHTML += questionHTML;
+            });
+        }
+        
+        let userAnswers = [];
+        function selectOption(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            document.querySelectorAll(`[id^='q${questionIndex}-o']`).forEach(opt => opt.style.background = "#333");
+            document.getElementById(`q${questionIndex}-o${optionIndex}`).style.background = "#666";
+        }
+        
+        function submitQuiz() {
+            let score = 0;
+            questions.forEach((q, index) => {
+                let selectedOption = userAnswers[index];
+                if (selectedOption === undefined) return;
+                let correctOption = q.correct;
+                let selectedElement = document.getElementById(`q${index}-o${selectedOption}`);
+                let correctElement = document.getElementById(`q${index}-o${correctOption}`);
+                if (selectedOption === correctOption) {
+                    score++;
+                    selectedElement.classList.add("correct");
+                } else {
+                    selectedElement.classList.add("wrong");
+                    correctElement.classList.add("correct");
+                }
+                document.getElementById(`explanation${index}`).style.display = "block";
+            });
+            document.getElementById("result").innerText = `You scored ${score} out of ${questions.length}`;
+        }
+    </script>
+</body>
+</html>
