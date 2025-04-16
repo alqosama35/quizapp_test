@@ -72,11 +72,32 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
+        .instructions {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #bbb;
+        }
     </style>
 </head>
 <body>
     <div class="quiz-container">
         <h2>MCQ Quiz</h2>
+        <p class="instructions">Paste a valid JSON format containing multiple-choice questions into the text box below. Click "Load Quiz" to start answering the questions.</p>
+        <p class="instructions">The JSON format should be as follows:</p>
+        <pre class="instructions">[
+    {
+        "question": "What is the capital of France?",
+        "options": ["Berlin", "Madrid", "Paris", "Rome"],
+        "correct": 2,
+        "explanation": "Paris is the capital of France."
+    },
+    {
+        "question": "Which planet is known as the Red Planet?",
+        "options": ["Earth", "Mars", "Jupiter", "Venus"],
+        "correct": 1,
+        "explanation": "Mars is known as the Red Planet due to its reddish appearance."
+    }
+]</pre>
         <textarea id="jsonInput" placeholder="Paste JSON here..."></textarea>
         <button class="submit-btn" onclick="loadQuiz()">Load Quiz</button>
         <div id="quiz"></div>
