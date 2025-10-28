@@ -57,6 +57,18 @@
         .submit-btn:hover {
             background: #0056b3;
         }
+        .submit-btn:nth-child(3), .submit-btn:nth-child(4), .submit-btn:nth-child(5) {
+            background: #28a745;
+        }
+        .submit-btn:nth-child(3):hover, .submit-btn:nth-child(4):hover, .submit-btn:nth-child(5):hover {
+            background: #218838;
+        }
+        .submit-btn:nth-child(5) {
+            background: #dc3545;
+        }
+        .submit-btn:nth-child(5):hover {
+            background: #c82333;
+        }
         .explanation {
             font-size: 14px;
             color: #ddd;
@@ -100,26 +112,106 @@
 ]</pre>
         <textarea id="jsonInput" placeholder="Paste JSON here..."></textarea>
         <button class="submit-btn" onclick="loadQuiz()">Load Quiz</button>
+        <button class="submit-btn" onclick="loadMistakesQuiz()">Practice Mistakes</button>
+        <button class="submit-btn" onclick="exportMistakes()">Export Mistakes</button>
+        <button class="submit-btn" onclick="clearMistakes()">Clear Mistakes</button>
+        <p id="mistakesCount" style="color: #FFD700; margin-top: 10px;"></p>
         <div id="quiz"></div>
         <button class="submit-btn" onclick="submitQuiz()">Submit</button>
         <p id="result"></p>
     </div>
     <script>
         let questions = [];
+        let mistakes = [];
+        
+        // Load mistakes from localStorage
+        function loadMistakes() {
+            const stored = localStorage.getItem('quizMistakes');
+            if (stored) {
+                mistakes = JSON.parse(stored);
+            }
+        }
+        
+        // Save mistakes to localStorage
+        function saveMistakes() {
+            localStorage.setItem('quizMistakes', JSON.stringify(mistakes));
+        }
+        
+        // Check if question already exists in mistakes (prevent duplicates)
+        function isQuestionInMistakes(question) {
+            return mistakes.some(m => m.question === question.question);
+        }
+        
+        // Add mistake to the list if it's unique
+        function addMistake(question) {
+            if (!isQuestionInMistakes(question)) {
+                mistakes.push(question);
+                saveMistakes();
+            }
+        }
         
         function loadQuiz() {
             const input = document.getElementById("jsonInput").value;
+            if (!input.trim()) {
+                alert("Please paste quiz JSON first!");
+                return;
+            }
             try {
                 questions = JSON.parse(input);
+                userAnswers = []; // Reset answers for new quiz
+                console.log("Loaded " + questions.length + " questions from input");
                 displayQuiz();
             } catch (error) {
                 alert("Invalid JSON format");
             }
         }
         
+        // Load quiz from mistakes
+        function loadMistakesQuiz() {
+            loadMistakes();
+            if (mistakes.length === 0) {
+                alert("No mistakes saved yet!");
+                return;
+            }
+            questions = JSON.parse(JSON.stringify(mistakes)); // Deep copy
+            userAnswers = []; // Reset answers
+            console.log("Loaded " + questions.length + " questions from mistakes");
+            document.getElementById("jsonInput").value = JSON.stringify(mistakes, null, 2);
+            displayQuiz();
+        }
+        
+        // Export mistakes as JSON file
+        function exportMistakes() {
+            loadMistakes();
+            if (mistakes.length === 0) {
+                alert("No mistakes to export!");
+                return;
+            }
+            const dataStr = JSON.stringify(mistakes, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'mistakes.json';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Clear all mistakes
+        function clearMistakes() {
+            if (confirm("Are you sure you want to clear all saved mistakes?")) {
+                mistakes = [];
+                saveMistakes();
+                document.getElementById("mistakesCount").innerText = "";
+                alert("All mistakes cleared!");
+            }
+        }
+        
         function displayQuiz() {
             let quizDiv = document.getElementById("quiz");
             quizDiv.innerHTML = "";
+            document.getElementById("result").innerText = ""; // Clear previous results
+            document.getElementById("mistakesCount").innerText = mistakes.length > 0 ? `Total mistakes saved: ${mistakes.length}` : "";
             questions.forEach((q, index) => {
                 let questionHTML = `<div class='question'>${index + 1}. ${q.question}</div>`;
                 q.options.forEach((option, i) => {
@@ -139,6 +231,8 @@
         
         function submitQuiz() {
             let score = 0;
+            loadMistakes(); // Load existing mistakes
+            
             questions.forEach((q, index) => {
                 let selectedOption = userAnswers[index];
                 if (selectedOption === undefined) return;
@@ -151,11 +245,26 @@
                 } else {
                     selectedElement.classList.add("wrong");
                     correctElement.classList.add("correct");
+                    // Save incorrect answer (only if unique)
+                    addMistake(q);
                 }
                 document.getElementById(`explanation${index}`).style.display = "block";
             });
             document.getElementById("result").innerText = `You scored ${score} out of ${questions.length}`;
+            
+            // Show how many mistakes are saved
+            if (mistakes.length > 0) {
+                document.getElementById("mistakesCount").innerText = `Total mistakes saved: ${mistakes.length}`;
+            }
         }
+        
+        // Initialize on page load
+        window.onload = function() {
+            loadMistakes();
+            if (mistakes.length > 0) {
+                document.getElementById("mistakesCount").innerText = `Total mistakes saved: ${mistakes.length}`;
+            }
+        };
     </script>
 </body>
 </html>
