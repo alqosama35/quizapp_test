@@ -3,268 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCQ Quiz App</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #121212;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .quiz-container {
-            max-width: 600px;
-            background: #1e1e1e;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            margin: auto;
-        }
-        .question {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        .option {
-            display: block;
-            background: #333;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            cursor: pointer;
-            color: white;
-        }
-        .option:hover {
-            background: #444;
-        }
-        .correct {
-            background: #4CAF50 !important;
-            color: white;
-        }
-        .wrong {
-            background: #F44336 !important;
-            color: white;
-        }
-        .submit-btn {
-            background: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        .submit-btn:hover {
-            background: #0056b3;
-        }
-        .submit-btn:nth-child(3), .submit-btn:nth-child(4), .submit-btn:nth-child(5) {
-            background: #28a745;
-        }
-        .submit-btn:nth-child(3):hover, .submit-btn:nth-child(4):hover, .submit-btn:nth-child(5):hover {
-            background: #218838;
-        }
-        .submit-btn:nth-child(5) {
-            background: #dc3545;
-        }
-        .submit-btn:nth-child(5):hover {
-            background: #c82333;
-        }
-        .explanation {
-            font-size: 14px;
-            color: #ddd;
-            margin-top: 5px;
-        }
-        textarea {
-            width: 100%;
-            height: 150px;
-            background: #222;
-            color: white;
-            border: 1px solid #444;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        .instructions {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: #bbb;
-        }
-    </style>
+    <title>QuizMaster - MCQ Quiz App</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/responsive.css">
 </head>
-<body>
-    <div class="quiz-container">
-        <h2>MCQ Quiz</h2>
-        <p class="instructions">Paste a valid JSON format containing multiple-choice questions into the text box below. Click "Load Quiz" to start answering the questions.</p>
-        <p class="instructions">The JSON format should be as follows:</p>
-        <pre class="instructions">[
-    {
-        "question": "What is the capital of France?",
-        "options": ["Berlin", "Madrid", "Paris", "Rome"],
-        "correct": 2,
-        "explanation": "Paris is the capital of France."
-    },
-    {
-        "question": "Which planet is known as the Red Planet?",
-        "options": ["Earth", "Mars", "Jupiter", "Venus"],
-        "correct": 1,
-        "explanation": "Mars is known as the Red Planet due to its reddish appearance."
-    }
-]</pre>
-        <textarea id="jsonInput" placeholder="Paste JSON here..."></textarea>
-        <button class="submit-btn" onclick="loadQuiz()">Load Quiz</button>
-        <button class="submit-btn" onclick="loadMistakesQuiz()">Practice Mistakes</button>
-        <button class="submit-btn" onclick="exportMistakes()">Export Mistakes</button>
-        <button class="submit-btn" onclick="clearMistakes()">Clear Mistakes</button>
-        <p id="mistakesCount" style="color: #FFD700; margin-top: 10px;"></p>
-        <div id="quiz"></div>
-        <button class="submit-btn" onclick="submitQuiz()">Submit</button>
-        <p id="result"></p>
+<body class="dark-theme">
+    <div id="app">
+        <div style="text-align: center; padding: 60px 20px;">
+            <h2>Loading Quiz App...</h2>
+            <p style="color: var(--text-secondary);">Please wait while we initialize the database</p>
+        </div>
     </div>
-    <script>
-        let questions = [];
-        let mistakes = [];
-        
-        // Load mistakes from localStorage
-        function loadMistakes() {
-            const stored = localStorage.getItem('quizMistakes');
-            if (stored) {
-                mistakes = JSON.parse(stored);
-            }
-        }
-        
-        // Save mistakes to localStorage
-        function saveMistakes() {
-            localStorage.setItem('quizMistakes', JSON.stringify(mistakes));
-        }
-        
-        // Check if question already exists in mistakes (prevent duplicates)
-        function isQuestionInMistakes(question) {
-            return mistakes.some(m => m.question === question.question);
-        }
-        
-        // Add mistake to the list if it's unique
-        function addMistake(question) {
-            if (!isQuestionInMistakes(question)) {
-                mistakes.push(question);
-                saveMistakes();
-            }
-        }
-        
-        function loadQuiz() {
-            const input = document.getElementById("jsonInput").value;
-            if (!input.trim()) {
-                alert("Please paste quiz JSON first!");
-                return;
-            }
-            try {
-                questions = JSON.parse(input);
-                userAnswers = []; // Reset answers for new quiz
-                console.log("Loaded " + questions.length + " questions from input");
-                displayQuiz();
-            } catch (error) {
-                alert("Invalid JSON format");
-            }
-        }
-        
-        // Load quiz from mistakes
-        function loadMistakesQuiz() {
-            loadMistakes();
-            if (mistakes.length === 0) {
-                alert("No mistakes saved yet!");
-                return;
-            }
-            questions = JSON.parse(JSON.stringify(mistakes)); // Deep copy
-            userAnswers = []; // Reset answers
-            console.log("Loaded " + questions.length + " questions from mistakes");
-            document.getElementById("jsonInput").value = JSON.stringify(mistakes, null, 2);
-            displayQuiz();
-        }
-        
-        // Export mistakes as JSON file
-        function exportMistakes() {
-            loadMistakes();
-            if (mistakes.length === 0) {
-                alert("No mistakes to export!");
-                return;
-            }
-            const dataStr = JSON.stringify(mistakes, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'mistakes.json';
-            link.click();
-            URL.revokeObjectURL(url);
-        }
-        
-        // Clear all mistakes
-        function clearMistakes() {
-            if (confirm("Are you sure you want to clear all saved mistakes?")) {
-                mistakes = [];
-                saveMistakes();
-                document.getElementById("mistakesCount").innerText = "";
-                alert("All mistakes cleared!");
-            }
-        }
-        
-        function displayQuiz() {
-            let quizDiv = document.getElementById("quiz");
-            quizDiv.innerHTML = "";
-            document.getElementById("result").innerText = ""; // Clear previous results
-            document.getElementById("mistakesCount").innerText = mistakes.length > 0 ? `Total mistakes saved: ${mistakes.length}` : "";
-            questions.forEach((q, index) => {
-                let questionHTML = `<div class='question'>${index + 1}. ${q.question}</div>`;
-                q.options.forEach((option, i) => {
-                    questionHTML += `<div class='option' onclick='selectOption(${index}, ${i})' id='q${index}-o${i}'>${option}</div>`;
-                });
-                questionHTML += `<div class='explanation' id='explanation${index}' style='display:none;'>${q.explanation}</div>`;
-                quizDiv.innerHTML += questionHTML;
-            });
-        }
-        
-        let userAnswers = [];
-        function selectOption(questionIndex, optionIndex) {
-            userAnswers[questionIndex] = optionIndex;
-            document.querySelectorAll(`[id^='q${questionIndex}-o']`).forEach(opt => opt.style.background = "#333");
-            document.getElementById(`q${questionIndex}-o${optionIndex}`).style.background = "#666";
-        }
-        
-        function submitQuiz() {
-            let score = 0;
-            loadMistakes(); // Load existing mistakes
-            
-            questions.forEach((q, index) => {
-                let selectedOption = userAnswers[index];
-                if (selectedOption === undefined) return;
-                let correctOption = q.correct;
-                let selectedElement = document.getElementById(`q${index}-o${selectedOption}`);
-                let correctElement = document.getElementById(`q${index}-o${correctOption}`);
-                if (selectedOption === correctOption) {
-                    score++;
-                    selectedElement.classList.add("correct");
-                } else {
-                    selectedElement.classList.add("wrong");
-                    correctElement.classList.add("correct");
-                    // Save incorrect answer (only if unique)
-                    addMistake(q);
-                }
-                document.getElementById(`explanation${index}`).style.display = "block";
-            });
-            document.getElementById("result").innerText = `You scored ${score} out of ${questions.length}`;
-            
-            // Show how many mistakes are saved
-            if (mistakes.length > 0) {
-                document.getElementById("mistakesCount").innerText = `Total mistakes saved: ${mistakes.length}`;
-            }
-        }
-        
-        // Initialize on page load
-        window.onload = function() {
-            loadMistakes();
-            if (mistakes.length > 0) {
-                document.getElementById("mistakesCount").innerText = `Total mistakes saved: ${mistakes.length}`;
-            }
-        };
-    </script>
+
+    <!-- Dexie.js - IndexedDB Library -->
+    <script src="https://unpkg.com/dexie@3.2.4/dist/dexie.min.js"></script>
+    
+    <!-- Core scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/modal.js"></script>
+    
+    <!-- Component scripts -->
+    <script src="components/dashboard.js"></script>
+    <script src="components/course-view.js"></script>
+    <script src="components/quiz-input.js"></script>
+    <script src="components/quiz-taking.js"></script>
+    <script src="components/quiz-results.js"></script>
+    <script src="components/settings.js"></script>
+    <script src="components/help.js"></script>
+    
+    <!-- Main app initialization -->
+    <script src="js/app.js"></script>
 </body>
 </html>
