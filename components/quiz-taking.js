@@ -6,103 +6,182 @@ async function renderQuizTaking() {
         Router.back();
         return '';
     }
-    
+
     const quiz = session.quiz;
     const currentQ = session.currentQuestion;
     const question = quiz.jsonData[currentQ];
     const totalQuestions = quiz.jsonData.length;
-    const progress = Math.round(((currentQ) / totalQuestions) * 100);
-    
-    // Calculate elapsed time
+    const progress = Math.round((currentQ / totalQuestions) * 100);
     const elapsedTime = Math.floor((Date.now() - session.startTime) / 1000);
-    
+
+    const isRevealed = session.instantFeedback && session.revealedAnswers[currentQ];
+    const selectedAnswer = session.answers[currentQ];
+    const isCorrectAnswer = isRevealed && selectedAnswer === question.correct;
+
     return `
         <div class="quiz-taking-page">
-            <header class="quiz-header">
-                <div class="quiz-title">${escapeHTML(quiz.name)}</div>
-                <div class="quiz-timer" id="quiz-timer">⏱️ ${formatTime(elapsedTime)}</div>
-            </header>
-            
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: ${progress}%"></div>
+
+            <!-- Sticky header -->
+            <div class="qt-header">
+                <div class="qt-header-inner">
+                    <div class="qt-title">${escapeHTML(quiz.name)}</div>
+                    <div class="qt-timer" id="quiz-timer">⏱ ${formatTime(elapsedTime)}</div>
+                </div>
+                <div class="qt-progress-bar">
+                    <div class="qt-progress-fill" style="width:${progress}%"></div>
+                </div>
+                <div class="qt-progress-label">Question ${currentQ + 1} of ${totalQuestions}</div>
             </div>
-            <div class="progress-text">Question ${currentQ + 1} / ${totalQuestions}</div>
-            
-            <div class="quiz-content">
-                <div class="question-text">
-                    <span class="question-number">Question ${currentQ + 1}</span>
-                    ${escapeHTML(question.question)}
+
+            <!-- Question card -->
+            <div class="qt-question-card">
+                <div class="qt-question-meta">
+                    <span class="qt-q-chip">Q ${currentQ + 1}</span>
                 </div>
-                
-                <div class="options-list">
-                    ${question.options.map((option, index) => {
-                        const isSelected = session.answers[currentQ] === index;
-                        return `
-                            <div class="option ${isSelected ? 'selected' : ''}" 
-                                 onclick="selectOption(${index})"
-                                 data-index="${index}">
-                                <div class="option-indicator">${String.fromCharCode(65 + index)})</div>
-                                <div class="option-text">${escapeHTML(option)}</div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-                
-                <div class="question-navigator">
-                    ${quiz.jsonData.map((_, idx) => {
-                        const answered = session.answers[idx] !== null;
-                        const current = idx === currentQ;
-                        return `
-                            <div class="nav-dot ${answered ? 'answered' : ''} ${current ? 'current' : ''}"
-                                 onclick="jumpToQuestion(${idx})"
-                                 title="Question ${idx + 1}">
-                                ${answered ? '✓' : idx + 1}
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-                
-                <div class="quiz-actions">
-                    <button class="btn btn-secondary" 
-                            onclick="previousQuestion()" 
-                            ${currentQ === 0 ? 'disabled' : ''}>
-                        ← Previous
-                    </button>
-                    
-                    ${currentQ < totalQuestions - 1 ? `
-                        <button class="btn btn-primary" onclick="nextQuestion()">
-                            Next →
-                        </button>
-                    ` : `
-                        <button class="btn btn-success btn-lg" onclick="submitQuizConfirm()">
-                            ✅ Submit Quiz
-                        </button>
-                    `}
-                </div>
-                
-                <div class="quiz-footer">
-                    <button class="btn btn-text" onclick="pauseQuiz()">⏸️ Pause</button>
-                    <button class="btn btn-text" onclick="reviewAllAnswers()">📝 Review All (R)</button>
-                    <div class="keyboard-hints">
-                        <span class="hint">1-4: Select option</span>
-                        <span class="hint">←→: Navigate</span>
-                        <span class="hint">Enter: Next/Submit</span>
+                <div class="qt-question-text">${escapeHTML(question.question)}</div>
+            </div>
+
+            <!-- Options -->
+            <div class="qt-options">
+                ${question.options.map((option, index) => {
+                    const isSelected = selectedAnswer === index;
+                    const isCorrectOpt = isRevealed && index === question.correct;
+                    const isWrongOpt = isRevealed && isSelected && index !== question.correct;
+
+                    let cls = 'qt-option';
+                    if (isCorrectOpt)     cls += ' option-feedback-correct';
+                    else if (isWrongOpt)  cls += ' option-feedback-wrong';
+                    else if (isSelected)  cls += ' selected';
+                    if (isRevealed)       cls += ' option-locked';
+
+                    return `
+                        <div class="${cls}"
+                             ${isRevealed ? '' : `onclick="selectOption(${index})"`}
+                             data-index="${index}">
+                            <div class="qt-option-key">${String.fromCharCode(65 + index)}</div>
+                            <div class="qt-option-label">${escapeHTML(option)}</div>
+                            ${isCorrectOpt ? '<div class="option-tag correct-tag">✓ Correct</div>' : ''}
+                            ${isWrongOpt   ? '<div class="option-tag wrong-tag">✗ Wrong</div>'   : ''}
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+
+            <!-- Instant feedback banner -->
+            ${isRevealed ? `
+                <div class="feedback-banner ${isCorrectAnswer ? 'feedback-correct' : 'feedback-wrong'}">
+                    <div class="feedback-icon">${isCorrectAnswer ? '✅' : '❌'}</div>
+                    <div class="feedback-body">
+                        <div class="feedback-title">${isCorrectAnswer ? 'Correct!' : 'Incorrect'}</div>
+                        ${question.explanation ? `<div class="feedback-explanation">💡 ${escapeHTML(question.explanation)}</div>` : ''}
                     </div>
                 </div>
+            ` : ''}
+
+            <!-- Question navigator -->
+            <div class="qt-nav-strip">
+                ${quiz.jsonData.map((_, idx) => {
+                    const answered = session.answers[idx] !== null;
+                    const revealed = session.revealedAnswers && session.revealedAnswers[idx];
+                    const correct  = revealed && session.answers[idx] === quiz.jsonData[idx].correct;
+                    const wrong    = revealed && session.answers[idx] !== quiz.jsonData[idx].correct;
+                    const current  = idx === currentQ;
+
+                    let dotClass = 'nav-dot';
+                    if (correct)       dotClass += ' nav-dot-correct';
+                    else if (wrong)    dotClass += ' nav-dot-wrong';
+                    else if (answered) dotClass += ' answered';
+                    if (current)       dotClass += ' current';
+
+                    return `
+                        <div class="${dotClass}" onclick="jumpToQuestion(${idx})" title="Question ${idx + 1}">
+                            ${correct ? '✓' : wrong ? '✗' : idx + 1}
+                        </div>
+                    `;
+                }).join('')}
             </div>
+
+            <!-- Actions -->
+            <div class="qt-actions">
+                <button class="btn btn-secondary" onclick="previousQuestion()" ${currentQ === 0 ? 'disabled' : ''}>
+                    ← Previous
+                </button>
+                ${currentQ < totalQuestions - 1 ? `
+                    <button class="btn btn-primary" onclick="nextQuestion()">
+                        Next →
+                    </button>
+                ` : `
+                    <button class="btn btn-success btn-lg" onclick="submitQuizConfirm()">
+                        ✅ Submit Quiz
+                    </button>
+                `}
+            </div>
+
+            <!-- Footer -->
+            <div class="qt-footer">
+                <button class="btn btn-text" onclick="pauseQuiz()">⏸ Pause</button>
+                <div class="qt-footer-divider"></div>
+                <button class="btn btn-text" onclick="reviewAllAnswers()">📝 Review (R)</button>
+                <div class="qt-footer-divider"></div>
+                <button class="btn btn-text feedback-toggle-btn ${session.instantFeedback ? 'feedback-toggle-on' : ''}"
+                        onclick="toggleInstantFeedback()"
+                        title="Show correct/wrong after each answer">
+                    💡 Feedback: <strong>${session.instantFeedback ? 'ON' : 'OFF'}</strong>
+                </button>
+                <div class="keyboard-hints">
+                    <span class="hint">1–4 Select</span>
+                    <span class="hint">← → Navigate</span>
+                    <span class="hint">Enter Next</span>
+                    <span class="hint">R Review</span>
+                </div>
+            </div>
+
         </div>
     `;
 }
 
 function selectOption(index) {
     const session = AppState.quizSession;
-    session.answers[session.currentQuestion] = index;
-    
-    // Update UI
-    const options = document.querySelectorAll('.option');
-    options.forEach((opt, idx) => {
-        opt.classList.toggle('selected', idx === index);
-    });
+    const currentQ = session.currentQuestion;
+
+    if (session.instantFeedback && session.revealedAnswers[currentQ]) return;
+
+    session.answers[currentQ] = index;
+
+    if (session.instantFeedback) {
+        session.revealedAnswers[currentQ] = true;
+        applyInstantFeedback(currentQ, index);
+    } else {
+        const options = document.querySelectorAll('.qt-option');
+        options.forEach((opt, idx) => opt.classList.toggle('selected', idx === index));
+    }
+}
+
+function applyInstantFeedback(questionIdx, selectedIndex) {
+    const session = AppState.quizSession;
+    const question = session.quiz.jsonData[questionIdx];
+    const isCorrect = selectedIndex === question.correct;
+
+    const navDots = document.querySelectorAll('.nav-dot');
+    if (navDots[questionIdx]) {
+        navDots[questionIdx].classList.remove('answered', 'nav-dot-correct', 'nav-dot-wrong');
+        navDots[questionIdx].classList.add(isCorrect ? 'nav-dot-correct' : 'nav-dot-wrong');
+        navDots[questionIdx].textContent = isCorrect ? '✓' : '✗';
+    }
+
+    render();
+}
+
+function toggleInstantFeedback() {
+    const session = AppState.quizSession;
+    session.instantFeedback = !session.instantFeedback;
+    updateSettings({ instantFeedback: session.instantFeedback });
+    const btn = document.querySelector('.feedback-toggle-btn');
+    if (btn) {
+        btn.classList.toggle('feedback-toggle-on', session.instantFeedback);
+        btn.innerHTML = `💡 Feedback: <strong>${session.instantFeedback ? 'ON' : 'OFF'}</strong>`;
+    }
+    showToast(`Instant feedback ${session.instantFeedback ? 'enabled' : 'disabled'}`, 'info');
 }
 
 function previousQuestion() {
@@ -116,7 +195,6 @@ function previousQuestion() {
 function nextQuestion() {
     const session = AppState.quizSession;
     const totalQuestions = session.quiz.jsonData.length;
-    
     if (session.currentQuestion < totalQuestions - 1) {
         session.currentQuestion++;
         render();
@@ -124,30 +202,23 @@ function nextQuestion() {
 }
 
 function jumpToQuestion(index) {
-    const session = AppState.quizSession;
-    session.currentQuestion = index;
+    AppState.quizSession.currentQuestion = index;
     render();
-}
-
-function pauseQuiz() {
-    if (confirmDialog('Pause quiz? Your progress will be saved.')) {
-        Router.back();
-    }
 }
 
 async function submitQuizConfirm() {
     const session = AppState.quizSession;
     const unanswered = session.answers.filter(a => a === null).length;
-    
+
     if (unanswered > 0) {
         const confirmed = await Modal.confirm(
-            `You have ${unanswered} unanswered question(s). Submit anyway?`,
+            `You have ${unanswered} unanswered question${unanswered !== 1 ? 's' : ''}. Submit anyway?`,
             'Unanswered Questions',
             { confirmText: 'Submit Anyway', cancelText: 'Go Back' }
         );
         if (!confirmed) return;
     }
-    
+
     await submitQuiz();
 }
 
@@ -155,16 +226,15 @@ async function submitQuiz() {
     const session = AppState.quizSession;
     const quiz = session.quiz;
     const totalTime = Math.floor((Date.now() - session.startTime) / 1000);
-    
-    // Calculate score
+
     let score = 0;
     const answers = [];
     const mistakes = [];
-    
+
     quiz.jsonData.forEach((question, index) => {
         const selectedOption = session.answers[index];
         const isCorrect = selectedOption === question.correct;
-        
+
         if (selectedOption !== null) {
             answers.push({
                 questionIndex: index,
@@ -174,7 +244,7 @@ async function submitQuiz() {
                 isCorrect,
                 timeTaken: 0
             });
-            
+
             if (isCorrect) {
                 score++;
             } else {
@@ -182,15 +252,14 @@ async function submitQuiz() {
                     courseId: AppState.currentCourse.id,
                     quizId: quiz.id !== 'mistakes-practice' ? quiz.id : null,
                     quizName: quiz.name,
-                    question: question,
+                    question,
                     incorrectAnswer: selectedOption,
                     correctAnswer: question.correct
                 });
             }
         }
     });
-    
-    // Save result
+
     const result = await saveResult({
         courseId: AppState.currentCourse.id,
         quizId: quiz.id !== 'mistakes-practice' ? quiz.id : null,
@@ -200,66 +269,63 @@ async function submitQuiz() {
         timeTaken: totalTime,
         answers
     });
-    
-    // Save mistakes
+
     for (const mistake of mistakes) {
         await saveMistake(mistake);
     }
-    
-    // Store result in session for results page
-    AppState.quizResult = {
-        result,
-        quiz,
-        mistakes: mistakes.length
-    };
-    
+
+    AppState.quizResult = { result, quiz, mistakes: mistakes.length };
     Router.navigate('quiz-results');
 }
 
 function reviewAllAnswers() {
+    if (document.getElementById('review-modal')) return;
+
     const session = AppState.quizSession;
     const quiz = session.quiz;
-    
-    const answeredCount = session.answers.filter(a => a !== null).length;
+
+    const answeredCount   = session.answers.filter(a => a !== null).length;
     const unansweredCount = session.answers.length - answeredCount;
-    
-    let html = `
-        <div class="review-modal">
-            <div class="review-content">
+
+    const modal = document.createElement('div');
+    modal.id = 'review-modal';
+    modal.className = 'review-modal';
+    modal.onclick = (e) => { if (e.target === modal) closeReviewModal(); };
+
+    modal.innerHTML = `
+        <div class="review-content" onclick="event.stopPropagation()">
+            <div class="review-header">
                 <h2>📝 Review Your Answers</h2>
-                <p class="review-summary">
-                    Answered: ${answeredCount} / ${session.answers.length}
-                    ${unansweredCount > 0 ? `<br><span style="color: var(--warning-color);">⚠️ ${unansweredCount} unanswered</span>` : ''}
-                </p>
-                
-                <div class="review-list">
-                    ${quiz.jsonData.map((q, idx) => {
-                        const answered = session.answers[idx] !== null;
-                        const answerText = answered ? q.options[session.answers[idx]] : 'Not answered';
-                        return `
-                            <div class="review-item ${!answered ? 'unanswered' : ''}" onclick="jumpToQuestion(${idx}); closeReviewModal();">
-                                <div class="review-question">
-                                    <strong>Q${idx + 1}:</strong> ${escapeHTML(q.question).substring(0, 60)}...
-                                </div>
-                                <div class="review-answer">
-                                    ${answered ? '✓' : '⚠️'} ${escapeHTML(answerText)}
-                                </div>
+                <button class="review-close-btn" onclick="closeReviewModal()" title="Close">✕</button>
+            </div>
+            <p class="review-summary">
+                Answered: <strong>${answeredCount} / ${session.answers.length}</strong>
+                ${unansweredCount > 0 ? `&nbsp;&nbsp;<span style="color:var(--warning-color)">⚠️ ${unansweredCount} unanswered</span>` : ''}
+            </p>
+            <div class="review-list">
+                ${quiz.jsonData.map((q, idx) => {
+                    const answered = session.answers[idx] !== null;
+                    const answerText = answered ? q.options[session.answers[idx]] : 'Not answered';
+                    return `
+                        <div class="review-item ${!answered ? 'unanswered' : ''}"
+                             onclick="jumpToQuestion(${idx}); closeReviewModal();">
+                            <div class="review-question">
+                                <strong>Q${idx + 1}:</strong> ${escapeHTML(q.question.substring(0, 70))}${q.question.length > 70 ? '…' : ''}
                             </div>
-                        `;
-                    }).join('')}
-                </div>
-                
-                <div class="review-actions">
-                    <button class="btn btn-secondary" onclick="closeReviewModal()">Continue Editing</button>
-                    <button class="btn btn-success" onclick="closeReviewModal(); submitQuizConfirm();">Submit Quiz</button>
-                </div>
+                            <div class="review-answer">
+                                ${answered ? '✓' : '⚠️'} ${escapeHTML(answerText)}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+            <div class="review-actions">
+                <button class="btn btn-secondary" onclick="closeReviewModal()">Continue Quiz</button>
+                <button class="btn btn-success"   onclick="closeReviewModal(); submitQuizConfirm();">✅ Submit Quiz</button>
             </div>
         </div>
     `;
-    
-    const modal = document.createElement('div');
-    modal.id = 'review-modal';
-    modal.innerHTML = html;
+
     document.body.appendChild(modal);
 }
 
@@ -269,86 +335,45 @@ function closeReviewModal() {
 }
 
 async function pauseQuiz() {
-    if (!window.Modal) {
-        console.error('Modal system not loaded!');
-        if (confirm('Pause quiz? Your progress will be saved.')) {
-            Router.navigate('course-view', { courseId: AppState.currentCourse.id });
-        }
-        return;
-    }
-    
     const confirmed = await Modal.confirm(
-        'Your progress will be saved. You can resume later from the course page.',
+        'Your current progress will be lost. Return to the course page?',
         'Pause Quiz?',
-        { confirmText: 'Pause', cancelText: 'Continue Quiz' }
+        { confirmText: 'Leave', cancelText: 'Continue Quiz' }
     );
-    if (confirmed) {
-        // In a full implementation, we'd save the session to IndexedDB
-        // For now, just go back
-        Router.navigate('course-view', { courseId: AppState.currentCourse.id });
-    }
+    if (confirmed) Router.navigate('course-view', { currentCourse: AppState.currentCourse });
 }
 
-// Keyboard shortcuts for quiz navigation
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
-        // Only handle shortcuts if we're in quiz-taking view
         if (AppState.currentView !== 'quiz-taking' || !AppState.quizSession) return;
-        
-        const session = AppState.quizSession;
+
+        const session  = AppState.quizSession;
         const currentQ = session.quiz.jsonData[session.currentQuestion];
-        
-        // Number keys 1-4 for selecting options
+
         if (e.key >= '1' && e.key <= '4') {
-            const optionIndex = parseInt(e.key) - 1;
-            if (optionIndex < currentQ.options.length) {
-                e.preventDefault();
-                selectOption(optionIndex);
-            }
+            const idx = parseInt(e.key) - 1;
+            if (idx < currentQ.options.length) { e.preventDefault(); selectOption(idx); }
         }
-        
-        // Arrow keys for navigation
-        if (e.key === 'ArrowLeft' && session.currentQuestion > 0) {
-            e.preventDefault();
-            previousQuestion();
-        }
-        
-        if (e.key === 'ArrowRight' && session.currentQuestion < session.quiz.jsonData.length - 1) {
-            e.preventDefault();
-            nextQuestion();
-        }
-        
-        // Enter to go next or submit
+
+        if (e.key === 'ArrowLeft'  && session.currentQuestion > 0)                             { e.preventDefault(); previousQuestion(); }
+        if (e.key === 'ArrowRight' && session.currentQuestion < session.quiz.jsonData.length - 1) { e.preventDefault(); nextQuestion(); }
+
         if (e.key === 'Enter') {
             e.preventDefault();
-            if (session.currentQuestion < session.quiz.jsonData.length - 1) {
-                nextQuestion();
-            } else {
-                submitQuizConfirm();
-            }
+            session.currentQuestion < session.quiz.jsonData.length - 1 ? nextQuestion() : submitQuizConfirm();
         }
-        
-        // R for review
-        if (e.key === 'r' || e.key === 'R') {
-            e.preventDefault();
-            reviewAllAnswers();
-        }
-        
-        // Escape to close modals
-        if (e.key === 'Escape') {
-            closeReviewModal();
-        }
+
+        if (e.key === 'r' || e.key === 'R') { e.preventDefault(); reviewAllAnswers(); }
+        if (e.key === 'Escape') closeReviewModal();
     });
 }
 
-// Initialize keyboard shortcuts
 setupKeyboardShortcuts();
 
-// Update timer every second
 setInterval(() => {
     const timerEl = document.getElementById('quiz-timer');
     if (timerEl && AppState.quizSession) {
         const elapsed = Math.floor((Date.now() - AppState.quizSession.startTime) / 1000);
-        timerEl.textContent = `⏱️ ${formatTime(elapsed)}`;
+        timerEl.textContent = `⏱ ${formatTime(elapsed)}`;
     }
 }, 1000);

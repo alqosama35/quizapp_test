@@ -95,7 +95,7 @@ class ModalSystem {
                     ${!config.hideClose ? '<button class="modal-close" onclick="window.Modal.close()">×</button>' : ''}
                 </div>
                 <div class="custom-modal-body">
-                    <p>${config.message.replace(/\n/g, '<br>')}</p>
+                    ${config.html ? config.html : `<p>${(config.message || '').replace(/\n/g, '<br>')}</p>`}
                     ${config.input ? `
                         <input 
                             type="${config.input.type}" 
@@ -180,12 +180,13 @@ class ModalSystem {
     // Close current modal
     close() {
         if (this.currentModal) {
-            this.currentModal.classList.remove('active');
+            const modalToRemove = this.currentModal;
+            this.currentModal = null; // Clear immediately to prevent race conditions
+            modalToRemove.classList.remove('active');
             setTimeout(() => {
-                if (this.currentModal && this.currentModal.parentNode) {
-                    this.currentModal.parentNode.removeChild(this.currentModal);
+                if (modalToRemove.parentNode) {
+                    modalToRemove.parentNode.removeChild(modalToRemove);
                 }
-                this.currentModal = null;
             }, 300);
         }
     }

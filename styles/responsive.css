@@ -1,398 +1,113 @@
-/* Responsive styles for mobile and tablet devices */
+/* ============================================================
+   QuizMaster – Responsive Styles
+   ============================================================ */
 
-/* Tablet (768px and below) */
-@media (max-width: 768px) {
-    #app {
-        padding: 12px;
-    }
-    
-    h1 { font-size: 1.75em; }
-    h2 { font-size: 1.3em; }
-    
-    .stats-overview {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-    
-    .stat-value {
-        font-size: 24px;
-    }
-    
-    .stat-label {
-        font-size: 11px;
-    }
-    
-    .courses-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    
-    .course-card {
-        padding: 16px;
-    }
-    
-    .course-icon {
-        width: 48px;
-        height: 48px;
-        font-size: 24px;
-    }
-    
-    .course-name {
-        font-size: 16px;
-    }
-    
-    .course-description {
-        font-size: 13px;
-    }
-    
-    .quiz-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .quiz-score {
-        font-size: 20px;
-        min-width: auto;
-    }
-    
-    .quiz-actions {
-        width: 100%;
-        flex-wrap: wrap;
-    }
-    
-    .quiz-content {
-        padding: 20px;
-    }
-    
-    .question-text {
-        font-size: 18px;
-    }
-    
-    .option {
-        padding: 12px 16px;
-    }
-    
-    .score-circle {
-        width: 160px;
-        height: 160px;
-    }
-    
-    .score-value {
-        font-size: 36px;
-    }
-    
-    .score-percentage {
-        font-size: 20px;
-    }
-    
-    .motivational-message {
-        font-size: 18px;
-    }
+/* Tablet (≤ 900px) */
+@media (max-width: 900px) {
+    .dash-stats         { grid-template-columns: repeat(2, 1fr); }
+    .cv-stats-row       { grid-template-columns: repeat(2, 1fr); }
+    .qr-stats-strip     { grid-template-columns: repeat(2, 1fr); }
+    .data-stats-grid    { grid-template-columns: repeat(2, 1fr); }
+    .qi-layout          { grid-template-columns: 1fr; }
+    .tutorial-panel     { position: static; }
+    .features-grid      { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Mobile (480px and below) */
-@media (max-width: 480px) {
-    #app {
-        padding: 8px;
-    }
-    
-    h1 { font-size: 1.5em; }
-    h2 { font-size: 1.2em; }
-    h3 { font-size: 1.1em; }
-    
-    .dashboard-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-    }
-    
-    .stats-overview {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-    }
-    
-    .stat-card {
-        padding: 12px;
-    }
-    
-    .stat-value {
-        font-size: 20px;
-    }
-    
-    .stat-label {
-        font-size: 10px;
-    }
-    
-    .course-card {
-        flex-direction: column;
-        padding: 12px;
-    }
-    
-    .course-icon {
-        width: 56px;
-        height: 56px;
-        font-size: 28px;
-        margin: 0 auto;
-    }
-    
-    .course-info {
-        text-align: center;
-    }
-    
-    .course-stats {
-        justify-content: center;
-    }
-    
-    .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-    }
-    
-    .action-buttons .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .quiz-header {
-        padding: 12px 16px;
-    }
-    
-    .quiz-title {
-        font-size: 14px;
-    }
-    
-    .quiz-timer {
-        font-size: 14px;
-    }
-    
-    .quiz-content {
-        padding: 16px;
-    }
-    
-    .question-text {
-        font-size: 16px;
-        margin-bottom: 20px;
-    }
-    
-    .options-list {
-        gap: 8px;
-        margin-bottom: 20px;
-    }
-    
-    .option {
-        padding: 10px 12px;
-    }
-    
-    .option-indicator {
-        width: 28px;
-        height: 28px;
-        font-size: 12px;
-    }
-    
-    .option-text {
-        font-size: 14px;
-    }
-    
-    .question-navigator {
-        gap: 6px;
-        padding: 16px 0;
-    }
-    
-    .nav-dot {
-        width: 32px;
-        height: 32px;
-        font-size: 11px;
-    }
-    
-    .quiz-actions {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .quiz-actions .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .quiz-footer {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .score-circle {
-        width: 140px;
-        height: 140px;
-        border-width: 8px;
-    }
-    
-    .score-value {
-        font-size: 28px;
-    }
-    
-    .score-percentage {
-        font-size: 16px;
-    }
-    
-    .score-stars {
-        font-size: 24px;
-    }
-    
-    .motivational-message {
-        font-size: 16px;
-    }
-    
-    .breakdown-item {
-        padding: 10px;
-    }
-    
-    .breakdown-icon {
-        font-size: 20px;
-    }
-    
-    .breakdown-value {
-        font-size: 16px;
-    }
-    
-    .results-actions {
-        flex-direction: column;
-    }
-    
-    .results-actions .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .course-header {
-        padding: 16px;
-    }
-    
-    .course-actions {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .course-actions .btn {
-        width: 100%;
-    }
-    
-    .course-stats-section {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-    }
-    
-    .form-submit {
-        flex-direction: column;
-    }
-    
-    .form-submit .btn {
-        width: 100%;
-    }
-    
-    .form-actions {
-        flex-direction: column;
-    }
-    
-    .form-actions .btn {
-        width: 100%;
-    }
+/* Mobile (≤ 640px) */
+@media (max-width: 640px) {
+    #app { padding: 12px 14px; }
+
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+    h3 { font-size: 1.05rem; }
+
+    /* Dashboard */
+    .dash-topbar { margin-bottom: 20px; }
+    .dash-app-name  { font-size: 1.1rem; }
+    .dash-tagline   { display: none; }
+    .dash-stats     { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .dash-stat-card { padding: 12px 14px; }
+    .dash-stat-value{ font-size: 1.4rem; }
+    .courses-grid   { grid-template-columns: 1fr; gap: 10px; }
+    .dash-courses-header  { flex-direction: column; align-items: flex-start; }
+    .dash-courses-controls{ width: 100%; flex-direction: column; }
+    .dash-search    { width: 100%; }
+
+    /* Course view */
+    .cv-banner { flex-direction: column; gap: 14px; padding: 18px 18px; }
+    .cv-banner-icon { align-self: flex-start; }
+    .cv-banner-info h1 { font-size: 1.2rem; }
+    .cv-stats-row { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .cv-action-bar { gap: 8px; }
+    .cv-action-bar .btn { font-size: 12px; padding: 7px 12px; }
+    .cv-quiz-row { flex-wrap: wrap; }
+    .cv-quiz-actions { width: 100%; justify-content: flex-end; margin-top: 6px; }
+
+    /* Quiz taking */
+    .qt-header-inner { padding: 10px 14px; }
+    .qt-title { font-size: 13px; max-width: 55%; }
+    .qt-question-card { padding: 20px 18px; }
+    .qt-question-text { font-size: 16px; }
+    .qt-option { padding: 12px 14px; gap: 10px; }
+    .qt-option-key { width: 28px; height: 28px; font-size: 12px; }
+    .qt-option-label { font-size: 14px; }
+    .qt-actions { gap: 8px; }
+    .qt-actions .btn { flex: 1; justify-content: center; }
+    .qt-footer { justify-content: flex-start; }
+    .keyboard-hints { display: none; }
+    .nav-dot { width: 30px; height: 30px; font-size: 10px; }
+
+    /* Quiz results */
+    .qr-header h1   { font-size: 1.5rem; }
+    .qr-hero        { padding: 24px 16px 20px; }
+    .score-circle   { width: 130px; height: 130px; border-width: 8px; }
+    .score-value    { font-size: 2rem; }
+    .qr-stats-strip { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .qr-section     { padding: 16px; }
+    .results-actions{ flex-direction: column; }
+    .results-actions .btn { width: 100%; justify-content: center; }
+
+    /* Quiz input */
+    .qi-submit-row  { flex-direction: column; }
+    .qi-submit-row .btn { width: 100%; justify-content: center; }
+    .qi-toolbar     { flex-wrap: wrap; }
+
+    /* Settings */
+    .settings-card  { padding: 16px; }
+    .settings-card-header { gap: 10px; }
+    .data-stats-grid{ grid-template-columns: repeat(2, 1fr); }
+    .theme-pills    { flex-wrap: wrap; }
+    .danger-action  { flex-direction: column; align-items: flex-start; }
+
+    /* Help */
+    .help-section   { padding: 18px; }
+    .step           { flex-direction: column; gap: 10px; }
+    .features-grid  { grid-template-columns: 1fr; }
+    .help-header    { flex-direction: column; align-items: flex-start; gap: 10px; }
+
+    /* Modals */
+    .custom-modal-overlay { padding: 12px; }
+    .review-content { padding: 18px; }
 }
 
-/* Extra small mobile (320px) */
-@media (max-width: 320px) {
-    .stats-overview {
-        grid-template-columns: 1fr;
-    }
-    
-    .course-stats-section {
-        grid-template-columns: 1fr;
-    }
-    
-    .course-stats {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
+/* Very small (≤ 380px) */
+@media (max-width: 380px) {
+    .dash-stats { grid-template-columns: 1fr; }
+    .cv-stats-row { grid-template-columns: 1fr 1fr; }
+    .qr-stats-strip { grid-template-columns: 1fr 1fr; }
 }
 
-/* Touch-friendly improvements */
+/* Touch-friendly tap targets */
 @media (hover: none) and (pointer: coarse) {
-    .btn {
-        min-height: 44px;
-        padding: 12px 20px;
-    }
-    
-    .option {
-        min-height: 56px;
-        padding: 16px;
-    }
-    
-    .nav-dot {
-        min-width: 44px;
-        min-height: 44px;
-    }
-    
-    .icon-btn {
-        min-width: 44px;
-        min-height: 44px;
-    }
+    .btn          { min-height: 44px; }
+    .qt-option    { min-height: 52px; }
+    .nav-dot      { min-width: 40px; min-height: 40px; }
+    .dash-nav-btn { min-width: 44px; min-height: 44px; }
 }
 
 /* Landscape mobile */
 @media (max-height: 500px) and (orientation: landscape) {
-    .score-circle {
-        width: 120px;
-        height: 120px;
-    }
-    
-    .score-value {
-        font-size: 24px;
-    }
-    
-    .score-percentage {
-        font-size: 14px;
-    }
-    
-    /* Help Page - Mobile */
-    .help-header h1 {
-        font-size: 1.8em;
-    }
-    
-    .help-section {
-        padding: 20px;
-    }
-    
-    .step {
-        flex-direction: column;
-        gap: 12px;
-    }
-    
-    .step-number {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2em;
-    }
-    
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .format-table {
-        font-size: 0.9em;
-    }
-    
-    .format-table th, .format-table td {
-        padding: 8px;
-    }
-    
-    .code-example, .code-block {
-        padding: 12px;
-    }
-    
-    .code-example pre, .code-block pre {
-        font-size: 12px;
-    }
+    .score-circle { width: 110px; height: 110px; }
+    .score-value  { font-size: 1.6rem; }
+    .qr-hero      { padding: 16px; }
 }

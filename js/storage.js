@@ -286,7 +286,8 @@ async function getSettings() {
             compactMode: false,
             animations: true,
             autoBackupReminder: true,
-            lastBackup: null
+            lastBackup: null,
+            instantFeedback: false
         };
         await db.settings.add(settings);
     }
@@ -306,7 +307,7 @@ async function migrateFromLocalStorage() {
     console.log('Checking for localStorage data to migrate...');
     
     // Check if already migrated
-    const migrated = localStorage.getItem('dataM igrated');
+    const migrated = localStorage.getItem('dataMigrated');
     if (migrated) {
         console.log('Data already migrated');
         return;
