@@ -318,18 +318,7 @@ async function handleSharedCourseImport(slug) {
     }
 
     const quizCount = quizzes.length;
-    const desc = course.description
-        ? `<br><small style="color:var(--text-secondary)">${escapeHTML(course.description)}</small>`
-        : '';
-
-    const confirmed = await Modal.confirm(
-        `<strong>${escapeHTML(course.name)}</strong>${desc}<br><br>${quizCount} quiz${quizCount !== 1 ? 'zes' : ''} will be added to your library.`,
-        '📥 Import Shared Course?',
-        { confirmText: 'Import', cancelText: 'Dismiss' }
-    );
-
     history.replaceState({ view: 'dashboard' }, '', location.pathname);
-    if (!confirmed) return;
 
     try {
         const newCourse = await createCourse({
