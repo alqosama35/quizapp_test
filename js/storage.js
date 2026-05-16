@@ -287,7 +287,7 @@ async function getSettings() {
             animations: true,
             autoBackupReminder: true,
             lastBackup: null,
-            instantFeedback: false
+            instantFeedback: true
         };
         await db.settings.add(settings);
     }
