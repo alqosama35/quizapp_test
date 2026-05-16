@@ -261,11 +261,19 @@ async function initApp() {
             document.body.classList.add('no-animations');
         }
         
+        // Read URL params before replaceState strips the query string
+        const courseSlug = new URLSearchParams(location.search).get('course');
+
         // Set initial browser history state so back button works from the start
         history.replaceState({ view: 'dashboard' }, '', location.pathname);
 
         // Initial render
         await render();
+
+        // Handle incoming shared course link
+        if (courseSlug) {
+            await handleSharedCourseImport(courseSlug);
+        }
 
         console.log('App initialized successfully');
     } catch (err) {
@@ -277,6 +285,71 @@ async function initApp() {
                 <button onclick="location.reload()">Reload</button>
             </div>
         `;
+    }
+}
+
+async function handleSharedCourseImport(slug) {
+    const filePath = SHARED_COURSES_REGISTRY[slug];
+
+    if (!filePath) {
+        showToast('Shared course not found: ' + slug, 'error');
+        history.replaceState({ view: 'dashboard' }, '', location.pathname);
+        return;
+    }
+
+    let bundle;
+    try {
+        const res = await fetch(filePath);
+        if (!res.ok) throw new Error('File not found');
+        bundle = await res.json();
+    } catch (err) {
+        showToast('Could not load course file', 'error');
+        history.replaceState({ view: 'dashboard' }, '', location.pathname);
+        return;
+    }
+
+    const course  = bundle.course;
+    const quizzes = bundle.quizzes;
+
+    if (!course || !Array.isArray(quizzes)) {
+        showToast('Invalid course file format', 'error');
+        history.replaceState({ view: 'dashboard' }, '', location.pathname);
+        return;
+    }
+
+    const quizCount = quizzes.length;
+    const desc = course.description
+        ? `<br><small style="color:var(--text-secondary)">${escapeHTML(course.description)}</small>`
+        : '';
+
+    const confirmed = await Modal.confirm(
+        `<strong>${escapeHTML(course.name)}</strong>${desc}<br><br>${quizCount} quiz${quizCount !== 1 ? 'zes' : ''} will be added to your library.`,
+        '📥 Import Shared Course?',
+        { confirmText: 'Import', cancelText: 'Dismiss' }
+    );
+
+    history.replaceState({ view: 'dashboard' }, '', location.pathname);
+    if (!confirmed) return;
+
+    try {
+        const newCourse = await createCourse({
+            name: course.name,
+            description: course.description || '',
+            color: course.color,
+            icon: course.icon,
+            settings: course.settings
+        });
+
+        for (const q of quizzes) {
+            await createQuiz(newCourse.id, { name: q.name, jsonData: q.jsonData });
+        }
+
+        const imported = await getCourse(newCourse.id);
+        showToast(`"${imported.name}" imported with ${quizCount} quiz${quizCount !== 1 ? 'zes' : ''}!`, 'success');
+        Router.navigate('course-view', { currentCourse: imported });
+    } catch (err) {
+        showToast('Import failed: ' + err.message, 'error');
+        console.error(err);
     }
 }
 
