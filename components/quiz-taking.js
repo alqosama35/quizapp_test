@@ -287,6 +287,15 @@ function reviewAllAnswers() {
     const answeredCount   = session.answers.filter(a => a !== null).length;
     const unansweredCount = session.answers.length - answeredCount;
 
+    let correctCount = 0;
+    let wrongCount = 0;
+    quiz.jsonData.forEach((q, idx) => {
+        if (session.answers[idx] !== null) {
+            if (session.answers[idx] === q.correct) correctCount++;
+            else wrongCount++;
+        }
+    });
+
     const modal = document.createElement('div');
     modal.id = 'review-modal';
     modal.className = 'review-modal';
@@ -301,19 +310,29 @@ function reviewAllAnswers() {
             <p class="review-summary">
                 Answered: <strong>${answeredCount} / ${session.answers.length}</strong>
                 ${unansweredCount > 0 ? `&nbsp;&nbsp;<span style="color:var(--warning-color)">⚠️ ${unansweredCount} unanswered</span>` : ''}
+                ${answeredCount > 0 ? `&nbsp;&nbsp;<span class="review-summary-correct">✓ ${correctCount}</span>&nbsp;&nbsp;<span class="review-summary-wrong">✗ ${wrongCount}</span>` : ''}
             </p>
             <div class="review-list">
                 ${quiz.jsonData.map((q, idx) => {
-                    const answered = session.answers[idx] !== null;
+                    const answered   = session.answers[idx] !== null;
+                    const isCorrect  = answered && session.answers[idx] === q.correct;
+                    const isWrong    = answered && session.answers[idx] !== q.correct;
                     const answerText = answered ? q.options[session.answers[idx]] : 'Not answered';
+
+                    let itemClass = 'review-item';
+                    let icon;
+                    if (!answered)      { itemClass += ' unanswered'; icon = '<span class="review-status-icon">⚠️</span>'; }
+                    else if (isCorrect) { itemClass += ' correct';    icon = '<span class="review-status-icon correct-icon">✓</span>'; }
+                    else                { itemClass += ' wrong';      icon = '<span class="review-status-icon wrong-icon">✗</span>'; }
+
                     return `
-                        <div class="review-item ${!answered ? 'unanswered' : ''}"
+                        <div class="${itemClass}"
                              onclick="jumpToQuestion(${idx}); closeReviewModal();">
                             <div class="review-question">
                                 <strong>Q${idx + 1}:</strong> ${escapeHTML(q.question.substring(0, 70))}${q.question.length > 70 ? '…' : ''}
                             </div>
                             <div class="review-answer">
-                                ${answered ? '✓' : '⚠️'} ${escapeHTML(answerText)}
+                                ${icon} ${escapeHTML(answerText)}
                             </div>
                         </div>
                     `;
