@@ -10,6 +10,15 @@ db.version(1).stores({
     settings: 'id'
 });
 
+db.version(2).stores({
+    courses: 'id, name, createdAt',
+    quizzes: 'id, courseId, name, createdAt',
+    results: 'id, courseId, quizId, completedAt',
+    mistakes: 'id, courseId, quizId, timestamp',
+    settings: 'id',
+    quizProgress: 'quizId, courseId, savedAt'
+});
+
 // ============= UTILITY FUNCTIONS =============
 
 function generateUUID() {
@@ -269,6 +278,32 @@ async function deleteMistake(id) {
 async function clearMistakesForCourse(courseId) {
     await db.mistakes.where('courseId').equals(courseId).delete();
     await updateCourseStats(courseId);
+}
+
+// ============= QUIZ PROGRESS OPERATIONS =============
+
+async function saveQuizProgress(session, courseId) {
+    const record = {
+        quizId: session.quiz.id,
+        courseId,
+        quiz: session.quiz,
+        answers: session.answers,
+        revealedAnswers: session.revealedAnswers,
+        currentQuestion: session.currentQuestion,
+        instantFeedback: session.instantFeedback,
+        autoScroll: session.autoScroll || false,
+        elapsedSeconds: session.elapsedSeconds || 0,
+        savedAt: new Date().toISOString()
+    };
+    await db.quizProgress.put(record);
+}
+
+async function getQuizProgress(quizId) {
+    return db.quizProgress.get(quizId);
+}
+
+async function clearQuizProgress(quizId) {
+    await db.quizProgress.delete(quizId);
 }
 
 // ============= SETTINGS OPERATIONS =============

@@ -78,6 +78,22 @@ async function renderQuizTaking() {
                 </div>
             ` : ''}
 
+            <!-- Actions -->
+            <div class="qt-actions">
+                <button class="btn btn-secondary" onclick="previousQuestion()" ${currentQ === 0 ? 'disabled' : ''}>
+                    ← Previous
+                </button>
+                ${currentQ < totalQuestions - 1 ? `
+                    <button class="btn btn-primary" onclick="nextQuestion()">
+                        Next →
+                    </button>
+                ` : `
+                    <button class="btn btn-success btn-lg" onclick="submitQuizConfirm()">
+                        ✅ Submit Quiz
+                    </button>
+                `}
+            </div>
+
             <!-- Question navigator -->
             <div class="qt-nav-strip">
                 ${quiz.jsonData.map((_, idx) => {
@@ -101,22 +117,6 @@ async function renderQuizTaking() {
                 }).join('')}
             </div>
 
-            <!-- Actions -->
-            <div class="qt-actions">
-                <button class="btn btn-secondary" onclick="previousQuestion()" ${currentQ === 0 ? 'disabled' : ''}>
-                    ← Previous
-                </button>
-                ${currentQ < totalQuestions - 1 ? `
-                    <button class="btn btn-primary" onclick="nextQuestion()">
-                        Next →
-                    </button>
-                ` : `
-                    <button class="btn btn-success btn-lg" onclick="submitQuizConfirm()">
-                        ✅ Submit Quiz
-                    </button>
-                `}
-            </div>
-
             <!-- Footer -->
             <div class="qt-footer">
                 <button class="btn btn-text" onclick="pauseQuiz()">⏸ Pause</button>
@@ -127,6 +127,12 @@ async function renderQuizTaking() {
                         onclick="toggleInstantFeedback()"
                         title="Show correct/wrong after each answer">
                     💡 Feedback: <strong>${session.instantFeedback ? 'ON' : 'OFF'}</strong>
+                </button>
+                <div class="qt-footer-divider"></div>
+                <button class="btn btn-text autoscroll-toggle-btn ${session.autoScroll ? 'autoscroll-on' : ''}"
+                        onclick="toggleAutoScroll()"
+                        title="Automatically go to next question after answering">
+                    → Auto-next: <strong>${session.autoScroll ? 'ON' : 'OFF'}</strong>
                 </button>
                 <div class="keyboard-hints">
                     <span class="hint">1–4 Select</span>
@@ -140,7 +146,7 @@ async function renderQuizTaking() {
     `;
 }
 
-function selectOption(index) {
+async function selectOption(index) {
     const session = AppState.quizSession;
     const currentQ = session.currentQuestion;
 
@@ -155,6 +161,9 @@ function selectOption(index) {
         const options = document.querySelectorAll('.qt-option');
         options.forEach((opt, idx) => opt.classList.toggle('selected', idx === index));
     }
+
+    const elapsedSeconds = Math.floor((Date.now() - session.startTime) / 1000);
+    await saveQuizProgress({ ...session, elapsedSeconds }, AppState.currentCourse.id);
 }
 
 function applyInstantFeedback(questionIdx, selectedIndex) {
@@ -170,6 +179,29 @@ function applyInstantFeedback(questionIdx, selectedIndex) {
     }
 
     render();
+
+    if (AppState.quizSession.autoScroll) {
+        const session = AppState.quizSession;
+        const totalQuestions = session.quiz.jsonData.length;
+        setTimeout(() => {
+            if (session.currentQuestion < totalQuestions - 1) {
+                nextQuestion();
+            } else {
+                submitQuizConfirm();
+            }
+        }, 1000);
+    }
+}
+
+function toggleAutoScroll() {
+    const session = AppState.quizSession;
+    session.autoScroll = !session.autoScroll;
+    const btn = document.querySelector('.autoscroll-toggle-btn');
+    if (btn) {
+        btn.classList.toggle('autoscroll-on', session.autoScroll);
+        btn.innerHTML = `→ Auto-next: <strong>${session.autoScroll ? 'ON' : 'OFF'}</strong>`;
+    }
+    showToast(`Auto-next ${session.autoScroll ? 'enabled' : 'disabled'}`, 'info');
 }
 
 function toggleInstantFeedback() {
@@ -274,6 +306,9 @@ async function submitQuiz() {
         await saveMistake(mistake);
     }
 
+    if (quiz.id !== 'mistakes-practice') {
+        await clearQuizProgress(quiz.id);
+    }
     AppState.quizResult = { result, quiz, mistakes: mistakes.length };
     Router.navigate('quiz-results');
 }
@@ -355,11 +390,16 @@ function closeReviewModal() {
 
 async function pauseQuiz() {
     const confirmed = await Modal.confirm(
-        'Your current progress will be lost. Return to the course page?',
+        'Leave this quiz? Your progress is saved and you can continue later.',
         'Pause Quiz?',
         { confirmText: 'Leave', cancelText: 'Continue Quiz' }
     );
-    if (confirmed) Router.navigate('course-view', { currentCourse: AppState.currentCourse });
+    if (confirmed) {
+        const session = AppState.quizSession;
+        const elapsedSeconds = Math.floor((Date.now() - session.startTime) / 1000);
+        await saveQuizProgress({ ...session, elapsedSeconds }, AppState.currentCourse.id);
+        Router.navigate('course-view', { currentCourse: AppState.currentCourse });
+    }
 }
 
 function setupKeyboardShortcuts() {

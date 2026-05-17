@@ -80,6 +80,7 @@ async function renderDashboard() {
                         placeholder="🔍  Search courses…"
                         oninput="filterCourses(this.value)"
                         autocomplete="off">
+                    <button class="btn btn-secondary" data-action="import-course">📂 Import Course</button>
                     <button class="btn btn-primary" data-action="new-course">＋ New Course</button>
                 </div>
             </div>

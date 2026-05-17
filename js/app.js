@@ -101,6 +101,11 @@ function attachEventListeners() {
     if (newCourseBtn) {
         newCourseBtn.addEventListener('click', showNewCourseDialog);
     }
+
+    const importCourseBtn = document.querySelector('[data-action="import-course"]');
+    if (importCourseBtn) {
+        importCourseBtn.addEventListener('click', importCourseFromFile);
+    }
     
     const courseCards = document.querySelectorAll('[data-action="view-course"]');
     courseCards.forEach(card => {
@@ -166,6 +171,55 @@ async function showNewCourseDialog() {
     }
 }
 
+async function importCourseFromFile() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+
+    input.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+            const parsed = JSON.parse(await file.text());
+
+            if (parsed.type !== 'course-export' || !parsed.course || !Array.isArray(parsed.quizzes)) {
+                showToast('Invalid file format — expected a course export file', 'error');
+                return;
+            }
+
+            const { course, quizzes } = parsed;
+            const confirmed = await Modal.confirm(
+                `Import "${course.name}" with ${quizzes.length} quiz${quizzes.length !== 1 ? 'zes' : ''}?`,
+                'Import Course',
+                { confirmText: 'Import', cancelText: 'Cancel' }
+            );
+            if (!confirmed) return;
+
+            const newCourse = await createCourse({
+                name: course.name,
+                description: course.description || '',
+                color: course.color,
+                icon: course.icon,
+                settings: course.settings
+            });
+
+            for (const q of quizzes) {
+                await createQuiz(newCourse.id, { name: q.name, jsonData: q.jsonData });
+            }
+
+            const imported = await getCourse(newCourse.id);
+            showToast(`"${imported.name}" imported with ${quizzes.length} quiz${quizzes.length !== 1 ? 'zes' : ''}!`, 'success');
+            Router.navigate('course-view', { currentCourse: imported });
+        } catch (err) {
+            showToast('Import failed: ' + err.message, 'error');
+            console.error(err);
+        }
+    };
+
+    input.click();
+}
+
 async function handleQuizSubmit(e) {
     e.preventDefault();
     
@@ -219,6 +273,31 @@ async function startQuiz(quiz) {
         });
     }
 
+    // Check for saved progress before starting fresh
+    const saved = await getQuizProgress(quiz.id);
+    if (saved) {
+        const resume = await Modal.confirm(
+            `You left this quiz at question ${saved.currentQuestion + 1} of ${saved.quiz.jsonData.length}. Continue from there?`,
+            'Resume Quiz',
+            { confirmText: 'Continue', cancelText: 'Start Fresh' }
+        );
+        if (resume) {
+            AppState.quizSession = {
+                quiz: saved.quiz,
+                startTime: Date.now() - saved.elapsedSeconds * 1000,
+                answers: saved.answers,
+                questionTimes: new Array(saved.quiz.jsonData.length).fill(0),
+                currentQuestion: saved.currentQuestion,
+                instantFeedback: saved.instantFeedback,
+                autoScroll: saved.autoScroll || false,
+                revealedAnswers: saved.revealedAnswers
+            };
+            Router.navigate('quiz-taking', { currentQuiz: saved.quiz });
+            return;
+        }
+        await clearQuizProgress(quiz.id);
+    }
+
     AppState.quizSession = {
         quiz,
         startTime: Date.now(),
@@ -226,6 +305,7 @@ async function startQuiz(quiz) {
         questionTimes: new Array(quiz.jsonData.length).fill(0),
         currentQuestion: 0,
         instantFeedback: settings.instantFeedback === true,
+        autoScroll: false,
         revealedAnswers: new Array(quiz.jsonData.length).fill(false)
     };
 
