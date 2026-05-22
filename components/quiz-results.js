@@ -77,7 +77,7 @@ async function renderQuizResults() {
                         return `
                             <div class="wrong-question">
                                 <div class="wrong-q-title">
-                                    <strong>Q${a.questionIndex + 1}:</strong> ${escapeHTML(question.question)}
+                                    <strong>Q${a.questionIndex + 1}:</strong> ${renderMath(question.question)}
                                 </div>
                                 <div class="result-options-list">
                                     ${question.options.map((opt, optIdx) => {
@@ -86,7 +86,7 @@ async function renderQuizResults() {
                                         return `
                                             <div class="result-option ${isCorrect ? 'result-option-correct' : ''} ${isUserWrong ? 'result-option-wrong' : ''}">
                                                 <span class="result-option-letter">${String.fromCharCode(65 + optIdx)}</span>
-                                                <span class="result-option-text">${escapeHTML(opt)}</span>
+                                                <span class="result-option-text">${renderMath(opt)}</span>
                                                 ${isCorrect   ? '<span class="result-badge correct-badge">✓ Correct</span>'      : ''}
                                                 ${isUserWrong ? '<span class="result-badge wrong-badge">✗ Your answer</span>' : ''}
                                             </div>
@@ -94,7 +94,7 @@ async function renderQuizResults() {
                                     }).join('')}
                                 </div>
                                 ${question.explanation ? `
-                                    <div class="explanation">💡 ${escapeHTML(question.explanation)}</div>
+                                    <div class="explanation">💡 ${renderMath(question.explanation)}</div>
                                 ` : ''}
                             </div>
                         `;
@@ -122,7 +122,7 @@ async function renderQuizResults() {
                             <div class="full-review-question ${isCorrect ? 'fq-correct' : notAnswered ? 'fq-unanswered' : 'fq-wrong'}">
                                 <div class="fq-header">
                                     <span class="fq-status">${isCorrect ? '✅' : notAnswered ? '⬜' : '❌'}</span>
-                                    <span class="fq-title">Q${qIdx + 1}: ${escapeHTML(question.question)}</span>
+                                    <span class="fq-title">Q${qIdx + 1}: ${renderMath(question.question)}</span>
                                 </div>
                                 <div class="result-options-list">
                                     ${question.options.map((opt, optIdx) => {
@@ -132,14 +132,14 @@ async function renderQuizResults() {
                                         return `
                                             <div class="result-option ${isCorrectOpt ? 'result-option-correct' : ''} ${isUserWrong ? 'result-option-wrong' : ''}">
                                                 <span class="result-option-letter">${String.fromCharCode(65 + optIdx)}</span>
-                                                <span class="result-option-text">${escapeHTML(opt)}</span>
+                                                <span class="result-option-text">${renderMath(opt)}</span>
                                                 ${isCorrectOpt ? '<span class="result-badge correct-badge">✓ Correct</span>' : ''}
                                                 ${isUserWrong  ? '<span class="result-badge wrong-badge">✗ Your answer</span>' : ''}
                                             </div>
                                         `;
                                     }).join('')}
                                 </div>
-                                ${question.explanation ? `<div class="explanation">💡 ${escapeHTML(question.explanation)}</div>` : ''}
+                                ${question.explanation ? `<div class="explanation">💡 ${renderMath(question.explanation)}</div>` : ''}
                             </div>
                         `;
                     }).join('')}

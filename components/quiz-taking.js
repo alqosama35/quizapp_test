@@ -38,7 +38,7 @@ async function renderQuizTaking() {
                 <div class="qt-question-meta">
                     <span class="qt-q-chip">Q ${currentQ + 1}</span>
                 </div>
-                <div class="qt-question-text">${escapeHTML(question.question)}</div>
+                <div class="qt-question-text">${renderMath(question.question)}</div>
             </div>
 
             <!-- Options -->
@@ -59,7 +59,7 @@ async function renderQuizTaking() {
                              ${isRevealed ? '' : `onclick="selectOption(${index})"`}
                              data-index="${index}">
                             <div class="qt-option-key">${String.fromCharCode(65 + index)}</div>
-                            <div class="qt-option-label">${escapeHTML(option)}</div>
+                            <div class="qt-option-label">${renderMath(option)}</div>
                             ${isCorrectOpt ? '<div class="option-tag correct-tag">✓ Correct</div>' : ''}
                             ${isWrongOpt   ? '<div class="option-tag wrong-tag">✗ Wrong</div>'   : ''}
                         </div>
@@ -73,7 +73,7 @@ async function renderQuizTaking() {
                     <div class="feedback-icon">${isCorrectAnswer ? '✅' : '❌'}</div>
                     <div class="feedback-body">
                         <div class="feedback-title">${isCorrectAnswer ? 'Correct!' : 'Incorrect'}</div>
-                        ${question.explanation ? `<div class="feedback-explanation">💡 ${escapeHTML(question.explanation)}</div>` : ''}
+                        ${question.explanation ? `<div class="feedback-explanation">💡 ${renderMath(question.explanation)}</div>` : ''}
                     </div>
                 </div>
             ` : ''}
@@ -364,10 +364,10 @@ function reviewAllAnswers() {
                         <div class="${itemClass}"
                              onclick="jumpToQuestion(${idx}); closeReviewModal();">
                             <div class="review-question">
-                                <strong>Q${idx + 1}:</strong> ${escapeHTML(q.question.substring(0, 70))}${q.question.length > 70 ? '…' : ''}
+                                <strong>Q${idx + 1}:</strong> ${renderMath(q.question.substring(0, 70))}${q.question.length > 70 ? '…' : ''}
                             </div>
                             <div class="review-answer">
-                                ${icon} ${escapeHTML(answerText)}
+                                ${icon} ${renderMath(answerText)}
                             </div>
                         </div>
                     `;

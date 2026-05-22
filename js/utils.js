@@ -225,6 +225,38 @@ function escapeHTML(str) {
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
 }
+
+// Render text that may contain LaTeX math delimited by $...$ or $$...$$
+function renderMath(text) {
+    if (!text) return '';
+    if (typeof katex === 'undefined') return escapeHTML(text);
+
+    const parts = [];
+    const regex = /(\$\$[\s\S]+?\$\$|\$[^$\n]+?\$)/g;
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+            parts.push(escapeHTML(text.slice(lastIndex, match.index)));
+        }
+        const raw = match[0];
+        const isDisplay = raw.startsWith('$$');
+        const latex = isDisplay ? raw.slice(2, -2) : raw.slice(1, -1);
+        try {
+            parts.push(katex.renderToString(latex, { displayMode: isDisplay, throwOnError: false }));
+        } catch (e) {
+            parts.push(escapeHTML(raw));
+        }
+        lastIndex = match.index + raw.length;
+    }
+
+    if (lastIndex < text.length) {
+        parts.push(escapeHTML(text.slice(lastIndex)));
+    }
+
+    return parts.join('');
+}
 // Confetti animation for perfect score
 function showConfetti() {
     const duration = 3000;
