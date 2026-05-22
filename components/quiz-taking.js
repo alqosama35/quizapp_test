@@ -37,6 +37,7 @@ async function renderQuizTaking() {
             <div class="qt-question-card">
                 <div class="qt-question-meta">
                     <span class="qt-q-chip">Q ${currentQ + 1}</span>
+                    <button class="btn btn-text qt-copy-btn" onclick="copyQuestion()" title="Copy question">📋 Copy</button>
                 </div>
                 <div class="qt-question-text">${renderMath(question.question)}</div>
             </div>
@@ -402,6 +403,47 @@ async function pauseQuiz() {
     }
 }
 
+function copyQuestion() {
+    const session = AppState.quizSession;
+    const q = session.quiz.jsonData[session.currentQuestion];
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+    const text = [
+        `Q${session.currentQuestion + 1}: ${q.question}`,
+        '',
+        ...q.options.map((opt, i) => `${letters[i]}) ${opt}`)
+    ].join('\n');
+    navigator.clipboard.writeText(text).then(() => showToast('Question copied!', 'success'));
+}
+
+function setupSwipeNavigation() {
+    let startX = 0, startY = 0, swiping = false;
+
+    document.addEventListener('touchstart', e => {
+        if (AppState.currentView !== 'quiz-taking' || !AppState.quizSession) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        swiping = false;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', e => {
+        if (AppState.currentView !== 'quiz-taking' || !AppState.quizSession) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        if (!swiping && Math.abs(dx) > 15 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            swiping = true;
+        }
+        if (swiping) e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchend', e => {
+        if (AppState.currentView !== 'quiz-taking' || !AppState.quizSession || !swiping) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if (dx > 50) previousQuestion();
+        else if (dx < -50) nextQuestion();
+        swiping = false;
+    });
+}
+
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
         if (AppState.currentView !== 'quiz-taking' || !AppState.quizSession) return;
@@ -428,6 +470,7 @@ function setupKeyboardShortcuts() {
 }
 
 setupKeyboardShortcuts();
+setupSwipeNavigation();
 
 setInterval(() => {
     const timerEl = document.getElementById('quiz-timer');

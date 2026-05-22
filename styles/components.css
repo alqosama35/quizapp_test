@@ -512,6 +512,14 @@
     gap: 8px;
     margin-bottom: 16px;
 }
+.qt-copy-btn {
+    margin-left: auto;
+    padding: 3px 8px;
+    font-size: 13px;
+    opacity: 0.5;
+    transition: opacity var(--t-fast);
+}
+.qt-copy-btn:hover { opacity: 1; }
 .qt-q-chip {
     background: var(--primary-muted);
     color: var(--primary-color);
@@ -566,7 +574,7 @@
     transition: all var(--t-fast);
     border: 1px solid var(--border-color);
 }
-.qt-option-label { font-size: 15px; flex: 1; line-height: 1.5; }
+.qt-option-label { font-size: 15px; flex: 1; line-height: 1.5; user-select: text; }
 
 /* Instant feedback states */
 .qt-option.option-feedback-correct {
