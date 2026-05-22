@@ -8,9 +8,16 @@ const AppState = {
     settings: null
 };
 
+function trackEvent(name, params = {}) {
+    if (typeof gtag === 'function') gtag('event', name, params);
+}
+
 // Simple router
 const Router = {
     navigate(view, params = {}) {
+        if (view === 'course-view' && params.currentCourse) {
+            trackEvent('course_opened', { course_name: params.currentCourse.name });
+        }
         AppState.currentView = view;
         Object.assign(AppState, params);
 
@@ -292,6 +299,7 @@ async function startQuiz(quiz) {
                 autoScroll: saved.autoScroll || false,
                 revealedAnswers: saved.revealedAnswers
             };
+            trackEvent('quiz_started', { quiz_name: saved.quiz.name, course_name: course?.name, question_count: saved.quiz.jsonData.length, resumed: true });
             Router.navigate('quiz-taking', { currentQuiz: saved.quiz });
             return;
         }
@@ -309,6 +317,7 @@ async function startQuiz(quiz) {
         revealedAnswers: new Array(quiz.jsonData.length).fill(false)
     };
 
+    trackEvent('quiz_started', { quiz_name: quiz.name, course_name: course?.name, question_count: quiz.jsonData.length, resumed: false });
     Router.navigate('quiz-taking', { currentQuiz: quiz });
 }
 
@@ -414,6 +423,7 @@ async function handleSharedCourseImport(slug) {
         }
 
         const imported = await getCourse(newCourse.id);
+        trackEvent('shared_course_imported', { course_slug: slug, course_name: course.name, quiz_count: quizCount });
         showToast(`"${imported.name}" imported with ${quizCount} quiz${quizCount !== 1 ? 'zes' : ''}!`, 'success');
         Router.navigate('course-view', { currentCourse: imported });
     } catch (err) {

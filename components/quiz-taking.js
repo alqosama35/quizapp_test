@@ -293,6 +293,15 @@ async function submitQuiz() {
         }
     });
 
+    trackEvent('quiz_completed', {
+        quiz_name: quiz.name,
+        course_name: AppState.currentCourse?.name,
+        score_percent: Math.round(score / quiz.jsonData.length * 100),
+        questions_answered: answers.length,
+        total_questions: quiz.jsonData.length,
+        time_seconds: totalTime
+    });
+
     const result = await saveResult({
         courseId: AppState.currentCourse.id,
         quizId: quiz.id !== 'mistakes-practice' ? quiz.id : null,
