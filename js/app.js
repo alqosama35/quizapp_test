@@ -18,6 +18,7 @@ const Router = {
         if (view === 'course-view' && params.currentCourse) {
             trackEvent('course_opened', { course_name: params.currentCourse.name });
         }
+        gtag('event', 'page_view', { page_title: view, page_path: '/' + view });
         AppState.currentView = view;
         Object.assign(AppState, params);
 

@@ -197,6 +197,7 @@ function applyInstantFeedback(questionIdx, selectedIndex) {
 function toggleAutoScroll() {
     const session = AppState.quizSession;
     session.autoScroll = !session.autoScroll;
+    trackEvent('feature_toggled', { feature: 'auto_next', enabled: session.autoScroll });
     const btn = document.querySelector('.autoscroll-toggle-btn');
     if (btn) {
         btn.classList.toggle('autoscroll-on', session.autoScroll);
@@ -208,6 +209,7 @@ function toggleAutoScroll() {
 function toggleInstantFeedback() {
     const session = AppState.quizSession;
     session.instantFeedback = !session.instantFeedback;
+    trackEvent('feature_toggled', { feature: 'instant_feedback', enabled: session.instantFeedback });
     updateSettings({ instantFeedback: session.instantFeedback });
     const btn = document.querySelector('.feedback-toggle-btn');
     if (btn) {
