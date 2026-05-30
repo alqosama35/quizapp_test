@@ -1,0 +1,2845 @@
+{
+  "type": "course-export",
+  "version": 1,
+  "exportDate": "2026-05-30T12:40:28.230Z",
+  "course": {
+    "id": "d20b1dee-47ec-4096-9908-631b9bc2f773",
+    "name": "se2",
+    "description": "",
+    "color": "#3B82F6",
+    "icon": "📘",
+    "createdAt": "2026-05-30T12:25:40.096Z",
+    "updatedAt": "2026-05-30T12:25:40.096Z",
+    "settings": {
+      "passingScore": 70,
+      "defaultTimeLimit": null,
+      "shuffleQuestions": false,
+      "shuffleOptions": false
+    },
+    "stats": {
+      "totalQuizzes": 7,
+      "totalAttempts": 0,
+      "averageScore": 0,
+      "bestScore": 0,
+      "totalMistakes": 0
+    }
+  },
+  "quizzes": [
+    {
+      "id": "06b8dc6a-b0be-46f7-a85e-daeaf2b20a4b",
+      "courseId": "d20b1dee-47ec-4096-9908-631b9bc2f773",
+      "name": "Lecture 6: Cloud-Based Software",
+      "jsonData": [
+        {
+          "question": "Which of the following best describes a cloud-based server?",
+          "options": [
+            "A physical machine dedicated to a single organization's workload",
+            "A server implemented in software and rented from a cloud provider",
+            "A local server managed by the customer's IT department",
+            "A hardware device permanently assigned to one user"
+          ],
+          "correct": 1,
+          "explanation": "Cloud-based servers are 'virtual servers' — implemented in software rather than hardware and offered for rent by cloud providers. A physical server dedicated to a single user is the opposite of this model. This tests the core definition of the cloud."
+        },
+        {
+          "question": "According to the lecture, how do cloud servers adapt to changing user demand?",
+          "options": [
+            "They automatically upgrade their physical hardware components",
+            "They redistribute load by moving users to different physical locations",
+            "They can be started up and shut down as demand changes",
+            "They require manual configuration by the cloud provider each time"
+          ],
+          "correct": 2,
+          "explanation": "Cloud servers can be started and shut down dynamically as demand changes, making them elastic. This is a core characteristic of cloud infrastructure — scalability on demand. Upgrading physical hardware is the opposite of the cloud's software-defined approach."
+        },
+        {
+          "question": "A startup wants to begin development immediately without waiting weeks for hardware procurement. Which cloud benefit directly addresses this need?",
+          "options": [
+            "Distributed development support",
+            "Reduced long-term hardware maintenance costs",
+            "Ability to upgrade server power on demand",
+            "Rapid startup — servers available in minutes"
+          ],
+          "correct": 3,
+          "explanation": "The lecture specifically identifies 'Startup time' as a cloud benefit: you don't have to wait for hardware delivery; servers can be up and running in minutes. Distributed development and cost savings are also benefits, but they do not address the 'waiting for hardware' problem."
+        },
+        {
+          "question": "A development team is distributed across Cairo, London, and New York. Which cloud benefit is MOST directly relevant to their situation?",
+          "options": [
+            "Cost savings from avoiding hardware procurement",
+            "Distributed development with a shared environment for all team members",
+            "Ability to shut down servers when not in use",
+            "Access to more powerful server configurations"
+          ],
+          "correct": 1,
+          "explanation": "The lecture identifies 'Distributed development' as a cloud benefit specifically for teams working from different locations: all team members get the same development environment and can seamlessly share information. Cost savings are a separate benefit, not specific to distributed teams."
+        },
+        {
+          "question": "Which of the following is NOT listed as a benefit of using cloud for software development over private servers?",
+          "options": [
+            "Avoiding initial capital costs of hardware procurement",
+            "Adding servers for short-term requirements like load testing",
+            "Complete data sovereignty and physical control over hardware",
+            "Upgrading to more powerful systems when current ones are insufficient"
+          ],
+          "correct": 2,
+          "explanation": "The lecture lists Cost, Startup time, Server choice, and Distributed development as cloud benefits. Complete physical control and data sovereignty are actually characteristics of private servers — in the cloud, hardware is owned and managed by the cloud provider, not the customer. This is a NOT/EXCEPT question."
+        },
+        {
+          "question": "What distinguishes a physical server from a virtual server?",
+          "options": [
+            "A physical server can run multiple operating systems simultaneously",
+            "A physical server is dedicated to a single user and is not shared",
+            "A physical server is implemented in software rather than hardware",
+            "A physical server requires a hypervisor to function"
+          ],
+          "correct": 1,
+          "explanation": "The lecture defines a physical server as 'designated or used by single user and not shared by multiple users.' Each physical server has its own OS, memory, hard drive, processors, and network connection. It is virtual servers (implemented via hypervisors) that are shared and run multiple OS instances."
+        },
+        {
+          "question": "After installing a hypervisor on a physical server and creating virtual machines, what are these VMs called when they are used to serve network clients?",
+          "options": [
+            "Container instances",
+            "Virtual servers",
+            "Bare-metal nodes",
+            "Daemon processes"
+          ],
+          "correct": 1,
+          "explanation": "The lecture states that virtual machines created and managed by a hypervisor 'can be used for different purposes and if they are used as a server then they are called virtual server.' This distinguishes the general concept of a VM from its specific use as a virtual server."
+        },
+        {
+          "question": "What is the primary role of a hypervisor in a cloud or virtualized environment?",
+          "options": [
+            "To provide network routing between cloud regions",
+            "To manage storage volumes attached to physical servers",
+            "To create and manage virtual machines on a physical server",
+            "To package applications and their dependencies into containers"
+          ],
+          "correct": 2,
+          "explanation": "The lecture states that installing a hypervisor on a physical server allows you to 'create and manage virtual machine.' Each resulting VM has its own resources, OS, and server applications. Packaging applications into containers is Docker's role, not the hypervisor's."
+        },
+        {
+          "question": "Container-based virtualization is described as 'simpler' than full VM virtualization. What specific condition makes containers the appropriate choice?",
+          "options": [
+            "When applications require different operating systems to run side by side",
+            "When running many instances of applications that all use the same operating system",
+            "When maximum isolation between workloads is the top priority",
+            "When each application needs its own dedicated kernel"
+          ],
+          "correct": 1,
+          "explanation": "The lecture states: 'If you are running a cloud-based system with many instances of applications or services, these all use the same operating system, you can use a simpler virtualization technology called containers.' Containers share the host OS kernel — they are NOT appropriate when you need applications on different operating systems."
+        },
+        {
+          "question": "Which statement correctly describes the size and startup speed difference between containers and virtual machines?",
+          "options": [
+            "Containers are gigabytes; VMs are megabytes; both start in seconds",
+            "Both containers and VMs are megabytes; containers start faster",
+            "Containers are megabytes; VMs are gigabytes; containers start in seconds vs VMs in minutes",
+            "Containers are megabytes; VMs are gigabytes; both start in under a minute"
+          ],
+          "correct": 2,
+          "explanation": "The lecture explicitly states: 'Containers are usually megabytes in size whereas VMs are gigabytes' and 'Containers can be started and shut down in a few seconds rather than the few minutes required for a VM.' This size/speed advantage is the primary technical reason containers accelerate cloud deployments."
+        },
+        {
+          "question": "Why can't Linux and Windows containers run on the same machine without any additional tooling?",
+          "options": [
+            "Containers require separate physical network adapters for each OS type",
+            "Containers don't emulate operating systems — they share the host kernel, and kernel types cannot be mixed",
+            "Docker licensing restrictions prevent mixing container types on one host",
+            "Linux and Windows use different filesystem formats that Docker cannot reconcile"
+          ],
+          "correct": 1,
+          "explanation": "The lecture explains that containers 'rely on the host OS kernel' — Linux containers need a Linux kernel and Windows containers need a Windows kernel. Because containers share (not emulate) the host kernel, you cannot mix kernel types natively. This is a hard technical constraint, not a licensing or filesystem issue."
+        },
+        {
+          "question": "A team needs to run both Linux and Windows containers on a Windows development machine. What does Docker Desktop use to enable Linux containers on Windows?",
+          "options": [
+            "A Type-1 hypervisor that replaces the Windows kernel at boot",
+            "WSL 2 (Windows Subsystem for Linux v2) to run a Linux kernel inside Windows",
+            "A cross-compilation layer that translates Linux system calls to Windows",
+            "A shared container runtime that abstracts both kernels simultaneously"
+          ],
+          "correct": 1,
+          "explanation": "The lecture states that Docker Desktop on Windows uses WSL 2 (Windows Subsystem for Linux v2) to run a Linux kernel inside Windows, which allows Linux containers to run. However, you can only switch between Linux and Windows containers — you cannot run both at the exact same time natively."
+        },
+        {
+          "question": "Compared to virtual machines, which of the following is a clear advantage of containers for cloud deployments?",
+          "options": [
+            "Containers provide stronger isolation by running separate OS kernels",
+            "Containers support running multiple operating systems on the same host",
+            "Containers accelerate deployment because they start in seconds and are megabytes in size",
+            "Containers eliminate the need for any host operating system"
+          ],
+          "correct": 2,
+          "explanation": "The lecture identifies that containers accelerate cloud deployment because they are megabytes (vs GB for VMs) and start in seconds (vs minutes for VMs). The statement about stronger isolation is backwards — VMs provide stronger isolation since each has its own kernel. Containers require a host OS, not eliminate it."
+        },
+        {
+          "question": "Which of the following best describes Docker?",
+          "options": [
+            "A hardware virtualization platform that creates VMs on bare-metal servers",
+            "An open-source container management service used to run containerized applications",
+            "A cloud provider that offers IaaS infrastructure to enterprises",
+            "A Linux kernel module that provides process-level resource isolation"
+          ],
+          "correct": 1,
+          "explanation": "The lecture defines Docker as 'an open-source standalone application which works as an engine used to run containerized applications' and concludes with 'Docker is a container management service.' Docker is not a VM platform or a cloud provider — it is a tool for running and managing containers."
+        },
+        {
+          "question": "Which of the following is true about where Docker applications can run?",
+          "options": [
+            "Docker applications can only run on Linux servers",
+            "Docker applications require a dedicated physical server with no shared resources",
+            "Docker applications run in containers usable on any system: laptop, server, or cloud",
+            "Docker applications can only be deployed on cloud platforms, not local machines"
+          ],
+          "correct": 2,
+          "explanation": "The lecture states: 'Docker applications run in containers that can be used on any system: a laptop, on server or in the cloud.' Docker's portability is one of its core benefits — the containerized application runs consistently regardless of the underlying system, as long as Docker is installed."
+        },
+        {
+          "question": "What is the purpose of a Dockerfile?",
+          "options": [
+            "To store running application state for backup and recovery",
+            "To configure the network routing rules between containers",
+            "To define instructions for building a Docker image in a reproducible way",
+            "To manage communication between the Docker daemon and Docker Hub"
+          ],
+          "correct": 2,
+          "explanation": "The lecture defines a Dockerfile as 'a simple text file containing all the instructions for building an image,' including base image, packages, files, and environment configuration. It automates the creation of a consistent and reproducible image. Network routing and daemon communication are different Docker components."
+        },
+        {
+          "question": "A developer writes a Dockerfile specifying a base image, dependencies, and configuration. What command does the developer run next to produce a usable artifact?",
+          "options": [
+            "docker run — to immediately start a container from the instructions",
+            "docker pull — to download the base image from Docker Hub",
+            "docker build — to build a Docker image from the Dockerfile",
+            "docker push — to upload the instructions to the registry"
+          ],
+          "correct": 2,
+          "explanation": "The lecture states: 'Once a Dockerfile is created, you can use the docker build command to build a Docker image based on the instructions in the file.' The docker run command starts a container from an existing image, and docker pull downloads an existing image — neither directly processes a Dockerfile."
+        },
+        {
+          "question": "Which of the following best describes a Docker image?",
+          "options": [
+            "A running instance of an application with active network connections",
+            "A lightweight, standalone, executable package containing code, runtime, libraries, and settings",
+            "A text file of instructions used to configure the container environment",
+            "A cloud registry service that stores and distributes container templates"
+          ],
+          "correct": 1,
+          "explanation": "The lecture defines a Docker image as 'a lightweight, standalone, executable software package that contains all the necessary components to run an application, including code, runtime, system libraries, and settings.' A running instance is a container, not an image; a text file of instructions is a Dockerfile."
+        },
+        {
+          "question": "What is the relationship between a Docker image and a Docker container?",
+          "options": [
+            "A container is a text template; an image is its compiled binary form",
+            "An image and a container are interchangeable terms for the same artifact",
+            "A container is a running instance of a Docker image",
+            "An image is created from a running container by saving its state"
+          ],
+          "correct": 2,
+          "explanation": "The lecture states: 'A Docker container is like a running instance of a Docker image.' The image is the static, packaged artifact; the container is the live, active version of that image. This is analogous to a class (image) vs an object instance (container) in object-oriented programming."
+        },
+        {
+          "question": "What is the role of the Docker daemon in Docker architecture?",
+          "options": [
+            "It stores Docker images in a local cache to speed up repeated builds",
+            "It acts as a middleman between the Docker client, images, and containers, executing client commands",
+            "It provides a graphical UI for managing running containers on the host",
+            "It handles authentication and authorization for Docker Hub access"
+          ],
+          "correct": 1,
+          "explanation": "The lecture describes the Docker daemon as 'the most important thing that is used for communication between these three components,' acting as 'a middleman between these components, reads commands from the Client, and performs operations depending on the command.' It is the core execution engine of Docker, not a caching or UI layer."
+        },
+        {
+          "question": "A developer on a Windows machine wants to run Linux containers today and Windows containers tomorrow — but NOT both simultaneously. Which solution from the lecture enables this?",
+          "options": [
+            "Installing two separate Docker engines — one for each container type",
+            "Using Docker Desktop with WSL 2, then switching between container modes",
+            "Running both container types through a Type-2 hypervisor that abstracts the kernel",
+            "Configuring Docker to use a compatibility layer that bridges Linux and Windows kernels"
+          ],
+          "correct": 1,
+          "explanation": "The lecture's 'Option 1' states that Docker Desktop uses WSL 2 to run a Linux kernel inside Windows, allowing the user to 'switch between Linux containers and Windows containers' — but not run both at the exact same time. The compatibility layer option is a fabricated distractor; Docker does not bridge kernels this way."
+        },
+        {
+          "question": "Which of the following statements about running mixed (Linux + Windows) containers is CORRECT according to the lecture?",
+          "options": [
+            "Docker natively supports running both Linux and Windows containers simultaneously on one host",
+            "You can run a Linux VM on a Windows host to execute Linux containers on that Windows machine",
+            "WSL 2 allows Linux and Windows containers to run in parallel without any limitations",
+            "Containers emulate their target OS, so kernel type does not restrict mixed deployments"
+          ],
+          "correct": 1,
+          "explanation": "The lecture lists 'Option 2: Use Virtual Machines' — specifically 'Linux VM on a Windows host to run Linux containers.' Option A is wrong because the lecture explicitly states you 'can't run both at the exact same time natively.' Option D is wrong because containers share the host kernel rather than emulating an OS."
+        },
+        {
+          "question": "An organization wants to build custom applications using cloud-provider-supplied libraries, frameworks, and databases without managing the underlying infrastructure. Which cloud service model matches this requirement?",
+          "options": [
+            "IaaS — renting virtualized compute, network, and storage resources",
+            "SaaS — accessing finished software products through a browser",
+            "PaaS — using provider-supplied libraries and frameworks to implement software",
+            "DaaS — renting data storage and management services from the provider"
+          ],
+          "correct": 2,
+          "explanation": "The lecture defines PaaS (Platform as a Service) as 'an intermediate level where you use libraries and frameworks provided by the cloud provider to implement your software.' IaaS gives raw infrastructure, SaaS gives ready-to-use applications. PaaS sits in between — development tools without infrastructure management."
+        },
+        {
+          "question": "Which cloud service model gives customers the MOST control and customization over the computing environment?",
+          "options": [
+            "SaaS, because it runs on the provider's optimized infrastructure",
+            "PaaS, because it provides a full development environment",
+            "IaaS, because customers rent raw infrastructure and control everything above it",
+            "CaaS, because containers provide isolated runtime environments"
+          ],
+          "correct": 2,
+          "explanation": "IaaS (Infrastructure as a Service) offers raw virtualized computing resources — compute, network, and storage — giving customers the highest level of control. They install and manage their own OS, middleware, and applications. SaaS and PaaS abstract away more layers, reducing but not eliminating customer control."
+        },
+        {
+          "question": "Which of the following correctly maps each service model to its description?",
+          "options": [
+            "IaaS = ready-to-use apps via browser; PaaS = raw compute/storage; SaaS = dev frameworks",
+            "IaaS = raw infrastructure services; PaaS = development frameworks and libraries; SaaS = software accessed via browser or app",
+            "IaaS = development frameworks; PaaS = software via browser; SaaS = raw infrastructure",
+            "IaaS = software via browser; SaaS = raw compute; PaaS = container orchestration"
+          ],
+          "correct": 1,
+          "explanation": "The lecture defines: IaaS as 'infrastructure service such as compute, network and storage'; PaaS as 'libraries and frameworks provided by the cloud provider to implement your software'; SaaS as 'software product runs on the cloud and is accessed by users through a web browser or mobile app.' All other options mix up these definitions."
+        },
+        {
+          "question": "A SaaS application processes some logic in the user's browser and some on the remote server. What is the PRIMARY reason for executing logic locally in the browser?",
+          "options": [
+            "To reduce the SaaS provider's server licensing costs",
+            "To improve data security by keeping sensitive data off remote servers",
+            "To reduce network traffic and increase user response speed, especially on slow connections",
+            "To allow the application to function without any internet connectivity"
+          ],
+          "correct": 2,
+          "explanation": "The lecture states: 'Local execution reduces network traffic and so increases user response speed. This is useful when users have a slow network connection.' While security and offline use may be valid reasons in general, the lecture specifically identifies network traffic reduction and speed improvement as the primary motivation."
+        },
+        {
+          "question": "Which SaaS design issue arises when multiple organizations use the same SaaS system and data from one organization may be visible to another?",
+          "options": [
+            "Authentication federation failure",
+            "Information leakage between tenants",
+            "Local/remote processing imbalance",
+            "Excessive electrical power consumption from local processing"
+          ],
+          "correct": 1,
+          "explanation": "The lecture identifies 'Information leakage' as a SaaS design issue: 'If you have multiple users from multiple organizations, a security risk is that information leaks from one organization to another.' This is specifically a multi-tenant security risk requiring careful security system design."
+        },
+        {
+          "question": "Read the following description and identify which system architecture it describes: 'All customers share a single running instance of the system and a single database, with data tagged by tenant ID for logical isolation.'",
+          "options": [
+            "Multi-instance system",
+            "Multi-tenant system"
+          ],
+          "correct": 1,
+          "explanation": "The lecture defines a multi-tenant system as one where 'all customers are served by a single instance of the system and a multitenant database.' Data isolation is achieved logically through tenant identifiers, not by physical separation. Multi-instance systems give each customer their own separate copy of the system and database."
+        },
+        {
+          "question": "A company evaluates SaaS deployment architectures. In which scenario would multi-instance be preferred over multi-tenant?",
+          "options": [
+            "When the provider wants to minimize infrastructure costs across all customers",
+            "When updates need to be delivered to all customers simultaneously",
+            "When a customer requires a customized database schema that differs from other customers",
+            "When the provider wants to simplify security management with a single database copy"
+          ],
+          "correct": 2,
+          "explanation": "The lecture identifies 'Inflexibility' as a disadvantage of multi-tenant: 'Customers must all use the same database schema with limited scope for adapting this schema to individual needs.' If a customer needs a unique schema, multi-instance is preferable. Minimizing costs, simultaneous updates, and simplified security are all advantages of multi-tenant."
+        },
+        {
+          "question": "Which of the following is NOT an advantage of multi-tenant databases listed in the lecture?",
+          "options": [
+            "Resource utilization — the provider can optimize all resources centrally",
+            "Update management — all customers receive updates simultaneously from a single instance",
+            "Flexibility — each customer can customize their own database schema independently",
+            "Security — fewer vulnerabilities due to a single copy of the database software to patch"
+          ],
+          "correct": 2,
+          "explanation": "Flexibility is actually listed as a DISADVANTAGE of multi-tenant systems, not an advantage. The lecture states that customers 'must all use the same database schema with limited scope for adapting this schema.' Resource utilization, update management, and security (single patch target) are all listed advantages. This is a NOT/EXCEPT question targeting a common reversal misconception."
+        }
+      ],
+      "createdAt": "2026-05-30T12:39:06.386Z",
+      "tags": [],
+      "difficulty": null,
+      "source": null,
+      "stats": {
+        "attempts": 0,
+        "bestScore": 0,
+        "lastAttempt": null
+      }
+    },
+    {
+      "id": "22d0f24f-fc0e-4839-9419-1bcd7530cae1",
+      "courseId": "d20b1dee-47ec-4096-9908-631b9bc2f773",
+      "name": "Lecture 4: OCL",
+      "jsonData": [
+        {
+          "question": "What does OCL stand for in the context of UML?",
+          "options": [
+            "Object Configuration Language",
+            "Object Constraint Language",
+            "Operational Class Language",
+            "Object Class Logic"
+          ],
+          "correct": 1,
+          "explanation": "OCL stands for Object Constraint Language. It is the standardized language used in UML for specifying constraints on object-oriented systems. The other three options are plausible-sounding but fabricated names."
+        },
+        {
+          "question": "OCL was originally developed in 1995 under what name and by which organization?",
+          "options": [
+            "OCL-1 by the Object Management Group (OMG)",
+            "UMLX by Microsoft Research",
+            "IBEL by IBM's Insurance division",
+            "IBEL by Rational Software's modeling team"
+          ],
+          "correct": 2,
+          "explanation": "OCL was first developed in 1995 as IBEL by IBM's Insurance division for business modelling. It was later standardized as OCL within UML. Rational Software was involved with UML but was not the originator of OCL."
+        },
+        {
+          "question": "Which of the following is a stated advantage of using formal OCL constraints alongside UML models?",
+          "options": [
+            "They replace UML class diagrams in all OO modeling scenarios",
+            "They allow OCL constraints to be executed directly as Java code",
+            "They reduce ambiguity via formal semantics for communication",
+            "They generate test cases and test suites automatically from UML"
+          ],
+          "correct": 2,
+          "explanation": "OCL constraints have formal semantics, which reduces the ambiguity inherent in visual UML models and enables unambiguous communication between developers. OCL does not replace class diagrams, generate tests automatically, or compile to Java."
+        },
+        {
+          "question": "Which of the following is NOT listed as a valid use of OCL in the lecture?",
+          "options": [
+            "Acting as a navigation language in UML models",
+            "Specifying pre- and post-conditions for operation calls",
+            "Specifying invariants for classes and types in a model",
+            "Auto-generating source code from UML diagrams"
+          ],
+          "correct": 3,
+          "explanation": "OCL is used for invariants, pre/post conditions, navigation, constraining operations, and testing requirements — but NOT for automatic source code generation. Code generation is a feature of model-driven tools, not OCL itself."
+        },
+        {
+          "question": "Why is OCL preferred over first-order logic for specifying constraints on UML models?",
+          "options": [
+            "First-order logic cannot express boolean conditions at all",
+            "OCL has more operators than first-order logic offers",
+            "First-order logic is not OO — a poor fit for object-oriented models",
+            "First-order logic needs a graphical notation UML tools cannot embed"
+          ],
+          "correct": 2,
+          "explanation": "The lecture explicitly states that first-order logic is 'not OO', making it a poor fit for OO systems modelled in UML. OCL is designed for the object-oriented context. Additionally, OCL is the only standardized constraint language for UML."
+        },
+        {
+          "question": "Which type of OCL constraint must hold TRUE before the execution of an operation?",
+          "options": [
+            "Invariant",
+            "Pre-condition",
+            "Guard",
+            "Post-condition"
+          ],
+          "correct": 1,
+          "explanation": "A pre-condition must hold BEFORE the operation executes. A post-condition holds after execution. An invariant always holds on the class at all times. A guard constrains state machine transitions, not operation invocation."
+        },
+        {
+          "question": "What is the purpose of a guard constraint in OCL?",
+          "options": [
+            "To restrict the return value of an operation to a valid range",
+            "To hold after the execution of an operation completes successfully",
+            "To prevent a class invariant from being evaluated at runtime",
+            "To constrain state-machine transitions between states"
+          ],
+          "correct": 3,
+          "explanation": "A guard constrains the transition from one state to another in a state machine. This is distinct from a pre-condition (before an operation runs), post-condition (after it runs), and invariant (which always holds on a class)."
+        },
+        {
+          "question": "In OCL, what does the keyword 'self' refer to within a constraint expression?",
+          "options": [
+            "The result value returned by the current operation",
+            "The parent class from which the context class inherits",
+            "The one instance of the context class being evaluated",
+            "The collection of all instances of the context class"
+          ],
+          "correct": 2,
+          "explanation": "'self' refers to the context object — the specific instance of the class to which the constraint is bound. In 'context Mortgage invariant: self.startDate < self.endDate', self is the particular Mortgage instance being checked, not all mortgages."
+        },
+        {
+          "question": "Which of the following is NOT a valid way to specify the context of an OCL constraint?",
+          "options": [
+            "Writing 'context <ClassName>' as a text prefix",
+            "A dashed note line connecting to the context figure in the UML model",
+            "Using 'self' at the start of the invariant expression body",
+            "Naming the constraint after the keyword 'invariant'"
+          ],
+          "correct": 2,
+          "explanation": "Context is specified by: (1) writing 'context ClassName' in text, or (2) using a dashed note line in the UML diagram. 'self' appears inside the expression body to reference the context object — it does not define which class is the context. Naming the invariant (e.g., 'invariant agerestriction:') is valid syntax."
+        },
+        {
+          "question": "In OCL, which syntax is used to access an attribute or call an operation on a SINGLE navigated object?",
+          "options": [
+            "The pipe operator '|'",
+            "The arrow operator '->'",
+            "The double-colon operator '::'",
+            "The dot operator '.'"
+          ],
+          "correct": 3,
+          "explanation": "The dot operator '.' accesses attributes and operations on a single object (e.g., 'owner.age'). The arrow '->' is used on collections. The '::' separates class and operation names in context headers (e.g., 'context Company::hire'). The '|' is the iterator separator inside expressions."
+        },
+        {
+          "question": "When navigating through TWO associations both with multiplicity 0..*, what OCL collection type results?",
+          "options": [
+            "A Set — duplicates are removed during navigation automatically",
+            "An OrderedSet — unique elements ordered by association traversal",
+            "A Bag — same element reachable via different paths",
+            "A Sequence — elements ordered by traversal path taken"
+          ],
+          "correct": 2,
+          "explanation": "Navigating through two many-multiplicity associations produces a Bag because the same object might be reachable via different paths (allowing duplicates), but no ordering is guaranteed. The lecture states explicitly: 'account.transaction produces a bag of transactions'."
+        },
+        {
+          "question": "Which OCL collection type preserves the ORDER of elements AND allows DUPLICATE values?",
+          "options": [
+            "OrderedSet",
+            "Sequence",
+            "Bag",
+            "Set"
+          ],
+          "correct": 1,
+          "explanation": "A Sequence is ordered and allows duplicates — it is essentially an ordered Bag. A Bag allows duplicates but has no order. An OrderedSet maintains order but enforces uniqueness. A Set has neither order nor duplicates."
+        },
+        {
+          "question": "The expression 'account.transaction -> asSet' is applied. What transformation occurs?",
+          "options": [
+            "Bag duplicates are removed, producing a Set",
+            "A Sequence is reordered and stored as an OrderedSet",
+            "A Set of Accounts is converted into a time-ordered Sequence",
+            "A nested collection is flattened into a single-level Bag"
+          ],
+          "correct": 0,
+          "explanation": "Since 'account.transaction' yields a Bag (possibly with duplicates), applying '-> asSet' removes all duplicates, producing a Set. The lecture illustrates this exact case to show when you need to deduplicate a navigated collection."
+        },
+        {
+          "question": "Which OCL collection type maintains UNIQUENESS of elements AND guarantees element ORDER?",
+          "options": [
+            "Bag (duplicates, unordered)",
+            "Set (unique, unordered)",
+            "Sequence (duplicates, ordered)",
+            "OrderedSet (unique, ordered)"
+          ],
+          "correct": 3,
+          "explanation": "An OrderedSet is both ordered and unique — it combines Set (no duplicates) with an ordering guarantee. A Set has no order. A Sequence is ordered but allows duplicates. A Bag allows duplicates with no ordering."
+        },
+        {
+          "question": "Which OCL operation returns the NUMBER OF ELEMENTS in a collection?",
+          "options": [
+            "count()",
+            "sum()",
+            "size()",
+            "length()"
+          ],
+          "correct": 2,
+          "explanation": "'size()' returns the cardinality (number of elements) of a collection. 'count(object)' counts occurrences of a specific object — useful in Bags. 'sum()' totals numeric values. 'length()' is a String operation, not a collection operation in OCL."
+        },
+        {
+          "question": "Which OCL collection operation returns a sub-collection of elements where the boolean expression is TRUE?",
+          "options": [
+            "collect",
+            "exists",
+            "reject",
+            "select"
+          ],
+          "correct": 3,
+          "explanation": "'select' filters a collection, keeping only elements where the condition is true. 'reject' is the inverse — it keeps elements where the condition is false. 'collect' transforms elements into a new collection. 'exists' returns a Boolean, not a collection."
+        },
+        {
+          "question": "What is the key difference between the 'select' and 'reject' operations in OCL?",
+          "options": [
+            "'select' works only on Sets; 'reject' works only on Bags only",
+            "'select' returns a Boolean result; 'reject' returns a sub-collection",
+            "'select' keeps elements matching the condition; 'reject' drops them",
+            "'select' creates a new collection; 'reject' modifies the original one"
+          ],
+          "correct": 2,
+          "explanation": "'select(e | condition)' keeps elements where the condition is TRUE. 'reject(e | condition)' removes those same elements — it keeps elements where the condition is FALSE. They are logical complements. Neither modifies the original; OCL collection operations always produce new collections."
+        },
+        {
+          "question": "The OCL expression 'items->forAll(i | i.quantity > 0)' evaluates to what?",
+          "options": [
+            "A sub-collection of items where quantity > 0",
+            "An Integer: the count of items with quantity > 0",
+            "A Boolean: true only if ALL items have quantity > 0",
+            "A Boolean: true if AT LEAST ONE item has quantity > 0"
+          ],
+          "correct": 2,
+          "explanation": "'forAll' is a universal quantifier (∀) that returns a Boolean. It is true only if the condition holds for EVERY element. If even one item has quantity <= 0 the result is false. 'exists' is the existential quantifier (∃) for at-least-one checks."
+        },
+        {
+          "question": "Which OCL operation checks whether a specific object is contained in a collection?",
+          "options": [
+            "contains(object)",
+            "includes(object)",
+            "exists(object)",
+            "count(object)"
+          ],
+          "correct": 1,
+          "explanation": "'includes(object)' returns true if the specified object is in the collection. 'count(object)' counts occurrences — useful for Bags but not a simple membership test. 'exists' requires a boolean expression with an iterator variable. 'contains' is not a valid OCL collection operation."
+        },
+        {
+          "question": "Which of the following operations is available ONLY on OrderedSet and Sequence, but NOT on Set or Bag?",
+          "options": [
+            "size()",
+            "isEmpty()",
+            "includes(object)",
+            "first()"
+          ],
+          "correct": 3,
+          "explanation": "'first()', 'last()', and 'indexOf()' require a defined element order and are available only on ordered collections (OrderedSet and Sequence). 'size()', 'isEmpty()', and 'includes()' are available on ALL four OCL collection types."
+        },
+        {
+          "question": "What does the OCL operation 'flatten()' produce when applied to a nested collection?",
+          "options": [
+            "All nested sub-collections are merged into one flat collection",
+            "A sorted version of the collection in ascending element order",
+            "A Set produced by deduplicating all elements across all sub-collections",
+            "A copy of the collection with first and last elements trimmed"
+          ],
+          "correct": 0,
+          "explanation": "'flatten()' converts a nested collection (a collection of collections) into one flat collection. The lecture example shows: 'Set{Bag{1,2,2}, Bag{2}} flatten -> asSet{1,2}'. It merges sub-collections — it does not sort, deduplicate alone, or trim boundary elements."
+        },
+        {
+          "question": "Which of the following is NOT a valid OCL collection transformation operation?",
+          "options": [
+            "asSet() — removes duplicates, unordered result",
+            "asOrderedSet() — removes duplicates, ordered result",
+            "asCollection() — abstract type, not a valid target",
+            "asBag() — keeps duplicates, unordered result"
+          ],
+          "correct": 2,
+          "explanation": "The four valid OCL transformation operations are: asSet(), asBag(), asOrderedSet(), and asSequence(). 'asCollection()' is NOT valid — 'Collection' is the abstract supertype in OCL's type hierarchy, not a concrete type you can convert to."
+        },
+        {
+          "question": "Statement: 'In OCL, the select operation always returns a collection of the same type as the input.' Is this statement correct?",
+          "options": [
+            "Correct — select preserves the input collection type",
+            "Incorrect — select always returns a Bag regardless of input"
+          ],
+          "correct": 0,
+          "explanation": "This is correct. 'select' returns a sub-collection of the SAME type as the input. Selecting from a Set returns a Set; selecting from a Sequence returns a Sequence. The same applies to 'reject'. This type-preserving property is an important OCL design principle."
+        },
+        {
+          "question": "In an OCL post-condition, the notation 'points@pre' refers to what value?",
+          "options": [
+            "The pre-operation value of 'points' — before the method ran",
+            "The predicted future value computed during constraint checking",
+            "The value of 'points' as it exists AFTER the operation completes",
+            "The default initial value of 'points' assigned at object creation"
+          ],
+          "correct": 0,
+          "explanation": "'@pre' in a post-condition refers to the value of an attribute BEFORE the operation executed. For example, 'points = points@pre + i' states: after earn, new points = old points + i. This is the only mechanism OCL post-conditions have to reason about state change."
+        },
+        {
+          "question": "Statement: 'context LoyaltyAccount invariant: points >= 0' allows a burn to temporarily set points to -5, as long as it returns to >= 0. Is this correct?",
+          "options": [
+            "Correct — invariants are checked only after each operation fully completes",
+            "Incorrect — an invariant must hold at all times, not just post-operation"
+          ],
+          "correct": 1,
+          "explanation": "This is incorrect. An invariant must ALWAYS hold and cannot be violated at any observable moment. The correct way to prevent invalid burns is a pre-condition (e.g., 'pre: points >= i') that blocks the call before it executes, as shown in the LoyaltyAccount example in the lecture."
+        },
+        {
+          "question": "In the OCL expression 'cards->select(valid=true)->size()', what does the Integer result represent?",
+          "options": [
+            "Whether any card with valid=true exists in the collection",
+            "The count of cards where valid is true",
+            "The total points across all cards where valid equals true",
+            "The first valid card found in the collection"
+          ],
+          "correct": 1,
+          "explanation": "'select(valid=true)' filters the collection, keeping only cards where valid is true. '->size()' then counts those elements. The result is an Integer — the number of valid cards. This chained pattern appears in the lecture's sizesAgree invariant example."
+        },
+        {
+          "question": "A developer needs an OCL operation that returns ONLY elements which DO NOT satisfy a given condition. Which operation is correct?",
+          "options": [
+            "reject — keeps elements where the condition is false",
+            "select — keeps elements where the condition evaluates to true"
+          ],
+          "correct": 0,
+          "explanation": "'reject(e | condition)' returns elements for which the condition is FALSE — elements that do NOT satisfy the condition. It is the logical complement of 'select'. For example, 'tasks->reject(t | t.completed)' returns all incomplete tasks."
+        },
+        {
+          "question": "A developer needs to verify that AT LEAST ONE element in a collection satisfies a condition. Which OCL operation applies?",
+          "options": [
+            "forAll — true only when all elements satisfy the given condition",
+            "exists — true when at least one element satisfies the condition"
+          ],
+          "correct": 1,
+          "explanation": "'exists(e | condition)' returns true if at least one element satisfies the condition (existential quantifier ∃). 'forAll(e | condition)' requires ALL elements to satisfy the condition (universal quantifier ∀). Confusing these two is a classic exam trap."
+        },
+        {
+          "question": "What does the OCL invariant 'context Module invariant: set_work->exists(weight > 50)' express?",
+          "options": [
+            "All assessments for the module have a weight greater than 50",
+            "The total combined weight of all assessments in the module exceeds 50",
+            "At least one assessment has a weight greater than 50",
+            "No assessment for the module has a weight of exactly 50"
+          ],
+          "correct": 2,
+          "explanation": "'exists(weight > 50)' is existential — it is true if at least ONE element in 'set_work' has weight > 50. To require ALL assessments to exceed 50 you would use 'forAll'. This maps to the lecture constraint: 'All modules must have at least one assessment worth over 50%'."
+        },
+        {
+          "question": "Is there anything wrong with this OCL: 'context Student invariant: takes.credit->sum() = 120', given 'takes' is a 0..* association to Module?",
+          "options": [
+            "Nothing is wrong — it correctly sums all credit values",
+            "The '->' should be '.' since 'credit' is a scalar attribute of Module",
+            "The '=' should be '>=' since some students may exceed 120 credits",
+            "The sum() needs an explicit iterator like 'takes->sum(m | m.credit)'"
+          ],
+          "correct": 0,
+          "explanation": "Nothing is wrong. 'takes' navigates to a collection of Modules, and '.credit' collects all credit integers. Applying '->sum()' totals them. This is exactly how the lecture expresses constraint (c): 'Students must register for 120 credits each year'."
+        },
+        {
+          "question": "Analyze: 'context LoyaltyAccount::burn(i:Integer) post: points = points@pre - i'. What is the correct interpretation?",
+          "options": [
+            "Before burn executes, points must be >= i (pre-condition check)",
+            "The @pre notation marks 'points' as read-only and immutable",
+            "New points after burn equals pre-burn value minus i",
+            "The burn method subtracts i and stores the result back in points@pre"
+          ],
+          "correct": 2,
+          "explanation": "This is a post-condition evaluated AFTER the operation. 'points@pre' is the value of points BEFORE burn ran. The expression states: new points = old points - i. This models the state change caused by burn. A pre-condition (not a post-condition) would enforce that points >= i before burning."
+        }
+      ],
+      "createdAt": "2026-05-30T12:37:57.379Z",
+      "tags": [],
+      "difficulty": null,
+      "source": null,
+      "stats": {
+        "attempts": 0,
+        "bestScore": 0,
+        "lastAttempt": null
+      }
+    },
+    {
+      "id": "3727b3b8-9933-43d2-944f-57449d4b0911",
+      "courseId": "d20b1dee-47ec-4096-9908-631b9bc2f773",
+      "name": "Lecture 2: SOLID Principles",
+      "jsonData": [
+        {
+          "id": 1,
+          "difficulty": "easy",
+          "bloom": "remember",
+          "pattern": "standard-4-option",
+          "question": "According to the Single Responsibility Principle (SRP), a software component should have:",
+          "options": [
+            "One and only one responsibility",
+            "At most two responsibilities if they are in the same domain",
+            "As many responsibilities as the number of its methods",
+            "One responsibility per developer who works on it"
+          ],
+          "correct": 0,
+          "explanation": "SRP states exactly: 'Every software component should have one and only one responsibility.' Option B is a common misunderstanding — even closely-related responsibilities must be evaluated carefully, and the goal is always exactly one, not 'at most two.'"
+        },
+        {
+          "id": 2,
+          "difficulty": "easy",
+          "bloom": "remember",
+          "pattern": "standard-4-option",
+          "question": "Uncle Bob's (Robert C. Martin) reformulation of SRP defines a software component as having one and only one:",
+          "options": [
+            "Class hierarchy",
+            "Reason to change",
+            "Public method",
+            "Design pattern"
+          ],
+          "correct": 1,
+          "explanation": "Uncle Bob rewords SRP as 'Every software component should have one and only one reason to change.' This is distinct from the original 'one responsibility' phrasing and emphasizes change drivers as the measure. 'Class hierarchy' and 'public method' are structural concepts unrelated to this definition."
+        },
+        {
+          "id": 3,
+          "difficulty": "medium",
+          "bloom": "understand",
+          "pattern": "standard-4-option",
+          "question": "Which of the following best explains why a component with multiple 'reasons to change' can still be acceptable according to SRP?",
+          "options": [
+            "SRP only applies to classes, not to methods or modules",
+            "Multiple reasons are fine as long as the class has fewer than five methods",
+            "Closely related reasons to change can be combined and treated as a single reason",
+            "SRP is a guideline, so any number of reasons is acceptable in practice"
+          ],
+          "correct": 2,
+          "explanation": "The lecture explicitly states: 'if the reasons are closely related, you can go ahead and combine them.' For example, 'change in student id format' and 'change in student name format' are both about student profile data and can be merged into one reason — 'changes to student profile.' Option D misrepresents SRP as merely optional."
+        },
+        {
+          "id": 4,
+          "difficulty": "medium",
+          "bloom": "understand",
+          "pattern": "standard-4-option",
+          "question": "In software engineering, 'cohesion' is best defined as:",
+          "options": [
+            "The number of dependencies a class has on external modules",
+            "The degree to which the various parts of a software component are related",
+            "The level of interdependency between different software components",
+            "The ability of a class to extend its behavior without modification"
+          ],
+          "correct": 1,
+          "explanation": "Cohesion measures how closely the parts inside a single component are related to each other. Option C describes coupling, not cohesion — a very common exam trap. Option A describes the number of external dependencies, which is also related to coupling."
+        },
+        {
+          "id": 5,
+          "difficulty": "medium",
+          "bloom": "apply",
+          "pattern": "standard-4-option",
+          "question": "A Square class has four methods: calculateArea(), calculatePerimeter(), draw(), and rotate(). Applying SRP, what is the BEST refactoring?",
+          "options": [
+            "Delete draw() and rotate() since rendering is not a mathematical concept",
+            "Keep all four methods together as they all relate to a square",
+            "Split into two classes: Square (calculateArea, calculatePerimeter) and SquareUI (draw, rotate)",
+            "Move calculateArea() and draw() into one class since both depend on the side field"
+          ],
+          "correct": 2,
+          "explanation": "The lecture demonstrates exactly this split: Square handles measurements, SquareUI handles rendering. This increases cohesion inside each class. Option B is wrong because low cohesion exists across all four methods. Option D mixes measurement and rendering, which is worse."
+        },
+        {
+          "id": 6,
+          "difficulty": "medium",
+          "bloom": "analyze",
+          "pattern": "NOT-except",
+          "question": "Which of the following is NOT a characteristic of high cohesion in a software component?",
+          "options": [
+            "All methods inside the component deal with the same type of functionality",
+            "The component has a clear, single, well-defined purpose",
+            "Splitting the component into parts reduces the relatedness of the remaining methods",
+            "The component depends on many other components to complete its work"
+          ],
+          "correct": 3,
+          "explanation": "Depending on many other components describes high coupling (specifically, tight coupling), not high cohesion. High cohesion is entirely about internal relatedness of parts within one component. Options A, B, and C all correctly describe features of a highly cohesive component."
+        },
+        {
+          "id": 7,
+          "difficulty": "hard",
+          "bloom": "apply",
+          "pattern": "code-reading",
+          "question": "Consider this Java class:\n\n```java\npublic class Student {\n    private String id;\n    private String name;\n    public void save() {\n        Connection connection = DriverManager.getConnection(\n            \"jdbc:mysql://localhost:3306/MyDB\", \"root\", \"password\");\n        statement.execute(\"INSERT INTO student VALUES ...\" );\n    }\n}\n```\n\nWhich SOLID principle does this code MOST directly violate?",
+          "options": [
+            "Open Closed Principle — because Student is not designed for extension",
+            "Single Responsibility Principle — because Student handles both profile data and database operations",
+            "Interface Segregation Principle — because Student does not implement any interface",
+            "Dependency Inversion Principle — because Student calls a static method"
+          ],
+          "correct": 1,
+          "explanation": "The Student class mixes two responsibilities: managing core student data (id, name) and performing database persistence. This is a textbook SRP violation. The lecture uses this exact example to show 'multiple reasons to change': student id format change AND database back-end change would both require modifying this one class. While DIP is also touched (direct dependency on MySQL), the primary and most immediate violation shown in the lecture is SRP."
+        },
+        {
+          "id": 8,
+          "difficulty": "hard",
+          "bloom": "analyze",
+          "pattern": "standard-4-option",
+          "question": "After refactoring the Student class by extracting a StudentRepository class, which outcome directly demonstrates loose coupling?",
+          "options": [
+            "The Student class no longer has any fields",
+            "Changing the underlying database requires modifying only StudentRepository, not Student",
+            "Both Student and StudentRepository now implement the same interface",
+            "The Student class can now be instantiated without a database connection"
+          ],
+          "correct": 1,
+          "explanation": "Loose coupling means a change in one module does NOT force changes in another. The lecture states: 'if we change the underlying database, the Student class does NOT need to get changed and recompiled. You only need to change the Repository class.' Option D describes a side effect, not the definition of loose coupling itself."
+        },
+        {
+          "id": 9,
+          "difficulty": "easy",
+          "bloom": "understand",
+          "pattern": "standard-4-option",
+          "question": "The Open Closed Principle (OCP) states that software entities should be:",
+          "options": [
+            "Open to modification and closed to extension",
+            "Open to both extension and modification",
+            "Open to extension but closed to modification",
+            "Closed to both extension and modification"
+          ],
+          "correct": 2,
+          "explanation": "OCP is precisely: 'open to extension but closed to modification.' 'Open to extension' means new functionality can be added via new classes; 'closed to modification' means existing code should not change (except to fix bugs). Option A reverses the two halves — a very common distractor."
+        },
+        {
+          "id": 10,
+          "difficulty": "medium",
+          "bloom": "understand",
+          "pattern": "standard-4-option",
+          "question": "What is the primary technical mechanism recommended for achieving OCP in object-oriented design?",
+          "options": [
+            "Duplicating class code for each new requirement",
+            "Using concrete classes for all dependencies to avoid abstraction overhead",
+            "Referring to abstractions (interfaces or abstract classes) rather than concrete classes",
+            "Limiting each class to a maximum of three methods"
+          ],
+          "correct": 2,
+          "explanation": "The lecture states: 'Generally, you achieve this by referring to abstractions for dependencies, such as interfaces or abstract classes, rather than using concrete classes. We can add the functionality by creating new classes that implement the interfaces.' This prevents modifying existing stable code while still allowing extension."
+        },
+        {
+          "id": 11,
+          "difficulty": "medium",
+          "bloom": "apply",
+          "pattern": "2-option-identification",
+          "question": "A Match class uses a series of if/else-if blocks to check whether a team is 'Ahly' or 'Zamalk' in order to decide scoring. Adding a new team would require editing the Match class directly. This design violates which principle?",
+          "options": [
+            "OCP",
+            "LSP"
+          ],
+          "correct": 0,
+          "explanation": "Having to modify an existing class (Match) every time a new team or strategy is added violates OCP — the class is not closed to modification. The correct solution (shown in the lecture) uses an abstract Strategy class so new teams simply extend it without touching Match. LSP is about subclass substitutability and is not the primary violation here."
+        },
+        {
+          "id": 12,
+          "difficulty": "medium",
+          "bloom": "analyze",
+          "pattern": "standard-4-option",
+          "question": "In the football match OCP solution, an abstract Strategy class is introduced with concrete Attack and Defend subclasses. The Match class holds a reference to Strategy. Which design pattern does this implement?",
+          "options": [
+            "Observer Pattern",
+            "Factory Pattern",
+            "Strategy Pattern",
+            "Decorator Pattern"
+          ],
+          "correct": 2,
+          "explanation": "The lecture explicitly names this the 'Strategy Design Pattern.' The Context (Match/Team) maintains a reference to one of the concrete strategies and communicates via the strategy interface. Observer handles event notification, Factory handles object creation, and Decorator adds behavior dynamically — none of these match the scenario."
+        },
+        {
+          "id": 13,
+          "difficulty": "hard",
+          "bloom": "analyze",
+          "pattern": "standard-4-option",
+          "question": "The Liskov Substitution Principle (LSP) was introduced by Barbara Liskov in 1987. Which statement BEST captures the principle?",
+          "options": [
+            "A subclass should override every method of its superclass",
+            "Objects of a superclass should be replaceable with objects of its subclasses without breaking the system",
+            "A subclass should add at least one new method to extend its parent",
+            "High-level modules should not depend on low-level modules"
+          ],
+          "correct": 1,
+          "explanation": "LSP states: 'Objects of a superclass should be replaceable with objects of its subclasses without breaking the system.' This means any code that works with a superclass reference must still work correctly when given a subclass instance. Option D is the Dependency Inversion Principle, not LSP."
+        },
+        {
+          "id": 14,
+          "difficulty": "hard",
+          "bloom": "analyze",
+          "pattern": "standard-4-option",
+          "question": "According to LSP Condition 2 (Preconditions cannot be strengthened in the subtype), which scenario is a violation?",
+          "options": [
+            "A child class method accepts the same parameter type as the parent method",
+            "A child class method accepts a broader type than the parent method's parameter",
+            "A child class method adds a condition that only accepts positive integers when the parent accepted all integers",
+            "A child class method returns a subtype of the parent method's return type"
+          ],
+          "correct": 2,
+          "explanation": "The lecture gives exactly this example: 'if the parent method accepts an integer number while in an overridden method in the child class, you added a condition to accept only positive integers, that change violates LSP.' Strengthening preconditions means callers that passed negative integers to the parent will now get unexpected behavior from the subclass. Option D describes covariant return types, which is actually allowed and covered under LSP conditions."
+        },
+        {
+          "id": 15,
+          "difficulty": "medium",
+          "bloom": "apply",
+          "pattern": "true-false-mcq",
+          "question": "LSP implies that if an override method does nothing or throws an exception in response to a call that the superclass would handle, the subclass is violating LSP.",
+          "options": [
+            "Correct",
+            "Incorrect"
+          ],
+          "correct": 0,
+          "explanation": "The lecture states explicitly: 'If an override method does nothing or just throws an exception, then you're probably violating the LSP.' The Bicycle.startEngine() throwing an exception is the lecture's prime example — clients that call startEngine() on a Vehicle reference will break when given a Bicycle."
+        },
+        {
+          "id": 16,
+          "difficulty": "hard",
+          "bloom": "analyze",
+          "pattern": "code-reading",
+          "question": "Consider this code:\n\n```java\nclass Bicycle extends Vehicle {\n    @Override\n    void startEngine() {\n        throw new Exception(\"Not supported\");\n    }\n}\n```\n\nWhy does this violate LSP?",
+          "options": [
+            "Bicycle should not extend Vehicle; it should extend a different root class entirely",
+            "A client iterating a List<Vehicle> and calling startEngine() will get an exception for Bicycle, breaking substitutability",
+            "The method name startEngine() is too specific and should be renamed",
+            "Bicycle violates OCP because it does not add new methods"
+          ],
+          "correct": 1,
+          "explanation": "The lecture shows exactly this: a loop over vehicleList calls v.startEngine() — the Car works fine, the Bicycle throws an exception. Code that correctly handles a Vehicle supertype breaks when given a Bicycle subtype. This is the classic LSP violation. Option A is partially relevant (the fix involves a new hierarchy) but does not explain WHY the violation occurs."
+        },
+        {
+          "id": 17,
+          "difficulty": "hard",
+          "bloom": "analyze",
+          "pattern": "standard-4-option",
+          "question": "The LSP-compliant vehicle hierarchy in the lecture introduces VehicleWithEngines and VehicleWithoutEngines as intermediate classes. What design principle does this follow?",
+          "options": [
+            "Flattening the inheritance tree to reduce complexity",
+            "Creating correct inheritance hierarchies that model real-world capabilities accurately",
+            "Avoiding interfaces in favor of abstract classes",
+            "Ensuring every subclass adds at least one new public method"
+          ],
+          "correct": 1,
+          "explanation": "The lecture states: 'The solution to these problems is a correct inheritance hierarchy, and in our case, we would solve the problem by differentiating classes of vehicles with and without engines.' The hierarchy now only promises startEngine() to classes that actually have engines, so substitutability is preserved. This is not about flattening — it actually adds depth — nor about avoiding interfaces."
+        },
+        {
+          "id": 18,
+          "difficulty": "medium",
+          "bloom": "evaluate",
+          "pattern": "NOT-except",
+          "question": "Which of the following is NOT a stated goal of the Interface Segregation Principle (ISP)?",
+          "options": [
+            "Reduce side effects caused by large interfaces",
+            "Ensure no class is forced to implement methods it does not use",
+            "Break large interfaces into smaller, purpose-specific ones",
+            "Ensure that every class implements at least one interface"
+          ],
+          "correct": 3,
+          "explanation": "ISP is about reducing unnecessary method implementation, not mandating that every class use an interface. The three genuine goals of ISP from the lecture are: (1) avoid forcing clients to depend on interfaces they don't use, (2) no class should implement methods it doesn't need, and (3) prefer multiple small interfaces over one fat interface. Requiring every class to implement at least one interface is not part of ISP."
+        },
+        {
+          "id": 19,
+          "difficulty": "easy",
+          "bloom": "remember",
+          "pattern": "standard-4-option",
+          "question": "The Interface Segregation Principle (ISP) was defined by Robert C. Martin while consulting for which company?",
+          "options": [
+            "IBM",
+            "Microsoft",
+            "Xerox",
+            "Oracle"
+          ],
+          "correct": 2,
+          "explanation": "The lecture explicitly states: 'The Interface Segregation Principle was defined by Robert C. Martin while consulting for Xerox to help them build the software for their new printer systems.' The printer context also explains why the lecture's ISP example uses printers (HPLaserJet, LiquidInkjet)."
+        },
+        {
+          "id": 20,
+          "difficulty": "medium",
+          "bloom": "understand",
+          "pattern": "standard-4-option",
+          "question": "ISP is described in the lecture as being 'like the Single Responsibility Principle.' What is the shared characteristic between ISP and SRP?",
+          "options": [
+            "Both require the use of abstract classes rather than interfaces",
+            "Both ensure each class or interface serves a single, focused purpose",
+            "Both were defined by Robert C. Martin in the same publication",
+            "Both forbid the use of inheritance in software design"
+          ],
+          "correct": 1,
+          "explanation": "The lecture states ISP 'is like the Single Responsibility Principle, where each class or interface serves a single purpose.' SRP focuses on classes having one responsibility; ISP focuses on interfaces having one focused set of related methods. Both are about purposeful, focused units of design."
+        },
+        {
+          "id": 21,
+          "difficulty": "medium",
+          "bloom": "apply",
+          "pattern": "2-option-identification",
+          "question": "A LiquidInkjetPrinter class implements a PrinterTasks interface that declares Print(), Scan(), Fax(), and PrintDuplex(). The printer does not support Fax or PrintDuplex, so those methods throw UnsupportedOperationException. Which principle does this violate?",
+          "options": [
+            "ISP",
+            "SRP"
+          ],
+          "correct": 0,
+          "explanation": "This is the lecture's exact ISP example. LiquidInkjetPrinter is forced to implement Fax() and PrintDuplex() even though it does not need them — violating the ISP rule: 'no class should be forced to implement any method(s) of an interface they don't use.' SRP would be about the interface having too many responsibilities, but the primary principle shown here is ISP."
+        },
+        {
+          "id": 22,
+          "difficulty": "easy",
+          "bloom": "remember",
+          "pattern": "standard-4-option",
+          "question": "In the ISP-compliant printer solution from the lecture, the single fat PrinterTasks interface is replaced by how many smaller interfaces?",
+          "options": [
+            "Two interfaces",
+            "Three interfaces",
+            "Four interfaces",
+            "Five interfaces"
+          ],
+          "correct": 2,
+          "explanation": "The lecture splits PrinterTasks into exactly four small interfaces: PrintingTasks, ScanTasks, FaxTasks, and DuplexTasks. Each now has a single, specific purpose. HPLaserJetPrinter implements all four; LiquidInkjetPrinter implements only PrintingTasks and ScanTasks."
+        },
+        {
+          "id": 23,
+          "difficulty": "medium",
+          "bloom": "apply",
+          "pattern": "standard-4-option",
+          "question": "A Store class directly instantiates a Stripe object inside its constructor: this.stripe = new Stripe(). If you later need to switch to PayPal, you must edit and recompile Store. This violates which principle?",
+          "options": [
+            "Single Responsibility Principle — Store should not handle payment logic",
+            "Dependency Inversion Principle — Store (high-level) directly depends on Stripe (low-level)",
+            "Liskov Substitution Principle — Stripe cannot be substituted for PayPal",
+            "Open Closed Principle — Store was not designed to be extended"
+          ],
+          "correct": 1,
+          "explanation": "DIP states high-level modules should not depend on low-level modules; both should depend on abstractions. Store (high-level) directly depends on Stripe (low-level concrete class) — a textbook DIP violation. The lecture uses this exact Store/Stripe example. While OCP is indirectly relevant (you have to modify Store), the core structural problem named here is DIP."
+        },
+        {
+          "id": 24,
+          "difficulty": "hard",
+          "bloom": "analyze",
+          "pattern": "standard-4-option",
+          "question": "In the DIP-compliant Store solution, both Store and Stripe depend on a PaymentGateway interface. How does this exemplify 'inversion of dependencies'?",
+          "options": [
+            "Store now calls Stripe's methods in reverse order",
+            "Stripe has become the high-level module and Store has become the low-level module",
+            "The direction of the source-code dependency is inverted: instead of Store→Stripe, both point to an abstraction Store→interface←Stripe",
+            "The PaymentGateway interface is owned by Stripe, so Store depends on Stripe indirectly"
+          ],
+          "correct": 2,
+          "explanation": "Inversion means the high-level module (Store) and the low-level module (Stripe) no longer have a direct relationship. Both depend on the abstraction (PaymentGateway interface). The source-code arrow that previously went Store→Stripe now goes Store→interface and Stripe→interface, inverting the dependency direction. Option D incorrectly attributes interface ownership to Stripe."
+        },
+        {
+          "id": 25,
+          "difficulty": "medium",
+          "bloom": "understand",
+          "pattern": "standard-4-option",
+          "question": "According to the lecture, why is code that violates DIP problematic?",
+          "options": [
+            "It prevents the use of polymorphism in the system",
+            "It makes the code too coupled, hard to maintain, unreadable, and prone to side effects",
+            "It forces every class to implement multiple interfaces",
+            "It prevents adding new classes to the system"
+          ],
+          "correct": 1,
+          "explanation": "The lecture states directly: 'Because code that violates this principle may become too coupled together, and that makes the code hard to maintain, unreadable, and prone to side effects.' This is the complete list given. Option A is wrong because DIP violations do not prevent polymorphism — they just make it harder to use effectively."
+        },
+        {
+          "id": 26,
+          "difficulty": "medium",
+          "bloom": "apply",
+          "pattern": "true-false-mcq",
+          "question": "The lecture states that one of the ways to achieve the Open Closed Principle is to use the Dependency Inversion Principle.",
+          "options": [
+            "Correct",
+            "Incorrect"
+          ],
+          "correct": 0,
+          "explanation": "The lecture's Key Points section explicitly states: 'One of the ways to achieve the Open-Close Principle is to use the Dependency Inversion Principle.' By depending on abstractions (DIP), you can add new concrete implementations (new payment gateways) without modifying the high-level class — which is exactly OCP."
+        },
+        {
+          "id": 27,
+          "difficulty": "medium",
+          "bloom": "apply",
+          "pattern": "standard-4-option",
+          "question": "In the setter injection version of the Store example, how is the PaymentGateway dependency provided to the Store object?",
+          "options": [
+            "By passing it as an argument to the Store constructor",
+            "By having Store implement a PaymentGatewayInjector interface",
+            "By calling the setPaymentGateway(PaymentGateway pg) method after creating Store",
+            "By declaring PaymentGateway as a static field inside Store"
+          ],
+          "correct": 2,
+          "explanation": "Setter injection uses a public setter method. The lecture shows: 'We inject (pass) the type of object PaymentGateway to class Store via the setter method setPaymentGateway().' Option A describes constructor injection; Option B describes interface injection — both are distinct types covered separately in the lecture."
+        },
+        {
+          "id": 28,
+          "difficulty": "hard",
+          "bloom": "analyze",
+          "pattern": "standard-4-option",
+          "question": "Which of the following correctly distinguishes Constructor Injection from Interface Injection?",
+          "options": [
+            "Constructor Injection uses a setter method; Interface Injection uses the constructor",
+            "Constructor Injection passes the dependency via the constructor; Interface Injection requires the client class to implement an injector interface that exposes a setter method",
+            "Constructor Injection only works with abstract classes; Interface Injection works with concrete classes",
+            "Constructor Injection is resolved at runtime; Interface Injection is resolved at compile time"
+          ],
+          "correct": 1,
+          "explanation": "From the lecture: Constructor Injection — 'Dependency is passed to the object via its constructor that accepts an interface as an argument.' Interface Injection — 'The client class must implement the interface and override the injector method. The clients must implement an interface that will expose a setter method.' Option A reverses the two definitions. Options C and D are fabricated distinctions not from the lecture."
+        },
+        {
+          "id": 29,
+          "difficulty": "easy",
+          "bloom": "remember",
+          "pattern": "standard-4-option",
+          "question": "According to the lecture, what are the three types of Dependency Injection?",
+          "options": [
+            "Static injection, dynamic injection, and runtime injection",
+            "Constructor injection, interface injection, and setter injection",
+            "Field injection, method injection, and class injection",
+            "Direct injection, indirect injection, and proxy injection"
+          ],
+          "correct": 1,
+          "explanation": "The lecture lists exactly three DI types: 'Constructor Injection, Interface injection, or Setter injection.' These map to where/how the dependency is passed: through the constructor, through an injector interface, or through a setter method respectively. All other options are invented."
+        },
+        {
+          "id": 30,
+          "difficulty": "hard",
+          "bloom": "evaluate",
+          "pattern": "NOT-except",
+          "question": "Which of the following is NOT listed as an advantage of Dependency Injection in the lecture?",
+          "options": [
+            "Makes testing easier",
+            "Reduces coupling between client and dependency classes",
+            "The code is easier to maintain, reuse, and extend",
+            "Eliminates the need for interfaces in the application"
+          ],
+          "correct": 3,
+          "explanation": "The lecture lists exactly three advantages of DI: (1) makes testing easier, (2) reduces coupling, and (3) code is easier to maintain, reuse, and extend. DI actually relies heavily on interfaces as the abstraction layer — it does not eliminate them. Interfaces are central to how DI achieves loose coupling, so Option D is not only absent from the lecture's list but is conceptually the opposite of how DI works."
+        }
+      ],
+      "createdAt": "2026-05-30T12:35:30.093Z",
+      "tags": [],
+      "difficulty": null,
+      "source": null,
+      "stats": {
+        "attempts": 0,
+        "bestScore": 0,
+        "lastAttempt": null
+      }
+    },
+    {
+      "id": "42b3a2fd-15e2-4502-972e-f932db4d03da",
+      "courseId": "d20b1dee-47ec-4096-9908-631b9bc2f773",
+      "name": "Lecture 5: Aspect-Oriented Programming (AOP)",
+      "jsonData": [
+        {
+          "id": 1,
+          "pattern": "Standard MCQ",
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "question": "In traditional OOP, when logging functionality is copy-pasted across many classes (Class A, Class B, Class C), this problem is known as:",
+          "options": [
+            "Code tangling",
+            "Code scattering",
+            "Code coupling",
+            "Code inheritance"
+          ],
+          "correct": 1,
+          "explanation": "Code scattering refers to the same cross-cutting concern (e.g., logging) being duplicated and spread across many modules. Code tangling is a different problem where multiple concerns are mixed inside a single module."
+        },
+        {
+          "id": 2,
+          "pattern": "Standard MCQ",
+          "bloom": "Understand",
+          "difficulty": "Easy",
+          "question": "When a single module contains multiple mixed concerns — such as business logic, logging, and security all in one method — this is called:",
+          "options": [
+            "Code scattering",
+            "Code tangling",
+            "High cohesion",
+            "Aspect weaving"
+          ],
+          "correct": 1,
+          "explanation": "Code tangling occurs when multiple concerns are implemented together in the same module, making the code hard to read and maintain. This is distinct from code scattering where the same concern is spread across many modules."
+        },
+        {
+          "id": 3,
+          "pattern": "NOT/EXCEPT Negation",
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "question": "Which of the following is NOT a problem caused by cross-cutting concerns in traditional OOP?",
+          "options": [
+            "Poor traceability between requirements and implementation",
+            "Lower developer productivity",
+            "Increased code reuse through inheritance",
+            "Harder refactoring when requirements change"
+          ],
+          "correct": 2,
+          "explanation": "Cross-cutting concerns reduce code reuse (boilerplate is copy-pasted, not reused). Poor traceability, lower productivity, and harder refactoring are all genuine problems identified in the lecture as consequences of code tangling and scattering."
+        },
+        {
+          "id": 4,
+          "pattern": "Standard MCQ",
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "question": "Which problem arises when changing a single cross-cutting concern (e.g., changing the logging format) requires modifying many unrelated modules?",
+          "options": [
+            "Code tangling",
+            "Poor traceability",
+            "Harder refactoring",
+            "Low cohesion"
+          ],
+          "correct": 2,
+          "explanation": "Harder refactoring is caused by code scattering: because the concern is spread across many modules, even a small change requires touching each one. This is a core motivation for AOP."
+        },
+        {
+          "id": 5,
+          "pattern": "Standard MCQ",
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "question": "Concerns that relate to the primary purpose of a system and implement its main functional requirements are called:",
+          "options": [
+            "Cross-cutting concerns",
+            "Secondary concerns",
+            "Core concerns",
+            "Policy concerns"
+          ],
+          "correct": 2,
+          "explanation": "Core concerns are the functional concerns related to the primary purpose of a system. Secondary concerns reflect non-functional requirements. Cross-cutting concerns cut across multiple modules regardless of whether they are core or secondary."
+        },
+        {
+          "id": 6,
+          "pattern": "Standard MCQ",
+          "bloom": "Analyze",
+          "difficulty": "Medium",
+          "question": "Logging, security, and transaction management are best classified as which type of concern in a software system?",
+          "options": [
+            "Core concerns",
+            "Cross-cutting concerns",
+            "Organisational concerns",
+            "Functional concerns"
+          ],
+          "correct": 1,
+          "explanation": "Logging, security, and transaction management are classic cross-cutting concerns because they cut across multiple classes and modules — they do not belong to any single class's primary responsibility but must appear in many places."
+        },
+        {
+          "id": 7,
+          "pattern": "True/False as MCQ",
+          "bloom": "Understand",
+          "difficulty": "Easy",
+          "question": "Evaluate this statement: 'By reflecting separation of concerns in a program, there is clear traceability from requirements to implementation.'",
+          "options": [
+            "Correct",
+            "Incorrect"
+          ],
+          "correct": 0,
+          "explanation": "This is directly stated in the lecture. Separation of concerns improves traceability because each module clearly maps to a specific requirement, making it easy to understand what a piece of code is doing relative to the problem domain."
+        },
+        {
+          "id": 8,
+          "pattern": "Standard MCQ",
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "question": "According to the lecture, which type of stakeholder concern relates to the non-functional behavior of a system (e.g., performance, reliability)?",
+          "options": [
+            "Functional concerns",
+            "Policy concerns",
+            "Quality of service concerns",
+            "Organisational concerns"
+          ],
+          "correct": 2,
+          "explanation": "Quality of service concerns relate to non-functional behaviors such as performance, reliability, and security. Functional concerns relate to specific functionality, policy concerns to overall governance rules, and organisational concerns to business goals."
+        },
+        {
+          "id": 9,
+          "pattern": "NOT/EXCEPT Negation",
+          "bloom": "Remember",
+          "difficulty": "Medium",
+          "question": "Which of the following is NOT one of the stakeholder concern types identified in the lecture?",
+          "options": [
+            "Quality of service concerns",
+            "Policy concerns",
+            "Implementation concerns",
+            "Organisational concerns"
+          ],
+          "correct": 2,
+          "explanation": "The lecture lists five concern types: Functional, Quality of Service, Policy, System, and Organisational. 'Implementation concerns' is not a listed category — it is a distractor."
+        },
+        {
+          "id": 10,
+          "pattern": "Standard MCQ",
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "question": "What is the main idea behind Aspect-Oriented Programming (AOP)?",
+          "options": [
+            "Replace object-oriented programming with procedure-oriented programming",
+            "Centralize cross-cutting concerns into separate modules called aspects, separate from business logic",
+            "Compile Java source code into bytecode more efficiently",
+            "Allow multiple classes to share a single data structure"
+          ],
+          "correct": 1,
+          "explanation": "AOP addresses the problem of cross-cutting concerns by separating them into dedicated modules called aspects. Instead of scattering logging or security code across all classes, AOP centralizes it in one place and weaves it in at specified join points."
+        },
+        {
+          "id": 11,
+          "pattern": "Standard MCQ",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "question": "In an AOP configuration, what three things must typically be specified to apply an aspect to a program?",
+          "options": [
+            "Class name, method name, return type",
+            "Which aspect, which class, which method and at which position",
+            "Package name, annotation type, advice class",
+            "Bean ID, dependency injection type, scope"
+          ],
+          "correct": 1,
+          "explanation": "As shown in the lecture's AOP configuration diagram: you specify WHICH aspect to apply, WHICH class to apply it on, WHICH method within that class, and IN WHICH POSITION (before, after, around) to inject the advice."
+        },
+        {
+          "id": 12,
+          "pattern": "NOT/EXCEPT Negation",
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "question": "Which of the following is NOT listed as a benefit of AOP in the lecture?",
+          "options": [
+            "Centralize concerns implementation",
+            "Inject new behavior into existing classes",
+            "Automatically generate unit tests for aspects",
+            "More reusable and cleaner code"
+          ],
+          "correct": 2,
+          "explanation": "The lecture lists AOP benefits as: centralize concerns, intercept method calls, inject new behavior, more reusable code, and cleaner code. Automatically generating unit tests is not mentioned as a benefit of AOP."
+        },
+        {
+          "id": 13,
+          "pattern": "Standard MCQ",
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "question": "An event in an executing program where the advice associated with an aspect may be executed is known as a:",
+          "options": [
+            "Pointcut",
+            "Aspect",
+            "Join point",
+            "Weaver"
+          ],
+          "correct": 2,
+          "explanation": "A join point is a specific point in the application execution — such as method execution, exception handling, or changing a variable value — where an aspect's advice can be applied. In Spring AOP, a join point is always a method execution."
+        },
+        {
+          "id": 14,
+          "pattern": "Standard MCQ",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "question": "The class which implements JEE application cross-cutting concerns such as transaction management and logging is known as a(n):",
+          "options": [
+            "Pointcut",
+            "Advice",
+            "Join point",
+            "Aspect"
+          ],
+          "correct": 3,
+          "explanation": "An Aspect is a class that implements enterprise application cross-cutting concerns (transaction management, logging, security, etc.) that cut across multiple classes. It can be configured via Spring XML or annotated with @Aspect."
+        },
+        {
+          "id": 15,
+          "pattern": "2-Option Identification",
+          "bloom": "Analyze",
+          "difficulty": "Medium",
+          "question": "In Spring AOP, 'the execution of a method' specifically represents which AOP term?",
+          "options": [
+            "Pointcut",
+            "Join point"
+          ],
+          "correct": 1,
+          "explanation": "A join point is a specific point in application execution such as method execution, exception handling, or field access. The lecture explicitly states: 'In Spring AOP, a join point is always the execution of the method.' A pointcut is the expression that selects which join points to intercept."
+        },
+        {
+          "id": 16,
+          "pattern": "Standard MCQ",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "question": "Which statement best distinguishes a join point from a pointcut in Spring AOP?",
+          "options": [
+            "A join point is the cross-cutting concern; a pointcut is the method that handles it",
+            "A join point is a specific execution event in the program; a pointcut is an expression that selects a set of join points",
+            "A join point is the class annotated with @Aspect; a pointcut is the advice method",
+            "A join point and a pointcut are synonyms for the same concept"
+          ],
+          "correct": 1,
+          "explanation": "Join points are individual execution events (e.g., a specific method call at runtime). A pointcut is a matching expression/predicate that identifies which join points an advice should apply to. One pointcut expression can match many join points."
+        },
+        {
+          "id": 17,
+          "pattern": "Standard MCQ",
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "question": "The AOP concept that specifies the criteria for selecting a subset of join points where advice should be executed is called a:",
+          "options": [
+            "Weaver",
+            "Aspect",
+            "Pointcut",
+            "Join point"
+          ],
+          "correct": 2,
+          "explanation": "A pointcut is an expression matched against join points to determine whether advice needs to be executed. It identifies the specific events with which advice should be associated and enables multicasting the same aspect to many places in code."
+        },
+        {
+          "id": 18,
+          "pattern": "Standard MCQ",
+          "bloom": "Apply",
+          "difficulty": "Hard",
+          "question": "Which of the following @Pointcut expressions would match ONLY the method `getName()` in the class `com.tutorialspoint.Student`?",
+          "options": [
+            "@Pointcut(\"execution(* com.tutorialspoint.*.*(..))\")",
+            "@Pointcut(\"execution(* com.tutorialspoint.Student.getName(..))\")",
+            "@Pointcut(\"execution(* com.tutorialspoint..*(..))\")",
+            "@Pointcut(\"execution(* *(..))\")"
+          ],
+          "correct": 1,
+          "explanation": "The expression `execution(* com.tutorialspoint.Student.getName(..))` specifically targets the `getName` method in the `Student` class. Option A matches all methods in all classes in the package. Option C matches all methods in the package and sub-packages. Option D matches all methods everywhere."
+        },
+        {
+          "id": 19,
+          "pattern": "2-Option Identification",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "question": "The expression `@Pointcut(\"execution(* com.tutorialspoint.*.*(..))\"` in a Spring AOP class represents which AOP concept?",
+          "options": [
+            "Pointcut",
+            "Join point"
+          ],
+          "correct": 0,
+          "explanation": "This is a pointcut — an expression that selects a set of join points. The `execution(...)` expression defines the criteria (all methods in all classes in the `com.tutorialspoint` package) that will be matched against actual runtime execution events (join points)."
+        },
+        {
+          "id": 20,
+          "pattern": "Standard MCQ",
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "question": "In AOP terminology, 'actions taken for a particular join point' describes which concept?",
+          "options": [
+            "Pointcut",
+            "Advice",
+            "Aspect",
+            "Weaving"
+          ],
+          "correct": 1,
+          "explanation": "Advice is the action taken at a particular join point. It is the actual code that runs when the aspect intercepts a join point. Different advice types (@Before, @After, @Around, etc.) run at different points relative to the join point method execution."
+        },
+        {
+          "id": 21,
+          "pattern": "True/False as MCQ",
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "question": "Evaluate this statement: 'In Spring AOP, the @Around advice is the most important and powerful advice type because it can control whether the join point method executes at all.'",
+          "options": [
+            "Correct",
+            "Incorrect"
+          ],
+          "correct": 0,
+          "explanation": "This is correct and directly stated in the lecture. @Around advice surrounds the join point and can choose whether to execute it or not. It is responsible for invoking the join point method and returning its values, making it the most powerful advice type."
+        },
+        {
+          "id": 22,
+          "pattern": "Standard MCQ",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "question": "A developer wants advice to execute ONLY when a join point method throws an exception (e.g., to roll back a transaction). Which annotation should be used?",
+          "options": [
+            "@After",
+            "@AfterReturning",
+            "@AfterThrowing",
+            "@Around"
+          ],
+          "correct": 2,
+          "explanation": "@AfterThrowing advice executes only when the join point method throws an exception. The lecture specifically notes it can be used to roll back transactions declaratively. @After runs in all cases (like finally), @AfterReturning runs only on normal completion."
+        },
+        {
+          "id": 23,
+          "pattern": "Standard MCQ",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "question": "What is the key difference between @After and @AfterReturning advice types?",
+          "options": [
+            "@After runs before the method; @AfterReturning runs after",
+            "@After runs whether the method succeeds or throws an exception; @AfterReturning runs only if the method completes normally",
+            "@After can only be used with void methods; @AfterReturning works with methods that return values",
+            "@After requires a JoinPoint parameter; @AfterReturning does not"
+          ],
+          "correct": 1,
+          "explanation": "@After (finally) advice executes after the join point finishes 'whether normally or by throwing an exception' — like a finally block in Java. @AfterReturning only executes if the method returns normally without exception, allowing access to the returned value."
+        },
+        {
+          "id": 24,
+          "pattern": "Standard MCQ",
+          "bloom": "Apply",
+          "difficulty": "Hard",
+          "question": "A developer wants to measure the execution time of a method by recording timestamps both before and after the method runs, while still allowing the method to execute normally. Which advice type is most appropriate?",
+          "options": [
+            "@Before",
+            "@After",
+            "@AfterReturning",
+            "@Around"
+          ],
+          "correct": 3,
+          "explanation": "@Around advice is most appropriate here because it wraps the entire method execution, allowing code to run before AND after the join point method. The advice controls when `proceed()` is called to execute the actual method, enabling precise timing measurement."
+        },
+        {
+          "id": 25,
+          "pattern": "Standard MCQ",
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "question": "The incorporation of advice code at the specified join points by an aspect weaver is called:",
+          "options": [
+            "Pointcut",
+            "Weaving",
+            "Compilation",
+            "Injection"
+          ],
+          "correct": 1,
+          "explanation": "Weaving is the process that combines advices with pointcuts — the aspect weaver incorporates (weaves) the advice code into the target program at the specified join points. This can happen at compile time (AspectJ) or at runtime (Spring AOP)."
+        },
+        {
+          "id": 26,
+          "pattern": "Code Reading",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "question": "Consider the following Spring AOP code:\n\n```java\n@Aspect\n@Component\npublic class LoggingAspect {\n\n    @Before(\"execution(* com.tutorialspoint.*.*(..))\")\n    public void logBefore(JoinPoint joinPoint) {\n        System.out.println(\"Before: \" + joinPoint.getSignature().getName());\n    }\n}\n```\n\nWhat does the pointcut expression `execution(* com.tutorialspoint.*.*(..))` match?",
+          "options": [
+            "Only the getName() method in the Student class",
+            "All methods in all classes directly inside the com.tutorialspoint package",
+            "All methods in all classes in com.tutorialspoint and all its sub-packages",
+            "Only public void methods with no parameters in com.tutorialspoint"
+          ],
+          "correct": 1,
+          "explanation": "The expression `execution(* com.tutorialspoint.*.*(..))` breaks down as: `*` (any return type), `com.tutorialspoint` (exact package — no double dot), `*` (any class), `*` (any method), `(..)` (any arguments). The single dot means only the direct package, not sub-packages. A double dot `..` would include sub-packages."
+        },
+        {
+          "id": 27,
+          "pattern": "Code Reading",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "question": "Examine the following code snippet:\n\n```java\n@Aspect\n@Component\npublic class SecurityAspect {\n\n    @Around(\"execution(* com.example.service.*.*(..))\")\n    public Object checkSecurity(ProceedingJoinPoint pjp) throws Throwable {\n        System.out.println(\"Security check before\");\n        Object result = pjp.proceed();\n        System.out.println(\"Security check after\");\n        return result;\n    }\n}\n```\n\nWhat is the advice type, and what happens if `pjp.proceed()` is NOT called inside this method?",
+          "options": [
+            "It is @Before advice; the method executes as normal regardless",
+            "It is @Around advice; the original join point method will NOT execute — it is skipped",
+            "It is @Around advice; a NullPointerException will be thrown automatically",
+            "It is @AfterReturning advice; the return value will be null"
+          ],
+          "correct": 1,
+          "explanation": "This is @Around advice (using ProceedingJoinPoint). The lecture states it is the responsibility of @Around advice to invoke the join point method — this is done via `pjp.proceed()`. If `proceed()` is NOT called, the actual target method never executes. This is the most powerful feature of @Around: complete control over method execution."
+        },
+        {
+          "id": 28,
+          "pattern": "Code Reading",
+          "bloom": "Apply",
+          "difficulty": "Hard",
+          "question": "A developer writes:\n\n```java\n@Aspect\n@Component\npublic class AuditAspect {\n\n    @Pointcut(\"execution(* com.example.demo.MyService.*(..))\")\n    public void myServiceMethods() {}\n\n    @AfterReturning(pointcut = \"myServiceMethods()\", returning = \"result\")\n    public void logResult(JoinPoint jp, Object result) {\n        System.out.println(\"Returned: \" + result);\n    }\n}\n```\n\nWhen will the `logResult` method execute?",
+          "options": [
+            "Before every method in MyService runs",
+            "After every method in MyService completes, whether it throws an exception or not",
+            "Only after a method in MyService returns normally (without exception)",
+            "Only after a method in MyService throws an exception"
+          ],
+          "correct": 2,
+          "explanation": "@AfterReturning advice only executes when the matched join point method returns normally (without throwing an exception). The `returning` attribute captures the actual returned value. If the method throws an exception, this advice is skipped — for that case, @AfterThrowing or @After would be needed."
+        }
+      ],
+      "createdAt": "2026-05-30T12:38:35.439Z",
+      "tags": [],
+      "difficulty": null,
+      "source": null,
+      "stats": {
+        "attempts": 0,
+        "bestScore": 0,
+        "lastAttempt": null
+      }
+    },
+    {
+      "id": "43dc4c62-0493-416f-a708-654cb28523f7",
+      "courseId": "d20b1dee-47ec-4096-9908-631b9bc2f773",
+      "name": "Lecture 1: Clean Code",
+      "jsonData": [
+        {
+          "question": "According to Martin Fowler's quote cited in the lecture, what distinguishes good programmers from others?",
+          "options": [
+            "They write code that executes faster than average programmers",
+            "They write code that humans can understand, not just computers",
+            "They write code with the fewest possible lines",
+            "They write code that is always bug-free on the first attempt"
+          ],
+          "correct": 1,
+          "explanation": "Martin Fowler's quote states: 'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.' The emphasis is on human readability, not performance or brevity. Option D is a common misconception — the lecture focuses on readability, not bug-free first drafts."
+        },
+        {
+          "question": "The 'WTF/minute' metric in clean code refers to which of the following?",
+          "options": [
+            "The number of syntax errors a compiler finds per minute of compilation",
+            "The rate at which a developer encounters confusing or frustrating code segments while reading",
+            "The frequency of failed unit tests during a test run",
+            "The number of lines of code a developer writes per minute"
+          ],
+          "correct": 1,
+          "explanation": "WTF stands for 'Works that Frustrate' per minute — it measures how often a developer reading code encounters something confusing. Clean code aims to reduce this rate. It is a metric of code readability quality, not compiler errors or productivity speed."
+        },
+        {
+          "question": "Consider the following code snippet. Which clean code rule does the variable and method naming primarily violate?\n\n```java\npublic List<int[]> getThem() {\n    List<int[]> list1 = new ArrayList<int[]>();\n    for (int[] x : theList) {\n        if (x[0] == 4) list1.add(x);\n    }\n    return list1;\n}\n```",
+          "options": [
+            "Avoid Disinformation — the name getThem is actively misleading",
+            "Use Intention-Revealing Names — the names do not answer why they exist, what they do, or how they are used",
+            "Avoid Encodings — the use of int[] encodes the type into the data structure",
+            "Pick One Word Per Concept — both getThem and list1 represent the same concept"
+          ],
+          "correct": 1,
+          "explanation": "The lecture uses this exact example to illustrate the 'Use Intention-Revealing Names' rule. The names getThem, list1, x, and theList fail to reveal context: What is in theList? What does index 0 represent? What does the value 4 mean? Disinformation (option A) means actively misleading names, which is a different violation."
+        },
+        {
+          "question": "In the minesweeper refactoring example from the lecture, which change best demonstrates the improvement from intention-revealing names?",
+          "options": [
+            "Replacing getThem() with getList() to be more general",
+            "Renaming theList to gameBoard and using cell.isFlagged() instead of x[0] == 4",
+            "Removing the ArrayList and replacing it with a primitive array for performance",
+            "Adding a comment above getThem() explaining what theList contains"
+          ],
+          "correct": 1,
+          "explanation": "The lecture shows two refactoring steps: renaming theList to gameBoard, and replacing the magic number check (x[0] == 4) with an intention-revealing method call (cell.isFlagged()). The key insight is that renaming makes the context explicit without needing comments. Option D (adding comments) is explicitly warned against — if a name needs a comment, it does not reveal its intent."
+        },
+        {
+          "question": "A developer names two variables XYZControllerForEfficientHandlingOfStrings and XYZControllerForEfficientStorageOfStrings in the same codebase. Which naming rule does this most directly violate?",
+          "options": [
+            "Use Intention-Revealing Names, because the names do not explain the purpose clearly",
+            "Avoid Disinformation, because names that vary in small ways make it hard to spot the difference and can mislead readers",
+            "Use Searchable Names, because these long names are hard to search in a text editor",
+            "Pick One Word Per Concept, because both names refer to the same controller concept"
+          ],
+          "correct": 1,
+          "explanation": "The lecture explicitly cites this exact pair of names as an example under 'Avoid Disinformation.' Names that vary in small ways (Handling vs. Storage) make it easy to miss the distinction, which is disinformative. Option D (one word per concept) would apply if both names were used for identical purposes — here they are distinct concepts with subtly different names."
+        },
+        {
+          "question": "Examine the following function signature:\n\n```java\npublic static void copyChars(char a1[], char a2[]) { ... }\n```\n\nWhich naming rule does the use of a1 and a2 as parameter names violate?",
+          "options": [
+            "Avoid Disinformation — a1 and a2 could be mistaken for array indices",
+            "Use Meaningful Distinctions — number-series naming (a1, a2) is non-informative and provides no clue about intent",
+            "Avoid Mental Mapping — the developer must mentally map a1 and a2 to source and destination",
+            "Use Searchable Names — single-character names are not easily searchable in a codebase"
+          ],
+          "correct": 1,
+          "explanation": "The lecture uses this exact example under 'Use Meaningful Distinctions,' stating that number-series naming (a1, a2, ..aN) is the opposite of intentional naming — it is non-informative. The improved version uses source and destination. While option C (mental mapping) is also a valid concern, the lecture specifically classifies this under Meaningful Distinctions."
+        },
+        {
+          "question": "Which of the following is NOT a valid strategy for reducing WTF/minutes according to the lecture?",
+          "options": [
+            "Having peers review your code",
+            "Standardizing all code and sticking with the standards",
+            "Practicing and learning from mistakes and from more skilled seniors",
+            "Writing detailed inline comments for every function explaining all logic"
+          ],
+          "correct": 3,
+          "explanation": "The lecture lists three strategies: let others review code, standardize code, and practice/learn. Writing detailed inline comments for every function is NOT listed — in fact, the lecture warns that if a name requires a comment, the name does not reveal its intent. The goal is self-documenting code, not comment-heavy code."
+        },
+        {
+          "question": "According to the lecture, which of the following should NEVER appear inside a variable name?",
+          "options": [
+            "The purpose of the variable in the problem domain",
+            "The word 'variable' itself",
+            "A prefix indicating the variable belongs to an address structure",
+            "A verb describing what the variable holds"
+          ],
+          "correct": 1,
+          "explanation": "The lecture's 'Eliminate Noise' rule states: 'The word variable should never appear in a variable name.' Similarly, 'table' should never appear in a table name. These are noise words — redundant additions that add no information."
+        },
+        {
+          "question": "A developer writes the following code. Which naming principle does the refactored version (bottom) correctly apply?\n\n```java\n// Original\nfor (int j=0; j<7; j++) { s += t[j]; }\n\n// Refactored\nint NUMBER_OF_SUBJECTS = 7;\nint TotalGrade = 0;\nfor (int j=0; j < NUMBER_OF_SUBJECTS; j++) {\n    TotalGrade += Student_grade[j];\n}\n```",
+          "options": [
+            "Use Intention-Revealing Names — the refactoring reveals what 7 represents",
+            "Use Searchable Names — NUMBER_OF_SUBJECTS can be searched across the codebase, unlike the literal 7",
+            "Use Meaningful Distinctions — s and t are replaced with more distinct names",
+            "Avoid Mental Mapping — the developer no longer needs to remember what t means"
+          ],
+          "correct": 1,
+          "explanation": "The lecture uses this exact example under 'Use Searchable Names.' The key improvement is replacing the magic number 7 with the constant NUMBER_OF_SUBJECTS, making it easy to find every usage in a codebase. While other improvements are visible, the lecture explicitly classifies this example under searchability."
+        },
+        {
+          "question": "According to the lecture's naming rules for classes, which of the following is the most appropriate class name?",
+          "options": [
+            "DataProcessor",
+            "ManageAccounts",
+            "AddressParser",
+            "InfoHandler"
+          ],
+          "correct": 2,
+          "explanation": "The lecture states class names should be noun or noun phrase names (like Customer, WikiPage, Account, AddressParser). Words like Manager, Processor, Data, and Info should be avoided in class names, and a class name should never be a verb. AddressParser is the only option that follows all three rules."
+        },
+        {
+          "question": "Which of the following is NOT a correct rule for naming methods, according to the lecture?",
+          "options": [
+            "Methods should have verb or verb phrase names",
+            "Overloaded constructors should use static factory methods with names that describe the arguments",
+            "Good method names should answer the question 'What does it do?'",
+            "Method names should be noun phrases to match the objects they belong to"
+          ],
+          "correct": 3,
+          "explanation": "The lecture is explicit: methods should have verb or verb phrase names (postPayment, deletePage, save) because they answer 'What does it do?' Noun phrase names are for classes, not methods. The other three options (A, B, C) are all stated rules in the lecture under Method Names."
+        },
+        {
+          "question": "A developer is creating an Abstract Factory for shapes. They must name the interface and its concrete implementation. According to the lecture, which naming approach is preferred?",
+          "options": [
+            "IShapeFactory for the interface, ShapeFactory for the implementation",
+            "ShapeFactory for the interface, ShapeFactoryImp for the implementation",
+            "AbstractShapeFactory for the interface, ConcreteShapeFactory for the implementation",
+            "ShapeInterface for the interface, ShapeClass for the implementation"
+          ],
+          "correct": 1,
+          "explanation": "The lecture explicitly states the author prefers to leave interfaces plain (no 'I' prefix) so callers just see ShapeFactory. If encoding must happen, it should be on the implementation side: ShapeFactoryImp or CShapeFactory. Option A (IShapeFactory) encodes the interface, which the lecture says reveals implementation details to users unnecessarily."
+        },
+        {
+          "question": "Which of the following naming approaches for static factory methods is demonstrated as the better design in the lecture?",
+          "options": [
+            "new Address(1, 4, 4, 'tahrir', 'helwan', 'cairo', 'Egypt')",
+            "Address.createFullAddress(1, 4, 4, 'tahrir', 'helwan', 'cairo', 'Egypt')",
+            "Address.build(1, 4, 4, 'tahrir', 'helwan', 'cairo', 'Egypt')",
+            "Address.getInstance(1, 4, 4, 'tahrir', 'helwan', 'cairo', 'Egypt')"
+          ],
+          "correct": 1,
+          "explanation": "The lecture shows that Address.createFullAddress(...) and Address.createShortAddress(...) are preferred over new Address(...) with different argument counts because the factory method names describe what kind of address is being created. Option C (build) does not describe the arguments, and Option D (getInstance) implies a singleton pattern."
+        },
+        {
+          "question": "Hungarian Notation is a naming convention where a variable's name includes a prefix representing its type (e.g., iAge for an integer age). According to the lecture, should Hungarian Notation be used in modern code?\n\nA) Correct — it should be used to clarify types\nB) Incorrect — Microsoft's official guidelines since 2008 say 'DO NOT use Hungarian notation'",
+          "options": [
+            "A) Correct — it should be used to clarify types",
+            "B) Incorrect — Microsoft's official guidelines since 2008 say 'DO NOT use Hungarian notation'"
+          ],
+          "correct": 1,
+          "explanation": "The lecture dedicates a full slide to this: Microsoft, the company where Hungarian Notation originated, updated its General Naming Conventions in 2008 to explicitly state 'DO NOT use Hungarian notation.' The lecture reinforces that encoding type or scope adds difficulty, forces name changes when types change, and makes code noisier."
+        },
+        {
+          "question": "A developer uses the variable names l (lowercase L), O (uppercase O), and O1 together in the same code block. Which naming rule does this violate, and why?",
+          "options": [
+            "Avoid Encodings — the letters encode type information similar to Hungarian Notation",
+            "Avoid Disinformation — lowercase l looks like the digit 1, and uppercase O looks like the digit 0, creating false clues about values",
+            "Use Pronounceable Names — single characters cannot be pronounced in team discussions",
+            "Use Searchable Names — single-letter names cannot be searched across a large codebase"
+          ],
+          "correct": 1,
+          "explanation": "The lecture specifically shows this example under 'Avoid Disinformation,' calling it 'a truly bad example of disinformative names.' The l/1 and O/0 confusion creates false visual clues. While option C and D raise valid concerns, the lecture classifies this under disinformation because these characters actively mislead readers about what values are stored."
+        },
+        {
+          "question": "Compare the two class definitions below. The class on the left uses names like DtaRcrd102 and genymdhms, while the right uses Customer and generationTimestamp. Which clean code rule is being illustrated?",
+          "options": [
+            "Avoid Encodings — the left class encodes the record number (102) into the class name",
+            "Use Pronounceable Names — abbreviations like DtaRcrd102 and genymdhms cannot be spoken aloud in discussion",
+            "Use Meaningful Distinctions — DtaRcrd and Customer represent the same concept with different levels of clarity",
+            "Avoid Mental Mapping — developers must mentally map DtaRcrd to Customer"
+          ],
+          "correct": 1,
+          "explanation": "This is the exact example from the lecture used to illustrate 'Use Pronounceable Names' (rule 9). The lecture's key point: 'If you can't pronounce it, you can't discuss it without sounding like an idiot. This matters because programming is a social activity.' While Avoid Mental Mapping is also relevant, the lecture classifies this under pronounceability."
+        },
+        {
+          "question": "The lecture discusses 'Avoid Mental Mapping' for variable names. Which of the following scenarios represents a correct exception to this rule, as acknowledged in the lecture?",
+          "options": [
+            "Using r, t, and p as variable names for URL components in a login function",
+            "Using x as a variable name inside a long method for an unrelated concept",
+            "Using i or j as iteration variable names in a loop, since these are universally understood standards",
+            "Using p as a variable name for a parameter in a public API method"
+          ],
+          "correct": 2,
+          "explanation": "The lecture explicitly acknowledges: 'when we see an i or j we know from the first moment that we are talking about an iteration.' This is a recognized exception to the mental mapping rule. Using r, t, p for URL components (option A) is given as a bad example in the lecture itself."
+        },
+        {
+          "question": "A developer must name a variable that holds a job queue implementation using a common design pattern. Which type of name should they prefer?",
+          "options": [
+            "A problem domain name drawn from the business requirements",
+            "A solution domain name such as JobQueue using a well-known CS/pattern term"
+          ],
+          "correct": 1,
+          "explanation": "The lecture states: 'Use Solution Domain Names' when the concept is a CS term, algorithm, or design pattern. Since all readers are programmers, using technical names like Queue is most appropriate. Problem domain names are the second choice, used when the code more closely relates to business logic concepts."
+        },
+        {
+          "question": "Which of the following does NOT violate the 'Pick One Word Per Concept' rule?",
+          "options": [
+            "Using getArticles(), fetchUsers(), and retrievePages() in the same codebase for similar data-retrieval operations",
+            "Using getArticles(), getUsers(), and getPages() consistently across the codebase",
+            "Using controller in one module and manager in another module to describe the same type of coordinator component",
+            "Using driver and controller interchangeably for components that orchestrate subsystems"
+          ],
+          "correct": 1,
+          "explanation": "The lecture explicitly shows get/fetch/retrieve as a violation and recommends picking one word — get — and using it consistently. Option B is the corrected version shown in the lecture (getArticles, getUsers, getPages). Options A, C, and D all represent the same concept with different vocabulary, which confuses readers."
+        },
+        {
+          "question": "The following statement is true or false: 'Adding context prefixes like addrFirstName, addrLastName, addrState to related variables is a recommended technique in the lecture for the Add Meaningful Context rule.'\n\nA) Correct  B) Incorrect",
+          "options": [
+            "A) Correct",
+            "B) Incorrect"
+          ],
+          "correct": 0,
+          "explanation": "The lecture explicitly recommends this under 'Add Meaningful Context' (rule 13): using prefixes like addrFirstName, addrLastName, addrState helps readers understand these variables are part of a larger address structure. This is stated as a better alternative to bare names like state or lastName, which alone do not reveal their structural context."
+        },
+        {
+          "question": "According to the lecture, what is the second rule of functions?",
+          "options": [
+            "They should have intention-revealing names",
+            "They should do exactly one thing",
+            "They should be smaller than the first rule says",
+            "They should avoid flag arguments"
+          ],
+          "correct": 2,
+          "explanation": "The lecture states verbatim: 'The first rule of functions is that they should be small. The second rule of functions is that they should be smaller than that.' This is a memorable principle emphasizing that developers consistently underestimate how small functions should be."
+        },
+        {
+          "question": "A developer has a method addDataToFile() that reads from a file, adds a person to the list, writes back to the file, and prints the data. What is the best refactoring strategy according to the lecture?",
+          "options": [
+            "Add clear comments above each section of the method to document its responsibilities",
+            "Extract each responsibility into separate methods (readDataFromFile, addDataToList, writeDataToFile, PrintPersonDataFile) so each method does one thing",
+            "Reduce the method to fewer lines by combining the read and write operations into a single stream operation",
+            "Convert the method to a constructor so the responsibilities are handled at object creation time"
+          ],
+          "correct": 1,
+          "explanation": "This is the exact example from the lecture demonstrating the 'Do One Thing' and 'Extract Method' principles. The lecture shows refactoring addDataToFile into four separate methods, each with a single responsibility. Adding comments (option A) does not fix the underlying design problem; it just annotates it."
+        },
+        {
+          "question": "The Single Level of Abstraction Principle (SLAP) states that all statements within a function should be at the same level of abstraction. Why is mixing abstraction levels within a function a problem?",
+          "options": [
+            "It increases the number of lines in the function, making it harder to read",
+            "It forces the compiler to perform additional type checks, reducing performance",
+            "Readers cannot tell whether a particular expression is an essential concept or an implementation detail, causing confusion",
+            "It prevents the function from being unit-tested independently"
+          ],
+          "correct": 2,
+          "explanation": "The lecture explains: 'Mixing levels of abstraction within a function is always confusing. Readers may not be able to tell whether a particular expression is an essential concept or a detail.' The problem is conceptual clarity, not line count or performance. The printNumbersOneToThirtyFive() example illustrates this — high-level calls (printNumbersOneToTen()) mixed with raw loops."
+        },
+        {
+          "question": "Examine the following function. What does it violate according to the lecture?\n\n```java\nprivate static void printNumbersOneToThirtyFive() {\n    printNumbersOneToTen(); // high level\n    for (int i=11; i < 21; i++) { // low level\n        System.out.println(i);\n    }\n    System.out.println(21);\n    if (22 % 11 == 0) {\n        System.out.println(22);\n        for (int i=23; i < 31; i++) { ... }\n    }\n}\n```",
+          "options": [
+            "The 'Do One Thing' principle only — the function is printing multiple ranges",
+            "The Single Level of Abstraction Principle — printNumbersOneToTen() is a high-level call while the raw loops are low-level implementation details, mixed in the same function",
+            "The 'Fewer Function Arguments' rule — the function should accept a range as a parameter",
+            "The 'Avoid Encodings' rule — the number 35 is encoded into the method name"
+          ],
+          "correct": 1,
+          "explanation": "This is the exact example used in the lecture to illustrate SLAP violations. The function mixes a high-level call (printNumbersOneToTen()) with raw for-loops, conditionals, and direct System.out.println calls — different abstraction levels. The fixed version delegates all ranges to same-level helper methods."
+        },
+        {
+          "question": "Which of the following is NOT a reason the lecture gives for preferring fewer function arguments?",
+          "options": [
+            "Arguments make functions harder to understand",
+            "More arguments make it harder to name the function meaningfully",
+            "Too many arguments may indicate some of them belong in a separate class",
+            "Zero-argument functions are generally easiest to understand and test"
+          ],
+          "correct": 1,
+          "explanation": "The lecture does NOT say that more arguments make it harder to name functions. The reasons given are: arguments make functions harder to understand, too many arguments should be moved to a class (e.g., sendRequest(Request request) instead of separate ip, port, user, password, body), and zero-argument functions are best. Naming difficulty is not mentioned as a reason."
+        },
+        {
+          "question": "A developer writes the following method. According to the lecture, what is the best approach to fix it?\n\n```java\npublic void printAddress(boolean isLong) {\n    if (isLong) {\n        // print long address\n    } else {\n        // print short address\n    }\n}\n```",
+          "options": [
+            "Rename the boolean parameter to something more descriptive like printFullAddress",
+            "Replace the boolean flag with an enum (e.g., AddressType.LONG, AddressType.SHORT)",
+            "Split into two separate methods: printShortAddress() and printLongAddress(), removing the flag entirely",
+            "Convert the boolean to an integer so the function can support more than two address formats"
+          ],
+          "correct": 2,
+          "explanation": "This is the exact example from the lecture on 'Flag Arguments.' The lecture states: 'Passing a Boolean into a function is a truly terrible practice — it means the function does more than one thing.' The prescribed solution is splitting into two independent methods: printShortAddress() and printLongAddress(). Renaming or switching to enum (options A and B) does not fix the fundamental problem of doing two things."
+        },
+        {
+          "question": "According to the lecture, what is the correct maximum indent level a function's body should have, and why?",
+          "options": [
+            "No limit — deeper nesting is acceptable as long as the function is well-commented",
+            "Maximum four levels — two for class context and two for logic",
+            "Maximum one or two indent levels — deeper nesting indicates the function is too large and should be extracted",
+            "Maximum three indent levels — one for the function body, one for loops, one for conditionals"
+          ],
+          "correct": 2,
+          "explanation": "The lecture states: 'the indent level of a function should not be greater than one or two.' The reason given is that deep nesting indicates the function is too large. Blocks within if/else/while should be single-line function calls, which naturally reduces nesting and adds documentary value through descriptive function names."
+        },
+        {
+          "question": "The lecture discusses replacing conditional statements with polymorphism. A Vehicle class uses a switch statement to return parking space sizes for BICYCLE, BIKE, CAR, and BUS. What specific clean code principles does this switch statement violate?",
+          "options": [
+            "It violates the Law of Demeter because the switch accesses internal enum values directly",
+            "It violates the Open/Closed Principle (hard to add new types without modifying the class) and 'Do One Thing' (the class handles multiple vehicle behaviors)",
+            "It violates the 'Fewer Arguments' rule because the switch reads a private field instead of accepting a type parameter",
+            "It violates Hungarian Notation rules because the enum names are uppercase"
+          ],
+          "correct": 1,
+          "explanation": "The lecture explicitly identifies two violations: (1) the Open/Closed Principle — adding a new vehicle type requires modifying the switch in multiple places, and (2) 'Do One Thing' — the class has both spaceRequiredForParking and parkingCharges as switch statements, mixing responsibilities. The solution is a Vehicle interface with separate implementation classes per type."
+        },
+        {
+          "question": "After refactoring the Vehicle switch-statement example, a new vehicle type (SCOOTER) needs to be added. Which approach does the lecture's recommended solution require?",
+          "options": [
+            "Modifying the switch statement in the Vehicle class to add SCOOTER cases",
+            "Creating a new Scooter class that implements the Vehicle interface"
+          ],
+          "correct": 1,
+          "explanation": "The lecture's recommended solution uses polymorphism: create a Vehicle interface and separate implementation classes (Car, Bike, Bus, Bicycle). Adding a new type means adding a new implementation class (Scooter implements Vehicle) without modifying existing code — this directly satisfies the Open/Closed Principle."
+        },
+        {
+          "question": "Consider the following code that violates the Law of Demeter:\n\n```java\nemployee.getDepartment().getManager().approveExpense(expenses);\n```\n\nThis violates LoD because:",
+          "options": [
+            "The method chain is too long and reduces code readability",
+            "getDepartment() returns an object, and calling getManager() on that returned object means the caller is accessing the internals of employee's dependencies — it is 'talking to strangers'",
+            "The method approveExpense should be defined in the Employee class, not the Manager class",
+            "The chain violates the Meaningful Names rule because getDepartment and getManager are not intention-revealing"
+          ],
+          "correct": 1,
+          "explanation": "The lecture explains LoD (also called 'Don't talk to strangers'): a method M of class C may call methods on C itself, M's parameters, objects created within M, and C's direct component objects. Here, getManager() is called on the object returned by getDepartment() — this is an object that employee does not directly own, making it a stranger. The fix shown in the lecture is to inject Manager as a direct field of Employee."
+        },
+        {
+          "question": "Which of the following best evaluates the trade-offs between exceptions and status codes as described in the lecture?",
+          "options": [
+            "Status codes are always better because they avoid the overhead of exception handling and make flow explicit",
+            "Exceptions are always better because they force callers to handle errors, preventing silent failures",
+            "Exceptions are best for truly unexpected paths that cannot be managed directly; status codes (enums) are appropriate when a range of expected, manageable outcomes exists",
+            "The choice depends only on language support — use exceptions in Java, status codes in C"
+          ],
+          "correct": 2,
+          "explanation": "The lecture provides a nuanced evaluation: exceptions make the happy path cleaner and prevent callers from forgetting to check results, but add overhead and misuse execution-path control. Status codes are verbose with if/else chains but appropriate for expected outcomes. The lecture concludes: 'exceptions should be used in exceptional cases... if you are expecting an unexpected path that you cannot manage directly, go for exceptions!'"
+        }
+      ],
+      "createdAt": "2026-05-30T12:34:17.419Z",
+      "tags": [],
+      "difficulty": null,
+      "source": null,
+      "stats": {
+        "attempts": 0,
+        "bestScore": 0,
+        "lastAttempt": null
+      }
+    },
+    {
+      "id": "4ae4d8e4-aeaf-45d9-a827-4c706cbf6136",
+      "courseId": "d20b1dee-47ec-4096-9908-631b9bc2f773",
+      "name": "Lecture 3: Design Patterns",
+      "jsonData": [
+        {
+          "id": 1,
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "pattern_type": "Standard 4-Option",
+          "question": "Which of the following best describes a design pattern?",
+          "options": [
+            "A ready-made code library that can be copied directly into any project",
+            "A ready-made solution concept that can be adapted to solve recurring design problems",
+            "A specific algorithm written in a particular programming language",
+            "A database schema template used for object persistence"
+          ],
+          "correct": 1,
+          "explanation": "Design patterns are ready-made solution concepts (blueprints), NOT copy-pasteable code. Option A is the most tempting wrong answer because it sounds similar, but patterns are not copy-pasted libraries — they are general ideas you adapt to your own context. Options C and D are far off: patterns are language-agnostic design concepts, not algorithms or schemas."
+        },
+        {
+          "id": 2,
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "pattern_type": "True/False as MCQ",
+          "question": "Design patterns can be directly copied and pasted into your code just like a function or a library.",
+          "options": [
+            "Correct",
+            "Incorrect"
+          ],
+          "correct": 1,
+          "explanation": "This statement is Incorrect. According to the lecture, you cannot directly copy and paste a design pattern into your code the way you would a function or library. Patterns are general concepts that must be understood and adapted to fit your specific program's needs."
+        },
+        {
+          "id": 3,
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "Which of the following is a reason to use design patterns in software development?",
+          "options": [
+            "They eliminate the need for testing because they are proven solutions",
+            "They enforce the use of a specific programming language for maximum performance",
+            "They improve code reusability, maintainability, and overall code quality",
+            "They replace documentation by making code self-explanatory"
+          ],
+          "correct": 2,
+          "explanation": "Design patterns improve reusability, maintainability, and code quality by providing proven solutions to recurring challenges. Option A is wrong — patterns do not eliminate testing. Option B is wrong — patterns are language-agnostic. Option D is a plausible but wrong benefit: patterns help with communication between developers but do not replace documentation."
+        },
+        {
+          "id": 4,
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "pattern_type": "Standard 4-Option",
+          "question": "Which of the following is one of the four components that a design pattern typically consists of?",
+          "options": [
+            "Test cases that validate the pattern implementation",
+            "A deployment diagram showing server infrastructure",
+            "The intent that briefly describes both the problem and the solution",
+            "A version history tracking changes to the pattern"
+          ],
+          "correct": 2,
+          "explanation": "The four components of a design pattern are: Intent, Motivation, Structure of classes, and Code example. 'Intent' briefly describes the problem and solution. Options A, B, and D are not among the four documented components."
+        },
+        {
+          "id": 5,
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "In a design pattern, which component 'further explains the problem and the solution the pattern makes possible'?",
+          "options": [
+            "Intent",
+            "Motivation",
+            "Structure",
+            "Code Example"
+          ],
+          "correct": 1,
+          "explanation": "Motivation further explains the problem and how the pattern solves it. Intent only briefly describes both; it does not go deeper. Structure shows how classes relate. Code Example shows implementation. Option A (Intent) is the most tempting wrong answer because it also describes the problem, but Intent is only brief — Motivation goes deeper."
+        },
+        {
+          "id": 6,
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "pattern_type": "Standard 4-Option",
+          "question": "Which category of design patterns deals with effective communication and assignment of responsibilities between objects?",
+          "options": [
+            "Creational patterns",
+            "Structural patterns",
+            "Behavioral patterns",
+            "Architectural patterns"
+          ],
+          "correct": 2,
+          "explanation": "Behavioral patterns handle communication and responsibility assignment between objects. Creational patterns deal with object creation. Structural patterns deal with assembling objects into larger structures. Architectural patterns are the highest-level patterns guiding overall application structure."
+        },
+        {
+          "id": 7,
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "pattern_type": "NOT/EXCEPT Negation",
+          "question": "Which of the following is NOT a characteristic of architectural patterns?",
+          "options": [
+            "They are the most universal and high-level patterns",
+            "They can be implemented in virtually any programming language",
+            "They focus on fine-grained object communication and responsibility assignment",
+            "They guide the overall structure of an entire application"
+          ],
+          "correct": 2,
+          "explanation": "Architectural patterns focus on HIGH-LEVEL design and the overall structure of an application — not fine-grained object communication. That description belongs to Behavioral patterns. Options A, B, and D all correctly describe architectural patterns as stated in the lecture."
+        },
+        {
+          "id": 8,
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "The Factory Method pattern suggests replacing direct object construction calls with calls to a special factory method. What are objects returned by a factory method commonly called?",
+          "options": [
+            "Builders",
+            "Prototypes",
+            "Products",
+            "Delegates"
+          ],
+          "correct": 2,
+          "explanation": "Objects returned by a factory method are referred to as 'products.' The lecture explicitly states this. Builder is a different creational pattern. Prototype is yet another creational pattern for cloning. Delegates is not a standard factory method term."
+        },
+        {
+          "id": 9,
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "In the logistics management example, a new requirement arrives to support bus transportation. Using the Factory Method pattern, which approach is most appropriate?",
+          "options": [
+            "Modify the existing if-else block inside the Logistics class to add a new bus condition",
+            "Create a new BusLogistics subclass that overrides createTransport() to return a Bus object",
+            "Add a Bus parameter to the base Logistics constructor",
+            "Merge the Bus logic directly into the RoadLogistics class"
+          ],
+          "correct": 1,
+          "explanation": "The correct approach is to create a new subclass (BusLogistics) that overrides createTransport() to return a Bus. This follows the Open/Closed Principle — the system is open for extension (new subclass) but closed for modification (no changes to existing code). Option A is exactly the BEFORE pattern that violates OCP. Options C and D also violate OCP by modifying existing classes."
+        },
+        {
+          "id": 10,
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "pattern_type": "2-Option Identification",
+          "question": "A class provides a planDelivery() method that internally calls createTransport(), which is overridden by subclasses to return different transport objects. This class is playing which role in the Factory Method pattern?",
+          "options": [
+            "Creator (Logistics)",
+            "Concrete Product (Truck/Ship)"
+          ],
+          "correct": 0,
+          "explanation": "This describes the Creator role. The Creator defines the factory method (createTransport()) and may provide a default implementation or leave it abstract for subclasses to override. The Concrete Product (Truck/Ship) implements the product interface — it does not define the factory method."
+        },
+        {
+          "id": 11,
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "pattern_type": "Standard 4-Option",
+          "question": "In the Factory Method pattern applied to the logistics example, what design principle does creating new subclasses (RoadLogistics, SeaLogistics) instead of modifying the base class directly uphold?",
+          "options": [
+            "Single Responsibility Principle — each class has one reason to change",
+            "Open/Closed Principle — open for extension, closed for modification",
+            "Liskov Substitution Principle — subclasses can replace their parent",
+            "Dependency Inversion Principle — depend on abstractions, not concretions"
+          ],
+          "correct": 1,
+          "explanation": "The Factory Method supports the Open/Closed Principle (OCP): you extend behavior by adding new subclasses rather than modifying existing code. The lecture explicitly connects the Factory Method to OCP. While the Liskov Substitution Principle is also involved (subclasses can substitute the parent), the slide specifically cites OCP as the motivating principle here. SRP and DIP are not directly discussed in this context."
+        },
+        {
+          "id": 12,
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "pattern_type": "Code Reading",
+          "question": "Consider the following class structure:\n\n  abstract class Logistics {\n    abstract Transport createTransport();\n    void planDelivery() { createTransport().deliver(); }\n  }\n  class RoadLogistics extends Logistics {\n    Transport createTransport() { return new Truck(); }\n  }\n\nWhich design pattern does this implement, and what is the role of createTransport()?",
+          "options": [
+            "Builder pattern; createTransport() is the build step",
+            "Factory Method pattern; createTransport() is the factory method that subclasses override",
+            "Abstract Factory pattern; createTransport() creates a family of related objects",
+            "Singleton pattern; createTransport() ensures only one transport object exists"
+          ],
+          "correct": 1,
+          "explanation": "This is the Factory Method pattern. createTransport() is the factory method — it is declared in the abstract creator (Logistics) and overridden in concrete creators (RoadLogistics) to produce a specific product (Truck). Abstract Factory involves creating families of related objects, which is different. Builder constructs objects step by step. Singleton ensures a single instance — none of which match this structure."
+        },
+        {
+          "id": 13,
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "The Builder pattern was introduced to solve a specific problem with object construction. Which of the following best describes the problem that Builder addresses?",
+          "options": [
+            "Too many classes with incompatible interfaces that cannot communicate",
+            "A constructor with too many parameters where most parameters are unused in any given call",
+            "Multiple threads trying to create the same object simultaneously",
+            "An object needing to notify other objects whenever its state changes"
+          ],
+          "correct": 1,
+          "explanation": "The Builder pattern addresses the 'telescoping constructor' problem: a constructor with many parameters where most are not needed in any single call (e.g., only a fraction of houses have swimming pools, making pool-related parameters useless most of the time). Option A describes Adapter's problem. Option C describes Singleton's concurrency concern. Option D describes Observer's problem."
+        },
+        {
+          "id": 14,
+          "bloom": "Apply",
+          "difficulty": "Hard",
+          "pattern_type": "Standard 4-Option",
+          "question": "According to the lecture, the Builder pattern 'doesn't allow other objects to access the product while it's being built.' Which principle does this most directly enforce?",
+          "options": [
+            "Ensuring the product can only be built by one thread at a time",
+            "Ensuring construction steps are atomic and the incomplete product is never exposed",
+            "Ensuring all builders produce exactly the same type of product",
+            "Ensuring the director controls the exact sequence of all build steps"
+          ],
+          "correct": 1,
+          "explanation": "By blocking access to the product during construction, the Builder ensures that clients never see a partially constructed (invalid) object — construction is effectively atomic from the client's perspective. Option A (thread safety) is a related but separate concern not stated in the lecture. Option C is wrong — different Concrete Builders can produce different products. Option D is about the Director role, which is a separate Builder concept."
+        },
+        {
+          "id": 15,
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "pattern_type": "Standard 4-Option",
+          "question": "Which of the following best describes the Singleton design pattern?",
+          "options": [
+            "A pattern that creates multiple instances of a class to improve performance",
+            "A pattern that ensures a class has only one instance and provides a global access point to it",
+            "A pattern that wraps an object to add new behavior dynamically",
+            "A pattern that defines a family of algorithms and makes them interchangeable"
+          ],
+          "correct": 1,
+          "explanation": "Singleton ensures exactly one instance and provides a global access point. Option A is the opposite — Singleton restricts instances, not multiplies them. Option C describes Decorator. Option D describes Strategy."
+        },
+        {
+          "id": 16,
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "To implement the Singleton pattern correctly, which two mechanisms must be used together?",
+          "options": [
+            "A public constructor and a protected static field",
+            "A private constructor and a static creation method that returns the cached instance",
+            "An abstract class and multiple concrete subclasses",
+            "A factory method and a separate builder class"
+          ],
+          "correct": 1,
+          "explanation": "Singleton requires (1) a private constructor to prevent external instantiation via 'new', and (2) a static creation method that creates the object on first call, stores it in a static field, and returns the cached object on all subsequent calls. Option A fails because a public constructor allows anyone to create multiple instances. Options C and D describe Factory Method and Builder, not Singleton."
+        },
+        {
+          "id": 17,
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "A stock market app uses an analytics library that only accepts JSON, but the app's data is in XML format. Which design pattern is most appropriate to solve this incompatibility without changing either the app or the library?",
+          "options": [
+            "Singleton",
+            "Observer",
+            "Adapter",
+            "Builder"
+          ],
+          "correct": 2,
+          "explanation": "The Adapter pattern converts the interface of one object so that another object can understand it — exactly what is needed here to convert XML to JSON between incompatible systems. Singleton manages instances. Observer handles event notifications. Builder constructs complex objects step by step. None of these address interface incompatibility."
+        },
+        {
+          "id": 18,
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "pattern_type": "NOT/EXCEPT Negation",
+          "question": "Which of the following is NOT a correct description of the Adapter pattern?",
+          "options": [
+            "It allows objects with incompatible interfaces to collaborate",
+            "It wraps one object to convert its interface into another interface expected by the client",
+            "It attaches new behaviors to objects by placing them inside wrapper objects",
+            "It acts as a bridge between a client and a third-party service with a different interface"
+          ],
+          "correct": 2,
+          "explanation": "Option C describes the Decorator pattern, not Adapter. Decorator 'attaches new behaviors to objects by placing these objects inside special wrapper objects.' While both Adapter and Decorator use wrapping, Adapter's purpose is interface conversion, whereas Decorator's purpose is behavior addition. Options A, B, and D all accurately describe the Adapter pattern."
+        },
+        {
+          "id": 19,
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "You have a basic Coffee object costing $2. You want to add Milk (+$3) and Chocolate (+$10) without modifying the original Coffee class. Which pattern allows you to dynamically wrap the Coffee object with these additions?",
+          "options": [
+            "Factory Method",
+            "Strategy",
+            "Decorator",
+            "Observer"
+          ],
+          "correct": 2,
+          "explanation": "The Decorator pattern lets you attach new behaviors (milk, chocolate add-ons) to objects by wrapping them — each decorator adds its cost on top of the base cost (Final = Base_Cost + Decorator_Cost). Factory Method creates objects but doesn't add behavior dynamically. Strategy swaps algorithms. Observer handles event notifications."
+        },
+        {
+          "id": 20,
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "pattern_type": "Code Reading",
+          "question": "In the coffee example from the lecture, the structure is:\n\n  Interface Coffee { int cost(); }\n  class BasicCoffee implements Coffee { cost() = 2 }\n  class MilkDecorator implements Coffee {\n    Coffee base;\n    cost() { return base.cost() + 3; }\n  }\n\nWhat role does MilkDecorator play, and why does it hold a reference to Coffee?",
+          "options": [
+            "It is a Concrete Creator; it holds Coffee to call the factory method",
+            "It is a Concrete Decorator; it holds a reference to the wrapped component to delegate and extend its behavior",
+            "It is a Concrete Strategy; it holds Coffee to switch the cost calculation algorithm",
+            "It is a Singleton; it holds Coffee to ensure only one milk option exists"
+          ],
+          "correct": 1,
+          "explanation": "MilkDecorator is a Concrete Decorator. It holds a reference to the wrapped Coffee object (the component) to call its cost() method and then add its own cost on top. This is the core Decorator mechanism — delegation plus extension. It implements the same interface as the component, allowing transparent wrapping. Options A, C, and D incorrectly assign roles from different patterns."
+        },
+        {
+          "id": 21,
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "pattern_type": "Standard 4-Option",
+          "question": "In the Observer pattern, what is the object that has interesting state and notifies other objects called?",
+          "options": [
+            "Subscriber",
+            "Listener",
+            "Publisher (Subject)",
+            "Dispatcher"
+          ],
+          "correct": 2,
+          "explanation": "The object with the interesting state is called the Subject, but since it also notifies others about state changes, the lecture calls it the Publisher. All other objects that track changes are called Subscribers. Listener is an alternative name for Subscriber/Observer, not the notifying object. Dispatcher is not a standard Observer term."
+        },
+        {
+          "id": 22,
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "In the iPhone store example from the lecture, a customer repeatedly visits the store to check if the product is available. Which Observer role does the customer need to adopt to avoid wasted visits?",
+          "options": [
+            "Publisher — the customer should publish availability events",
+            "Subscriber — the customer should subscribe and wait for a notification from the store",
+            "Adapter — the customer should convert the store's interface",
+            "Director — the customer should direct the store's build process"
+          ],
+          "correct": 1,
+          "explanation": "The customer should become a Subscriber (Observer) — registering interest with the Store (Publisher) and waiting to be notified when the product becomes available. This eliminates both wasted customer trips and the store spamming everyone. Options C and D describe completely different patterns (Adapter and Builder). Option A reverses the roles: the Store is the Publisher of availability events, not the customer."
+        },
+        {
+          "id": 23,
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "pattern_type": "Standard 4-Option",
+          "question": "The Observer pattern solution avoids two problems described in the lecture. Which pair of problems does it solve?",
+          "options": [
+            "Too many subclasses and incompatible interfaces",
+            "Customers wasting time checking repeatedly AND the store wasting resources spamming all customers",
+            "Objects having too many constructor parameters and missing a global access point",
+            "Algorithms being hardcoded and violating the Open/Closed Principle"
+          ],
+          "correct": 1,
+          "explanation": "The lecture specifically describes two problems: (1) the customer wastes time on repeated store visits while the product isn't available, and (2) the store wastes resources sending emails to customers who don't care. Observer's subscription mechanism solves both — only interested subscribers receive targeted notifications. Options A, C, and D describe problems solved by Factory Method, Builder/Singleton, and Strategy respectively."
+        },
+        {
+          "id": 24,
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "pattern_type": "Standard 4-Option",
+          "question": "In the Strategy design pattern, which component maintains a reference to a concrete strategy and communicates with it only via the strategy interface?",
+          "options": [
+            "The Strategy interface",
+            "The Concrete Strategy",
+            "The Context",
+            "The Client"
+          ],
+          "correct": 2,
+          "explanation": "The Context maintains a reference to one of the concrete strategies and communicates with it exclusively through the Strategy interface. This decouples the Context from the specific algorithm used. The Strategy interface declares the contract. Concrete Strategies implement the actual algorithms. The Client configures the Context but is not the component holding the reference during execution."
+        },
+        {
+          "id": 25,
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "In the football match example, before applying the Strategy pattern, the Match class used if-else statements to check team names and assign scores. Which problem does this create?",
+          "options": [
+            "It makes the Match class too small and hard to find",
+            "It violates the Open/Closed Principle because adding a new team requires modifying the Match class",
+            "It makes the Match class a Singleton, preventing multiple matches",
+            "It forces the Transport interface to be reused for teams"
+          ],
+          "correct": 1,
+          "explanation": "The if-else chain inside Match (checking 'if team is Ahly' or 'if team is Zamalk') violates OCP: every new team requires modifying existing Match code. The lecture explicitly labels this as violating OCP. After applying Strategy, new behaviors (team strategies) are added by creating new Concrete Strategy classes without touching Match. Options A, C, and D are incorrect — they do not describe the problem shown in the lecture."
+        },
+        {
+          "id": 26,
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "pattern_type": "Standard 4-Option",
+          "question": "In the Strategy pattern solution for the football match, the Team class holds a reference to a Strategy object. What happens when SetBonus() is called on a Team?",
+          "options": [
+            "The Match class calculates the bonus using its own internal if-else logic",
+            "The Team calls strategy.SetScorePoint(), delegating the bonus calculation to the concrete strategy",
+            "The Strategy interface directly modifies the Match score field",
+            "A new Singleton instance is created to manage the bonus value"
+          ],
+          "correct": 1,
+          "explanation": "In the Strategy solution, Team.SetBonus() delegates to strategy.SetScorePoint(), which is implemented by Attack (+2 score points) or Defend (+1 score point). This removes conditional logic from the Team/Match and moves it to the appropriate Concrete Strategy. Option A describes the BEFORE (broken) approach. Options C and D are fabricated — Strategy interface doesn't directly modify Match fields, and Singleton is unrelated."
+        },
+        {
+          "id": 27,
+          "bloom": "Analyze",
+          "difficulty": "Medium",
+          "pattern_type": "2-Option Identification",
+          "question": "A system needs to define multiple sorting algorithms (BubbleSort, QuickSort, MergeSort) and allow the client to switch between them at runtime without changing the client code. Which pattern is most suitable?",
+          "options": [
+            "Strategy Pattern",
+            "Factory Method Pattern"
+          ],
+          "correct": 0,
+          "explanation": "Strategy is the right choice. Strategy defines a family of interchangeable algorithms (concrete strategies) and lets the context switch between them at runtime via a common interface. Factory Method is for creating objects — it does not address runtime algorithm switching. The lecture's football example maps directly: team strategies (Attack/Defend) are swapped via the strategy interface, just as sort algorithms would be."
+        },
+        {
+          "id": 28,
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "pattern_type": "Standard 4-Option",
+          "question": "Both the Adapter and Decorator patterns wrap an existing object. Which of the following best distinguishes their purposes?",
+          "options": [
+            "Adapter adds new behavior; Decorator changes the interface for compatibility",
+            "Adapter converts an interface for compatibility; Decorator adds new behavior while keeping the same interface",
+            "Both serve identical purposes; the only difference is naming convention",
+            "Adapter is structural; Decorator is creational"
+          ],
+          "correct": 1,
+          "explanation": "Adapter's purpose is interface conversion — making two incompatible interfaces work together. Decorator's purpose is behavior extension — adding new capabilities while keeping the same interface (the decorator implements the same interface as the component it wraps). Option A reverses the definitions. Option C is false — they have distinct purposes. Option D is partially wrong: both Adapter and Decorator are Structural patterns, not creational."
+        },
+        {
+          "id": 29,
+          "bloom": "Evaluate",
+          "difficulty": "Hard",
+          "pattern_type": "Standard 4-Option",
+          "question": "A team is designing a logging system that must be accessible from anywhere in the application, and it is critical that there is never more than one logger instance (to avoid duplicate log entries). Which pattern is the best choice, and why?",
+          "options": [
+            "Factory Method — because it provides a static method to create Logger objects",
+            "Singleton — because it guarantees exactly one Logger instance with a global access point",
+            "Observer — because multiple parts of the app can subscribe to log events",
+            "Builder — because the Logger may have many optional configuration parameters"
+          ],
+          "correct": 1,
+          "explanation": "Singleton is the best choice. The requirements map exactly to Singleton's two goals: (1) ensure only one instance exists, and (2) provide a global access point. The lecture's Log Singleton example directly illustrates this use case. Factory Method creates objects but does not restrict instance count. Observer handles event notification, not instance management. Builder handles complex construction but also does not restrict instance count."
+        },
+        {
+          "id": 30,
+          "bloom": "Evaluate",
+          "difficulty": "Hard",
+          "pattern_type": "NOT/EXCEPT Negation",
+          "question": "Which of the following is NOT a valid use case for the Singleton pattern as described in the lecture?",
+          "options": [
+            "Controlling access to a shared database connection",
+            "Providing a global configuration object used throughout the application",
+            "Dynamically attaching optional features (e.g., logging, compression) to an object at runtime",
+            "Providing a single shared log manager that records application events"
+          ],
+          "correct": 2,
+          "explanation": "Dynamically attaching optional features at runtime describes the Decorator pattern, not Singleton. Singleton is about controlled single-instance access to shared resources. The lecture explicitly gives database access, logging (Log Singleton), and configuration (Config Singleton) as Singleton use cases — making Options A, B, and D all valid Singleton applications."
+        }
+      ],
+      "createdAt": "2026-05-30T12:37:23.579Z",
+      "tags": [],
+      "difficulty": null,
+      "source": null,
+      "stats": {
+        "attempts": 0,
+        "bestScore": 0,
+        "lastAttempt": null
+      }
+    },
+    {
+      "id": "6272e6be-d708-4ef9-b7cd-cbc8fd65dc40",
+      "courseId": "d20b1dee-47ec-4096-9908-631b9bc2f773",
+      "name": "Lecture 7: Microservices",
+      "jsonData": [
+        {
+          "id": 1,
+          "question": "Which of the following best describes a monolithic application?",
+          "options": [
+            "A collection of small independent services each with its own codebase and database",
+            "A single-tiered software application in which the user interface and data access code are combined into a single program",
+            "An application where services communicate through well-defined APIs",
+            "A distributed system where each module is deployed and scaled independently"
+          ],
+          "correct": 1,
+          "pattern": "Standard 4-option",
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "explanation": "A monolithic application combines UI and data access code into one single program running on a single platform — it is self-contained and responsible for all steps of a function. Option A describes microservices. Options C and D also describe microservices characteristics, not monolithic."
+        },
+        {
+          "id": 2,
+          "question": "Which of the following is a core characteristic of microservices?",
+          "options": [
+            "All services must share the same technology stack and database",
+            "The entire application is deployed as a single unit from one codebase",
+            "Internal implementation details of each service are hidden from other services",
+            "A large centralized team manages all services together"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Understand",
+          "difficulty": "Easy",
+          "explanation": "Microservices deliberately hide internal implementation details from other services, exposing only well-defined APIs. Option A is wrong because microservices support polyglot programming with different stacks. Option B describes monolithic. Option D contradicts the small team model."
+        },
+        {
+          "id": 3,
+          "question": "In this architecture, each service is responsible for persisting its own data rather than relying on a shared data layer. Which architecture does this describe?",
+          "options": [
+            "Monolithic",
+            "Microservices"
+          ],
+          "correct": 1,
+          "pattern": "2-Option Identification",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "explanation": "Microservices differ from the traditional model precisely because each service manages its own data persistence instead of delegating to a shared, separate data layer. In monolithic architecture, a single shared data layer typically handles all data persistence."
+        },
+        {
+          "id": 4,
+          "question": "What does 'polyglot programming' mean in the context of microservices?",
+          "options": [
+            "All services must be written in multiple programming languages simultaneously",
+            "Services can use different technology stacks, libraries, or frameworks without being forced to share them",
+            "The application code is translated to multiple languages for international users",
+            "A single programming language is used across all microservices to ensure consistency"
+          ],
+          "correct": 1,
+          "pattern": "Standard 4-option",
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "explanation": "Polyglot programming in microservices means services are NOT required to share the same technology stack, libraries, or frameworks — each team can choose the best tool for their service. The most tempting wrong answer is option D, which sounds like a reasonable consistency policy but is the opposite of what polyglot means."
+        },
+        {
+          "id": 5,
+          "question": "Which of the following correctly describes how updates are handled in microservices architecture?",
+          "options": [
+            "Updating one service requires rebuilding and redeploying the entire application",
+            "Services must be updated in batches to avoid dependency conflicts",
+            "A team can update an existing service without rebuilding and redeploying the entire application",
+            "All services must be taken offline simultaneously during any update"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Understand",
+          "difficulty": "Easy",
+          "explanation": "Independent deployment is a key microservices feature — a team updates and deploys one service without touching others. Option A describes the painful reality of monolithic architecture, making it the most tempting wrong choice."
+        },
+        {
+          "id": 6,
+          "question": "How does microservices architecture achieve faster deployments compared to monolithic?",
+          "options": [
+            "By combining all modules into one deployable unit that reduces build time",
+            "By eliminating the need for testing individual components",
+            "By allowing each module to be independently built, tested, and deployed",
+            "By using a single shared database that reduces data synchronization time"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Understand",
+          "difficulty": "Easy",
+          "explanation": "Microservices simplify the design by making each module independently buildable, testable, and deployable — this directly translates to increased agility and faster time to market. Option A describes the monolithic approach. Options B and D introduce incorrect claims not supported by the lecture."
+        },
+        {
+          "id": 7,
+          "question": "Which property of microservices modules specifically enables ease of scalability according to the lecture?",
+          "options": [
+            "Shared codebase across all services",
+            "Each module has bounded context and works independently",
+            "All modules are deployed on the same physical server",
+            "A centralized scaling manager coordinates all module growth"
+          ],
+          "correct": 1,
+          "pattern": "Standard 4-option",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "explanation": "Bounded context — meaning each module has a clearly defined scope and works independently — is what makes microservices easy to scale. Individual modules can be scaled without affecting others. Options A and C describe monolithic constraints, while option D describes a central control model that contradicts microservices' decentralized nature."
+        },
+        {
+          "id": 8,
+          "question": "Why is it 'almost impossible for the whole system to go down' in a well-architected microservices system?",
+          "options": [
+            "Because all services share a single fault-tolerant database",
+            "Because each microservice is built, deployed, and managed independently and is totally isolated at runtime",
+            "Because a master service automatically restarts all other services when one fails",
+            "Because microservices are always hosted on dedicated physical hardware with redundancy"
+          ],
+          "correct": 1,
+          "pattern": "Standard 4-option",
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "explanation": "Runtime isolation means that if one service fails, it does not cascade to bring down the entire system — the other services continue running. Option A is incorrect because shared databases are a monolithic pattern and a single point of failure. Options C and D introduce incorrect technical details not covered in the lecture."
+        },
+        {
+          "id": 9,
+          "question": "Which of the following is the primary reason microservices architecture avoids vendor lock-in?",
+          "options": [
+            "Microservices require all vendors to sign contractual agreements",
+            "The architecture is based on open standards and standard-based APIs, making migration straightforward",
+            "Microservices can only run on open-source cloud platforms",
+            "Vendors are legally prohibited from creating proprietary microservices implementations"
+          ],
+          "correct": 1,
+          "pattern": "Standard 4-option",
+          "bloom": "Analyze",
+          "difficulty": "Medium",
+          "explanation": "Open standards and standard-based APIs mean that almost all commercial platforms follow the same conventions, so migrating between vendors is feasible. The standard APIs also allow using different languages and technologies. Options A, C, and D are fabricated constraints not mentioned in the lecture."
+        },
+        {
+          "id": 10,
+          "question": "In a microservices environment using Kubernetes or OpenShift, how is resilience primarily achieved?",
+          "options": [
+            "By manually restarting failed services during a scheduled maintenance window",
+            "By routing all traffic through a single robust master service",
+            "Through orchestration capabilities that self-monitor and restart failed components automatically",
+            "By replicating all service data to a central backup server every minute"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "explanation": "Kubernetes/OpenShift provide self-healing through orchestration — they monitor infrastructure, clusters, nodes, and pods and automatically restart failed components. This self-monitoring and healing ensures resilience. Option A (manual restarts) defeats the purpose. Options B and D are not how Kubernetes works."
+        },
+        {
+          "id": 11,
+          "question": "Microservices architecture makes it easier to onboard new team members and hire engineers with different coding backgrounds.",
+          "options": [
+            "Correct",
+            "Incorrect"
+          ],
+          "correct": 0,
+          "pattern": "True/False as MCQ",
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "explanation": "This is correct — the lecture explicitly states that with microservices it is easier to onboard new team members as well as hiring software engineers with different coding backgrounds. This is the Dynamic Talent Pool benefit, enabled by polyglot programming and independent team ownership."
+        },
+        {
+          "id": 12,
+          "question": "Which of the following is NOT a recognized challenge of microservices architecture as described in the lecture?",
+          "options": [
+            "Increased complexity because the system has more moving parts than a monolithic application",
+            "Difficulty testing service dependencies when the application is evolving quickly",
+            "Data consistency challenges because each service manages its own persistence",
+            "Inability to use asynchronous communication patterns between services"
+          ],
+          "correct": 3,
+          "pattern": "NOT/EXCEPT",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "explanation": "The lecture actually recommends using asynchronous communication patterns (like queue-based load leveling) as a solution to network latency — it is NOT a challenge. The real challenges include complexity (A), testing difficulty (B), and data integrity/consistency (C). The tempting wrong pick is C, but data consistency is explicitly listed as a challenge."
+        },
+        {
+          "id": 13,
+          "question": "What is the specific latency risk described in the lecture when a microservices application has a long chain of service dependencies?",
+          "options": [
+            "The API gateway becomes overwhelmed and stops routing requests",
+            "The service registry loses track of service instances",
+            "Additional latency accumulates as each hop in the chain (A calls B, B calls C) adds delay",
+            "The shared database becomes a bottleneck slowing all services simultaneously"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "explanation": "The lecture specifically warns that if the chain of service dependencies gets too long, the additional per-hop latency compounds and becomes a problem. The recommendation is to design APIs carefully and look for places to use asynchronous patterns. Option D describes a monolithic/shared-database problem, not a microservices chain latency issue."
+        },
+        {
+          "id": 14,
+          "question": "Which challenge arises specifically because each microservice is responsible for its own data persistence?",
+          "options": [
+            "Network congestion from too many inter-service API calls",
+            "Backward compatibility issues when one service is updated",
+            "Data consistency becomes difficult to maintain across services",
+            "Skills shortage as distributed systems require specialized knowledge"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Analyze",
+          "difficulty": "Medium",
+          "explanation": "When each service owns its own data, there is no single source of truth — achieving consistency across services becomes a significant challenge. Option A (network congestion) is a separate challenge. Option B (backward compatibility) is the versioning challenge. Option D is the skills-set challenge. All are real microservices challenges, but only C is directly caused by distributed data ownership."
+        },
+        {
+          "id": 15,
+          "question": "Which of the following is NOT a concern related to the versioning challenge in microservices?",
+          "options": [
+            "Updates to one service may break dependent services",
+            "Multiple services could be updated at the same time",
+            "Careful design is needed to avoid backward or forward compatibility problems",
+            "Each service must share the same version number as the entire application"
+          ],
+          "correct": 3,
+          "pattern": "NOT/EXCEPT",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "explanation": "Requiring all services to share the same version number is NOT a microservices versioning concern — in fact, independent versioning is a feature, not a problem. The real versioning concerns are: breaking dependent services (A), simultaneous updates causing conflicts (B), and backward/forward compatibility issues (C). Option D describes a monolithic constraint, not a microservices challenge."
+        },
+        {
+          "id": 16,
+          "question": "According to the lecture, what problem can arise from the decentralized approach to building microservices?",
+          "options": [
+            "Services become too tightly coupled and cannot be deployed independently",
+            "The application becomes hard to maintain due to too many different languages and frameworks",
+            "All services must be written by the same development team to avoid conflicts",
+            "The single shared database becomes overloaded with requests from all services"
+          ],
+          "correct": 1,
+          "pattern": "Standard 4-option",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "explanation": "Lack of governance means the decentralized freedom can lead to so many different languages and frameworks that the application becomes hard to maintain. This is a real downside of polyglot programming when taken too far. Option A describes tight coupling, which is the opposite of microservices. Options C and D contradict core microservices principles."
+        },
+        {
+          "id": 17,
+          "question": "Which of the following best describes the 'Single Responsibility' characteristic of microservices?",
+          "options": [
+            "One developer is solely responsible for all microservices in the system",
+            "Each microservice handles only one specific business or functional boundary",
+            "The entire application has a single point of entry through the API gateway",
+            "All services must use a single programming language for consistency"
+          ],
+          "correct": 1,
+          "pattern": "Standard 4-option",
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "explanation": "Single responsibility means each microservice is scoped to one business boundary (business logic) or function boundary (development concern). Option A misapplies 'single' to a person. Option C describes the API gateway role, not single responsibility. Option D contradicts polyglot programming."
+        },
+        {
+          "id": 18,
+          "question": "In Domain-Driven Design (DDD), what determines the structure and language of software code?",
+          "options": [
+            "The preferences of the lead software architect",
+            "The programming language chosen by the majority of the team",
+            "The business domain, with input from domain experts",
+            "Industry-standard design patterns published by IEEE"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Understand",
+          "difficulty": "Medium",
+          "explanation": "DDD focuses on modeling software to match the business domain according to input from that domain's experts — class names, methods, and variables should match the business domain vocabulary. Option A (architect preference) and Option B (language majority) are human/political factors, not DDD principles. Option D refers to external standards, not domain modeling."
+        },
+        {
+          "id": 19,
+          "question": "A development team designs Service A to call Service B's REST API and wait for a response before continuing. Which communication pattern are they using?",
+          "options": [
+            "Asynchronous message passing",
+            "Event-driven communication",
+            "Synchronous communication using HTTP",
+            "Queue-based load leveling"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "explanation": "Synchronous communication means the caller waits for a response from the receiver — using HTTP or gRPC, one service calls another's exposed API and blocks until a reply comes. Asynchronous patterns (options A, B, D) all involve NOT waiting for an immediate response. The most tempting distractor is option A, since REST API calls could be confused with messaging."
+        },
+        {
+          "id": 20,
+          "question": "Service X sends a message to a broker and immediately continues processing without waiting for any reply. Other services subscribe to the broker and process the message on their own schedule. Which communication type does this describe?",
+          "options": [
+            "Synchronous communication",
+            "Asynchronous communication"
+          ],
+          "correct": 1,
+          "pattern": "2-Option Identification",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "explanation": "Asynchronous communication means a service sends a message without waiting for a response — one or more services process it independently. The message broker pattern described here is the canonical asynchronous model. Synchronous communication requires the caller to wait for a response, which is the opposite of what is described."
+        },
+        {
+          "id": 21,
+          "question": "Which type of inter-service communication involves services pushing messages to a message broker that other services subscribe to?",
+          "options": [
+            "Synchronous HTTP communication via REST API",
+            "gRPC direct call communication",
+            "Message (Asynchronous) communication through a broker",
+            "DNS-based service discovery communication"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "explanation": "Message communication (also called asynchronous communication) uses a message broker — services publish messages and other services subscribe to receive them, with no direct call between the two. Option A describes synchronous HTTP. Option B (gRPC) is also synchronous. Option D is a network resolution mechanism, not a communication style."
+        },
+        {
+          "id": 22,
+          "question": "Which of the following correctly distinguishes event-driven communication from standard message communication in microservices?",
+          "options": [
+            "Event-driven requires all services to know each other's network location",
+            "Event-driven services do not need to know the common message structure, unlike standard message communication",
+            "Event-driven communication is synchronous, while message communication is asynchronous",
+            "Event-driven communication uses HTTP calls, while message communication uses TCP sockets"
+          ],
+          "correct": 1,
+          "pattern": "Standard 4-option",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "explanation": "The lecture explicitly distinguishes event-driven as a type of asynchronous communication where services do NOT need to know the common message structure — making it more loosely coupled than standard message communication. Option C is wrong because both are asynchronous. Options A and D introduce false technical details not in the lecture."
+        },
+        {
+          "id": 23,
+          "question": "An architect places a single entry point in front of all backend microservices. This component handles creating, publishing, monitoring, and securing APIs at scale. What is this component called?",
+          "options": [
+            "Service Registry",
+            "Message Broker",
+            "API Gateway",
+            "Load Balancer Node"
+          ],
+          "correct": 2,
+          "pattern": "Architecture/Code Reading",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "explanation": "The API Gateway acts as the 'front door' for all applications to access data, business logic, or functionality from backend services — it is a fully managed service for creating, publishing, monitoring, and securing APIs. A Service Registry (A) tracks service locations. A Message Broker (B) handles async messaging. A Load Balancer (D) distributes traffic but does not manage or secure APIs."
+        },
+        {
+          "id": 24,
+          "question": "The API Gateway acts as the 'front door' for applications to access data, business logic, or functionality from backend services.",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "correct": 0,
+          "pattern": "True/False as MCQ",
+          "bloom": "Understand",
+          "difficulty": "Easy",
+          "explanation": "Yes — this is the exact definition given in the lecture. The API Gateway is described as a fully managed service that acts as the 'front door' through which applications access backend microservices. It is the authoritative entry point for API calls."
+        },
+        {
+          "id": 25,
+          "question": "Why is static network configuration (reading IP addresses from a configuration file) insufficient for service discovery in cloud-based microservices?",
+          "options": [
+            "Configuration files are too large to parse efficiently in cloud environments",
+            "Cloud providers do not support text-based configuration files",
+            "Service instances have dynamically assigned network locations that change due to autoscaling, failures, and upgrades",
+            "Static files cannot store both IP addresses and port numbers simultaneously"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "explanation": "In cloud-based microservices, service instances come and go dynamically — autoscaling adds new instances, failures remove them, and upgrades replace them. Their IP addresses and ports are not fixed. A static config file that is 'occasionally updated' cannot keep up. Options A, B, and D are technically false statements invented as distractors."
+        },
+        {
+          "id": 26,
+          "question": "In the diagram below, a client needs to call a service but does not know its current network address. It first queries a central component that maintains a registry of all live service instances and their locations, then connects directly to the service. What is the central component's role?",
+          "options": [
+            "API Gateway — it routes and secures all external requests",
+            "Message Broker — it queues the client request for later delivery",
+            "Service Registry — it stores and provides the network locations of available service instances",
+            "Load Balancer — it distributes the request across replicas without exposing addresses"
+          ],
+          "correct": 2,
+          "pattern": "Architecture/Code Reading",
+          "bloom": "Apply",
+          "difficulty": "Medium",
+          "explanation": "The Service Registry is the component that solves the dynamic location problem — it maintains an up-to-date map of all running service instances and their network locations (IP + port), allowing clients to look up where to connect. The API Gateway (A) focuses on API management, not instance location lookup. The Message Broker (B) handles async messaging. The Load Balancer (D) distributes traffic but does not provide address lookup in this pattern."
+        },
+        {
+          "id": 27,
+          "question": "Which of the following is NOT listed as a property of Service Discovery in the lecture?",
+          "options": [
+            "Load Balance",
+            "Resilient",
+            "Fault-tolerant",
+            "Schema validation"
+          ],
+          "correct": 3,
+          "pattern": "NOT/EXCEPT",
+          "bloom": "Analyze",
+          "difficulty": "Hard",
+          "explanation": "The lecture explicitly lists three properties for Service Discovery: Load Balance, Resilient, and Fault-tolerant. Schema validation is not mentioned anywhere in connection with service discovery — it is a concept related to API or data contracts, not service discovery properties. The tempting wrong answers are A and C, because fault-tolerance and load balancing are sometimes confused with each other."
+        },
+        {
+          "id": 28,
+          "question": "According to the lecture, what is the recommended team size for writing and maintaining a microservice?",
+          "options": [
+            "A large department with specialized sub-teams for each layer",
+            "A single developer working in isolation",
+            "A small team of developers",
+            "A cross-company consortium responsible for the shared codebase"
+          ],
+          "correct": 2,
+          "pattern": "Standard 4-option",
+          "bloom": "Remember",
+          "difficulty": "Easy",
+          "explanation": "The lecture states that 'a single small team of developers can write and maintain a service' — this small, autonomous team model is a defining characteristic of microservices ownership. Option B (single developer) is close but too extreme. Options A and D describe large, centralized structures that contradict the microservices philosophy."
+        }
+      ],
+      "createdAt": "2026-05-30T12:39:52.688Z",
+      "tags": [],
+      "difficulty": null,
+      "source": null,
+      "stats": {
+        "attempts": 0,
+        "bestScore": 0,
+        "lastAttempt": null
+      }
+    }
+  ]
+}

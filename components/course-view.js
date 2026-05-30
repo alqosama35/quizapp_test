@@ -4,7 +4,7 @@ async function renderCourseView() {
     const course = AppState.currentCourse;
     if (!course) { Router.navigate('dashboard'); return ''; }
 
-    const quizzes  = await getAllQuizzes(course.id);
+    const quizzes  = (await getAllQuizzes(course.id)).sort((a, b) => a.name.localeCompare(b.name));
     const mistakes = await getMistakesForCourse(course.id);
 
     return `

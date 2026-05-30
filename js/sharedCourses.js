@@ -9,5 +9,6 @@ const SHARED_COURSES_REGISTRY = {
     // "os102": "shared-courses/os102.json"
     "cloud": "shared-courses/course-cloud.json",
     "nlp": "shared-courses/course-nlp.json",
-    "cv": "shared-courses/course-cv.json"
+    "cv": "shared-courses/course-cv.json",
+    "se2": "shared-courses/course-se2.json"
 };
