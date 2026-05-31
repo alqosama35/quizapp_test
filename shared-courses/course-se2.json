@@ -1,7 +1,7 @@
 {
   "type": "course-export",
   "version": 1,
-  "exportDate": "2026-05-30T12:40:28.230Z",
+  "exportDate": "2026-05-31T17:46:27.770Z",
   "course": {
     "id": "d20b1dee-47ec-4096-9908-631b9bc2f773",
     "name": "se2",
@@ -17,7 +17,7 @@
       "shuffleOptions": false
     },
     "stats": {
-      "totalQuizzes": 7,
+      "totalQuizzes": 8,
       "totalAttempts": 0,
       "averageScore": 0,
       "bestScore": 0,
@@ -2832,6 +2832,462 @@
         }
       ],
       "createdAt": "2026-05-30T12:39:52.688Z",
+      "tags": [],
+      "difficulty": null,
+      "source": null,
+      "stats": {
+        "attempts": 0,
+        "bestScore": 0,
+        "lastAttempt": null
+      }
+    },
+    {
+      "id": "f8a22e4d-69f5-482e-8d0e-dd82f49fbf12",
+      "courseId": "d20b1dee-47ec-4096-9908-631b9bc2f773",
+      "name": "All",
+      "jsonData": [
+        {
+          "question": "Which of the following best defines 'clean code' as described in this course?",
+          "options": [
+            "Code that compiles without errors and passes all automated tests reliably",
+            "Code that is readable, maintainable, and extendable by other developers",
+            "Code documented with comprehensive comments explaining every function's purpose",
+            "Code written with the fewest possible lines to minimize file size"
+          ],
+          "correct": 1,
+          "explanation": "Clean code must be readable, maintainable, and extendable — written for humans, not just computers. Working code (compiles and passes tests) is necessary but not sufficient. Heavy commenting is actually a sign that naming is poor, not that the code is clean."
+        },
+        {
+          "question": "What does the 'WTF/minute' metric informally measure during a code review?",
+          "options": [
+            "The frequency of confusing or frustrating moments a reviewer encounters",
+            "The number of compiler warnings generated per minute of active development",
+            "How often build failures occur per minute in a continuous integration pipeline",
+            "The rate at which syntax errors are introduced during an active coding session"
+          ],
+          "correct": 0,
+          "explanation": "WTF/minute (Works That Frustrate per minute) is a humorous informal metric: good code produces low WTF/minute because it is self-explanatory. It is not related to compilation, CI pipelines, or error rates — it measures reader confusion during review."
+        },
+        {
+          "question": "A developer names a loop variable `j` used only inside a small local for-loop. Which Clean Code statement about single-letter variable names is accurate?",
+          "options": [
+            "Single-letter names are never acceptable under any clean coding guideline",
+            "Single-letter names are acceptable only when the variable stores an integer type",
+            "Single-letter names such as i, j, k are acceptable as standard loop iterators",
+            "Single-letter names should be avoided even in loops because they cannot be searched"
+          ],
+          "correct": 2,
+          "explanation": "Rule 10 (Avoid Mental Mapping) carves out an explicit exception: `i`, `j`, `k` are universally understood as loop iteration counters and are acceptable in that context. Rule 5 (Use Searchable Names) targets scope-spanning variables and magic numbers, not local loop counters."
+        },
+        {
+          "question": "A codebase uses `fetchUsers()`, `getArticles()`, and `retrievePages()` for the same kind of data-retrieval operation. Which naming rule does this violate?",
+          "options": [
+            "Rule 2 — Avoid Disinformation: different verbs imply different behaviors, misleading readers",
+            "Rule 4 — Eliminate Noise Words: fetch, get, and retrieve are all semantically empty noise",
+            "Rule 3 — Use Meaningful Distinctions: these names differ only superficially and mislead",
+            "Rule 12 — Pick One Word Per Concept: one abstract operation must use one consistent term"
+          ],
+          "correct": 3,
+          "explanation": "Rule 12 requires choosing one word per abstract concept and using it consistently everywhere. Using fetch, get, and retrieve interchangeably for identical operations forces readers to guess whether a difference is intentional. Rule 2 (Disinformation) is tempting but the names are not false — they are merely inconsistent."
+        },
+        {
+          "question": "According to Clean Code naming conventions, which of the following names is correctly formed?",
+          "options": [
+            "`ProcessData` as a class name — 'Process' is a verb and class names must be noun phrases",
+            "`deleteExpiredSessions` as a method name — methods must use verb or verb phrases",
+            "`Verify` as a class name — single-word class names are always preferred for brevity",
+            "`customerUpdater` as a method name — starts with a noun, violating verb-phrase convention"
+          ],
+          "correct": 1,
+          "explanation": "Rule 6 says classes must have noun or noun phrase names; Rule 7 says methods must have verb or verb phrase names. `deleteExpiredSessions` is a verb phrase — correct for a method. `ProcessData` and `Verify` are verb-based class names; `customerUpdater` begins with a noun instead of a verb."
+        },
+        {
+          "question": "A Logistics app currently handles only truck delivery. Using the Factory Method pattern, what is the correct approach to add ship delivery support?",
+          "options": [
+            "Add a ship branch inside `Logistics.createTransport()` using a new conditional statement",
+            "Modify the `Truck` class to optionally behave as a `Ship` by adding a type parameter",
+            "Create a `SeaLogistics` subclass that overrides `createTransport()` to return a `Ship`",
+            "Replace `createTransport()` with a static factory method and add Ship handling inside it"
+          ],
+          "correct": 2,
+          "explanation": "Factory Method achieves OCP by letting subclasses decide which concrete product to create. Adding ship delivery means creating `SeaLogistics extends Logistics` that overrides `createTransport()` to return `new Ship()`. No existing class is modified — only a new class is added. Adding conditionals (options A and D) violates OCP."
+        },
+        {
+          "question": "Which mechanism does the Singleton pattern use to prevent external code from creating additional instances of the class?",
+          "options": [
+            "Making the class constructor private so only internal static methods can instantiate it",
+            "Throwing a runtime exception if a second instantiation is attempted from outside the class",
+            "Declaring the class as final so it cannot be subclassed and thus cannot be re-instantiated",
+            "Using a static boolean flag that blocks the constructor body after the first successful call"
+          ],
+          "correct": 0,
+          "explanation": "The private constructor is the Singleton's core mechanism — it prevents any external code from calling `new ClassName()`, forcing all callers through the static `getInstance()` method which controls the single instance. Declaring `final` prevents subclassing but does not limit instantiation count."
+        },
+        {
+          "question": "A `SlackNotification` class implements a `Notification` interface, wraps a `SlackApi` object, and translates `send(title, message)` calls into `SlackApi.sendMessage()` calls. Which pattern is this?",
+          "options": [
+            "Decorator — it extends the Notification interface by adding Slack-specific formatting behavior",
+            "Observer — it subscribes to notification events and forwards them to the Slack channel",
+            "Builder — it constructs a formatted Slack message step-by-step from title and body parts",
+            "Adapter — it converts the Notification interface into the incompatible SlackApi interface"
+          ],
+          "correct": 3,
+          "explanation": "Adapter bridges incompatible interfaces: `SlackNotification` implements `Notification` (the client interface) while wrapping `SlackApi` (the incompatible service). The tempting wrong answer is Decorator — but Decorator keeps the same interface and adds behavior; here the interface is being translated, not extended."
+        },
+        {
+          "question": "What is the key difference between the Adapter pattern and the Decorator pattern?",
+          "options": [
+            "Adapter requires modifying the original service class; Decorator wraps it without any changes",
+            "Adapter selects algorithms at runtime; Decorator applies structural transformations at compile time",
+            "Adapter changes the interface the client sees; Decorator preserves it while adding behavior",
+            "Adapter is a creational pattern; Decorator is a behavioral pattern applied to existing objects"
+          ],
+          "correct": 2,
+          "explanation": "Adapter converts one interface into another — the client calls one method signature and the adapter translates it. Decorator keeps the exact same interface but wraps the object to add or modify behavior. Both are structural patterns (not creational), making option D wrong."
+        },
+        {
+          "question": "A developer must create `House` objects with 15 optional configuration parameters. Which pattern solves the telescoping constructor problem, and how?",
+          "options": [
+            "Singleton — one canonical House instance is shared; parameters are set through global config",
+            "Builder — fluent setter methods let callers configure only the parameters they need",
+            "Abstract Factory — creates families of House types optimized for different environments",
+            "Factory Method — a subclass picks the specific House variant without exposing construction"
+          ],
+          "correct": 1,
+          "explanation": "Builder solves the telescoping constructor antipattern — when a class has many optional parameters, named fluent setter methods make construction readable: `House.builder().setWindows(4).setGarage(true).build()`. Callers set only what they need. Factory Method decides *which type* to create, not *how to configure* it."
+        },
+        {
+          "question": "Which of the following code patterns violates the Law of Demeter?",
+          "options": [
+            "`car.getOwner().getAddress().getStreet()` navigates through objects the method doesn't own",
+            "`car.startEngine()` calls a method directly on a dependency the class already holds as a field",
+            "`new Address(city, street).getFormatted()` uses an object created inside the same method call",
+            "`this.validate(data)` calls another method on the same class — always allowed under LoD"
+          ],
+          "correct": 0,
+          "explanation": "LoD says a method should only call methods on: itself, its parameters, objects it created, its direct component fields, and global variables. `car.getOwner().getAddress().getStreet()` reaches into a nested object the method does not directly hold — a 'stranger'. Options C and D are both explicitly permitted by LoD rules."
+        },
+        {
+          "question": "A Football application switches between `Attack` and `Defend` behaviors at runtime depending on the match situation. Which pattern fits this requirement?",
+          "options": [
+            "Observer — multiple field positions subscribe to the coach's signal and react simultaneously",
+            "Factory Method — a Creator subclass instantiates the correct behavior based on match context",
+            "Singleton — only one active formation object should exist globally per running match instance",
+            "Strategy — the Team holds a Strategy reference and swaps it at runtime without structural change"
+          ],
+          "correct": 3,
+          "explanation": "Strategy defines a family of interchangeable algorithms behind a common interface and lets a Context (Team) swap between them at runtime. The Team holds a `Strategy` reference and calls `strategy.execute()`. Observer would notify multiple observers of an event — not the right model for swapping a single algorithm."
+        },
+        {
+          "question": "A `Student` class has methods for storing student data AND for saving that data directly to a database. According to SRP, what is the problem?",
+          "options": [
+            "The class violates OCP because adding new student attributes forces modification of existing code",
+            "The class has two reasons to change: data format changes and database backend changes",
+            "The class violates ISP because database clients depend on student data methods they don't need",
+            "The class violates LSP because subclasses cannot safely override the database save method"
+          ],
+          "correct": 1,
+          "explanation": "SRP: every component should have one and only one reason to change. This Student class changes if (1) the student data format changes or (2) the database backend changes — two distinct reasons. The fix is extracting `StudentRepository` to handle persistence separately. OCP (option A) is not the primary violation here."
+        },
+        {
+          "question": "Which combination of cohesion and coupling represents a well-designed software component according to the SRP lecture?",
+          "options": [
+            "Low cohesion and tight coupling — handles many concerns and shares internal state with others",
+            "Low cohesion and loose coupling — independent components that each handle diverse responsibilities",
+            "High cohesion and loose coupling — each component has one focus and minimal dependency on others",
+            "High cohesion and tight coupling — focused components that share state directly with dependents"
+          ],
+          "correct": 2,
+          "explanation": "SRP drives toward high cohesion (parts inside a module are closely related to one another) and loose coupling (modules are independent of each other). Low cohesion means unrelated concerns are lumped together; tight coupling means changes ripple across modules. Both are antipatterns SRP aims to eliminate."
+        },
+        {
+          "question": "A `Bicycle` class extends `Vehicle` and overrides `startEngine()` by throwing `UnsupportedOperationException`. Which SOLID principle does this most directly violate?",
+          "options": [
+            "SRP — Vehicle handles both movement and engine management, giving it multiple responsibilities",
+            "OCP — the Bicycle class is modifying inherited Vehicle behavior rather than extending cleanly",
+            "ISP — the Vehicle interface forces Bicycle to depend on engine-related methods it cannot use",
+            "LSP — a subclass must not weaken superclass behavior by throwing where the parent does not"
+          ],
+          "correct": 3,
+          "explanation": "LSP requires subclasses to be substitutable for their superclass without breaking behavior. If `Vehicle.startEngine()` works, `Bicycle.startEngine()` must also work — throwing an exception breaks this contract. The fix is restructuring the hierarchy: `VehicleWithEngines` and `VehicleWithoutEngines` as intermediate types."
+        },
+        {
+          "question": "A `LiquidInkjetPrinter` class must implement `fax()` and `printDuplex()` with empty bodies because the `PrinterTasks` interface requires them. Which SOLID principle is violated?",
+          "options": [
+            "ISP — clients must not be forced to depend on interface methods they do not use",
+            "SRP — the printer class has more than one responsibility: printing, scanning, and faxing",
+            "DIP — the printer depends on a concrete `PrinterTasks` class rather than an abstraction",
+            "LSP — the subclass provides invalid implementations for methods the parent interface guarantees"
+          ],
+          "correct": 0,
+          "explanation": "ISP states clients should not be forced to depend on methods they don't use. `LiquidInkjetPrinter` cannot fax or print duplex but must implement those methods. The fix is splitting `PrinterTasks` into focused interfaces: `PrintingTasks`, `ScanTasks`, `FaxTasks`, `DuplexTasks` — each class implements only what it supports."
+        },
+        {
+          "question": "A `Store` class directly instantiates `Stripe` inside its constructor. Why does this violate DIP?",
+          "options": [
+            "It violates SRP: Store is responsible for both sales operations and payment provider management",
+            "It violates OCP: switching payment providers requires editing Store's existing source code directly",
+            "Store depends on a concrete Stripe class; DIP requires depending on a PaymentGateway abstraction",
+            "It violates LSP because Stripe and PayPal have incompatible method signatures and return types"
+          ],
+          "correct": 2,
+          "explanation": "DIP requires high-level modules (Store) and low-level modules (Stripe) to both depend on an abstraction. When Store creates `new Stripe()` directly, it is tightly coupled to the concrete class. Introducing a `PaymentGateway` interface that Stripe and PayPal both implement allows Store to depend on the abstraction instead."
+        },
+        {
+          "question": "A method returns `null` when no user is found. According to Clean Code error-handling rules, what is the preferred alternative?",
+          "options": [
+            "Return `-1` as a sentinel value to indicate absence without the overhead of object creation",
+            "Return an empty `Optional` or a Null Object implementing the same interface as User",
+            "Throw a `NullPointerException` explicitly so callers are forced to handle the missing case",
+            "Set a global error flag to `true` and return `new User()` with all fields set to empty defaults"
+          ],
+          "correct": 1,
+          "explanation": "Returning null forces every caller to null-check, and forgotten checks cause NullPointerExceptions. The Null Object Pattern — a do-nothing implementation of the User interface — or an empty `Optional<User>` eliminates null checks. Sentinel values (-1) are status codes, not object-absence signals. Throwing NPE explicitly is wrong practice."
+        },
+        {
+          "question": "Which of the following correctly lists ALL THREE Dependency Injection types described in the SOLID lecture?",
+          "options": [
+            "Constructor Injection, Field Injection, and Method Injection",
+            "Setter Injection, Factory Injection, and Interface Injection",
+            "Constructor Injection, Setter Injection, and Property Injection",
+            "Constructor Injection, Setter Injection, and Interface Injection"
+          ],
+          "correct": 3,
+          "explanation": "The three DI types in the lecture are: Constructor Injection (dependency passed as a constructor parameter), Setter Injection (passed via a public setter method), and Interface Injection (client implements an injector interface that exposes a setter). Field Injection, Method Injection, Property Injection, and Factory Injection are not mentioned."
+        },
+        {
+          "question": "In OCL, what does the keyword `self` refer to when used inside a constraint expression?",
+          "options": [
+            "The instance of the context class the constraint is being evaluated against",
+            "The return value of the constrained operation, accessible only in postconditions",
+            "A reference to the parent superclass of the context type in the UML diagram",
+            "The complete set of all instances of the context class currently in the system"
+          ],
+          "correct": 0,
+          "explanation": "`self` in OCL is the equivalent of `this` in Java — it refers to the specific instance of the context class being evaluated. It can be omitted when unambiguous. The keyword for return values in postconditions is `result`, not `self`."
+        },
+        {
+          "question": "In OCL, when should you use the arrow operator `->` instead of the dot operator `.`?",
+          "options": [
+            "When navigating to a single-valued association with a multiplicity of exactly one",
+            "When the navigation result is a collection due to a multiplicity greater than one",
+            "When the target attribute is a primitive type such as Integer, String, or Boolean",
+            "When writing a postcondition that refers to values captured before method execution"
+          ],
+          "correct": 1,
+          "explanation": "Use `.` for navigating to a single object or a primitive attribute. Use `->` when the navigation result is a collection (Set, Bag, Sequence, or OrderedSet) — i.e., when multiplicity is > 1. Arrow triggers collection operations like `->size()`, `->select()`, and `->forAll()`."
+        },
+        {
+          "question": "Which OCL expression correctly verifies that the weights of all assessments for a `Module` sum to exactly 100?",
+          "options": [
+            "context Module invariant: set_work->forAll(weight) = 100",
+            "context Module invariant: set_work->size(weight) = 100",
+            "context Module invariant: set_work.weight->sum() = 100",
+            "context Module invariant: set_work->collect(weight) = 100"
+          ],
+          "correct": 2,
+          "explanation": "`set_work.weight` navigates across the collection to collect all weight values (producing a Bag of Integers), and `->sum()` totals them. `->forAll()` tests a boolean condition per element — it does not produce a sum. `->collect()` transforms elements but returns a collection, not a number. `->size()` counts elements."
+        },
+        {
+          "question": "In OCL, what type does `account.transaction` produce when navigating from a single `Customer` through multiple accounts?",
+          "options": [
+            "A Bag, because duplicate Transaction objects from different accounts are preserved",
+            "A Set, because OCL automatically eliminates duplicate objects during navigation results",
+            "An OrderedSet, because navigation results are sorted alphabetically by default in OCL",
+            "A Sequence, because accounts are ordered and their transactions inherit that ordering"
+          ],
+          "correct": 0,
+          "explanation": "Multi-hop navigation `account.transaction` goes from one Customer → Set of Accounts → Transactions. Because multiple accounts may share the same Transaction, duplicates can appear. OCL preserves these duplicates, producing a Bag. Use `->asSet()` to eliminate duplicates when needed."
+        },
+        {
+          "question": "In an OCL postcondition for the `burn(i : Integer)` operation on `LoyaltyAccount`, how is the value of `points` before the operation referenced?",
+          "options": [
+            "Using `initial.points` — the snapshot taken when the LoyaltyAccount object was first created",
+            "Using `before.points` — the keyword `before` marks pre-execution attribute values in OCL",
+            "Using `previous(points)` — the `previous()` built-in function captures temporal state in OCL",
+            "Using `points@pre` — the `@pre` suffix accesses the attribute value before execution began"
+          ],
+          "correct": 3,
+          "explanation": "`@pre` is the standard OCL syntax for accessing an attribute's value as it was before the operation began. The postcondition `points = points@pre - i` means the new balance equals the old balance minus i. There is no `initial`, `before`, or `previous()` in OCL — these are plausible but fabricated distractors."
+        },
+        {
+          "question": "Which of the following is the best example of a cross-cutting concern that AOP is specifically designed to handle?",
+          "options": [
+            "Computing compound interest from principal, rate, and number of compounding periods",
+            "Validating that all required fields in a customer registration form are properly filled",
+            "Logging the execution time of every service method without modifying each service class",
+            "Storing customer order records in a normalized relational database with foreign key constraints"
+          ],
+          "correct": 2,
+          "explanation": "Cross-cutting concerns cut across multiple classes and cannot be cleanly modularized with OOP. Logging execution time across all service methods is a classic example — it involves many classes, is repetitive boilerplate, and is unrelated to business logic. Computing interest and validating forms are domain business logic, not cross-cutting concerns."
+        },
+        {
+          "question": "In Spring AOP, what does a 'Join Point' specifically mean?",
+          "options": [
+            "The `@Aspect`-annotated class containing the cross-cutting concern implementation logic",
+            "A specific execution point in the program — in Spring AOP, always a method execution",
+            "The expression that matches methods to determine where advice should be applied",
+            "The process of merging aspect advice code into the target application classes"
+          ],
+          "correct": 1,
+          "explanation": "A Join Point is a specific point in program execution where advice can be applied. In Spring AOP, join points are exclusively method executions (not field access or constructors). The @Aspect class is the Aspect; the selection expression is the Pointcut; the merging process is Weaving."
+        },
+        {
+          "question": "Which advice type should be used to measure a method's execution time by recording timestamps both before and after the method runs?",
+          "options": [
+            "@Around — executes code before and after the join point by calling `joinPoint.proceed()`",
+            "@Before and @After used together — two annotations bracket the full method call for timing",
+            "@AfterReturning — fires only when the method returns normally without throwing exceptions",
+            "@After — fires after every method completion regardless of exception or normal return"
+          ],
+          "correct": 0,
+          "explanation": "@Around is the most powerful advice type — it wraps the entire join point. You record `startTime` before calling `joinPoint.proceed()` and calculate elapsed time after. Using @Before + @After (option B) would require sharing state between two separate advice methods, which is more complex and error-prone."
+        },
+        {
+          "question": "In the pointcut `execution(* com.tutorialspoint.*.*(..))`, what does the `(..)` syntax match?",
+          "options": [
+            "Only methods with no parameters — the two dots represent an empty parameter slot",
+            "Only methods that return `void` — the dots replace the return type in the signature",
+            "Any class in the package path — two dots act as a wildcard for package hierarchy levels",
+            "Any number of method parameters of any type, including methods that take no parameters"
+          ],
+          "correct": 3,
+          "explanation": "`(..)` is the parameter wildcard in pointcut expressions: zero or more arguments of any type. A single `*` in parameters would match exactly one argument of any type. The first `*` in `execution(* …)` matches the return type. Package wildcards use `..` in a different position within the class path string."
+        },
+        {
+          "question": "What is 'weaving' in AOP, and how does Spring AOP typically perform it?",
+          "options": [
+            "Compiling aspects into bytecode at build time — Spring AOP uses compile-time weaving exclusively",
+            "Incorporating aspect advice at join points; Spring AOP does this at runtime using dynamic proxies",
+            "Merging pointcut expressions into the class hierarchy during application context initialization",
+            "Linking aspect interfaces to concrete implementations, resolved statically at class-load time"
+          ],
+          "correct": 1,
+          "explanation": "Weaving is the process of incorporating aspect advice code into the target code at specified join points. Spring AOP performs runtime weaving using dynamic proxies (JDK proxies for interfaces, CGLIB proxies for classes). Compile-time and load-time weaving are features of AspectJ, not Spring AOP."
+        },
+        {
+          "question": "Which microservices benefit directly addresses the problem that a single code change in a monolithic app requires redeploying the entire application?",
+          "options": [
+            "Resilience — individual service failures do not cascade to bring down the whole system",
+            "Polyglot programming — each service can be written in the language best suited to its task",
+            "Independent deployment — each service can be built, tested, and released on its own schedule",
+            "Scalability — services handling high load can be scaled out without touching other services"
+          ],
+          "correct": 2,
+          "explanation": "Independent deployment is the benefit that directly solves deployment coupling: each microservice has its own build, test, and release cycle. In a monolith, one change anywhere triggers a full redeploy. Resilience and Scalability are also microservice benefits but address failure isolation and resource efficiency, not deployment coupling."
+        },
+        {
+          "question": "What does 'polyglot programming' mean in the context of microservices architecture?",
+          "options": [
+            "Each service may use a different programming language, framework, or technology stack",
+            "All services share a common language chosen by the architecture team for consistency",
+            "Teams must be proficient in every language used across all services in the system",
+            "A universal protocol layer that makes service APIs independent of implementation language"
+          ],
+          "correct": 0,
+          "explanation": "Polyglot programming means each microservice team can independently choose the best language, framework, or technology for their service — one service might use Java, another Python, another Node.js. This is possible because services communicate via well-defined APIs that are language-agnostic."
+        },
+        {
+          "question": "Why is 'data integrity' a challenge unique to microservices that monolithic applications naturally avoid?",
+          "options": [
+            "Microservices cannot use relational databases, making ACID transactions unavailable systemwide",
+            "Microservices require all data to pass through an API Gateway, introducing consistency delays",
+            "Data integrity requires network consensus protocols that microservices frameworks do not support",
+            "Each service owns its own database; there is no single transaction boundary across all services"
+          ],
+          "correct": 3,
+          "explanation": "In a monolith, all modules share one database and can participate in a single ACID transaction. In microservices, each service owns its own data store — there is no single transaction boundary. Ensuring cross-service consistency requires complex patterns like Sagas or eventual consistency. Microservices can use relational databases."
+        },
+        {
+          "question": "Which component in a microservices architecture serves as the single entry point for all client requests and handles routing, authentication, and rate limiting?",
+          "options": [
+            "Service Registry — stores the current network addresses of all active service instances",
+            "Message Broker — queues and routes messages between services for asynchronous processing",
+            "API Gateway — the front door that routes, authenticates, and monitors all incoming requests",
+            "Load Balancer — distributes incoming requests evenly across all healthy service instances"
+          ],
+          "correct": 2,
+          "explanation": "The API Gateway is the front door for all client requests: it routes to the correct service, handles authentication, enforces rate limits, and monitors traffic. The Service Registry handles service discovery (tracking dynamic IP addresses) — a common confusion point. Examples include AWS API Gateway, NGINX, and Netflix Zuul."
+        },
+        {
+          "question": "Why is static IP configuration insufficient for microservice-to-microservice communication?",
+          "options": [
+            "Static IPs prevent the API Gateway from performing SSL termination and certificate rotation",
+            "Service instances receive dynamic IPs when deployed; a registry tracks their current addresses",
+            "Static IPs are too slow for high-throughput inter-service calls in large distributed systems",
+            "Static IP configuration violates the stateless constraint required by REST-based microservices"
+          ],
+          "correct": 1,
+          "explanation": "In containerized microservice environments, service instances start and stop dynamically and receive new IP addresses each time. A Service Registry solves this: instances register on startup, and clients query the registry for current locations instead of using hardcoded IPs. The registry is also resilient — it caches locations and removes unhealthy instances."
+        },
+        {
+          "question": "What software layer is installed on physical server hardware to enable the creation and management of Virtual Machines?",
+          "options": [
+            "A hypervisor",
+            "A container manager",
+            "A Docker Daemon",
+            "An orchestration engine"
+          ],
+          "correct": 0,
+          "explanation": "A hypervisor (e.g., VMware) is software installed on physical hardware that creates and manages Virtual Machines. Each VM runs its own Guest OS on top of the hypervisor. Docker is a container manager — a different, lighter virtualization layer that shares the host OS kernel instead of emulating a full machine."
+        },
+        {
+          "question": "A team must run 50 isolated application instances on a single physical server. Why are Docker containers a better choice than virtual machines in this scenario?",
+          "options": [
+            "Containers offer stronger isolation since each has a fully independent kernel and OS installation",
+            "Containers allow mixing Windows and Linux instances on one host without a compatibility layer",
+            "Containers provide better security because Docker verifies image integrity before each startup",
+            "Containers are megabytes in size and start in seconds, while VMs are gigabytes and take minutes"
+          ],
+          "correct": 3,
+          "explanation": "Containers share the host OS kernel and isolate only the application and its dependencies — making them megabytes in size vs gigabytes for VMs, and seconds to start vs minutes. Running 50 VM instances would require enormous memory pre-allocation. Option A is wrong: VMs have stronger isolation (full OS boundary), not containers."
+        },
+        {
+          "question": "A developer runs `docker build -t myapp .` then `docker run myapp`. Which sequence of Docker concepts correctly describes what happens?",
+          "options": [
+            "Registry → Image → Container: the base image is pulled from the registry first, then built locally",
+            "Dockerfile → Image → Container: `build` reads Dockerfile instructions to produce an Image; `run` starts a Container",
+            "Dockerfile → Registry → Container: images must be pushed to a registry before `docker run` can use them",
+            "Image → Dockerfile → Container: the existing image specifies how to regenerate the Dockerfile"
+          ],
+          "correct": 1,
+          "explanation": "The standard Docker workflow: a `Dockerfile` contains build instructions → `docker build` reads it and produces an `Image` (a packaged, executable artifact) → `docker run` creates a `Container` (a running instance of the image). Pushing to a Registry is optional and not required for local `docker run` commands."
+        },
+        {
+          "question": "A startup wants to deploy a custom web application without managing OS patches, runtime versions, or middleware upgrades. Which cloud service model matches this requirement?",
+          "options": [
+            "IaaS — provides virtual machines giving the team full control over the OS and runtime stack",
+            "SaaS — the vendor delivers fully managed software, leaving no infrastructure concerns for users",
+            "PaaS — the vendor manages OS and runtime so the team focuses solely on their app and data",
+            "On-premises — full hardware ownership gives complete control over every infrastructure component"
+          ],
+          "correct": 2,
+          "explanation": "PaaS (e.g., Azure App Service, Heroku) is the model where the vendor manages OS, runtime, and middleware — the developer only manages the application code and data. IaaS requires you to manage your own OS and runtime. SaaS is for consuming existing software products (like Google Docs), not deploying your own application."
+        },
+        {
+          "question": "A SaaS vendor needs to apply a security patch to all customers' environments simultaneously with a single deployment. Which architecture makes this possible?",
+          "options": [
+            "Multi-tenant — all customers share one instance, so a single deployment updates everyone",
+            "Multi-instance — each separate environment can be patched on its own independent schedule",
+            "IaaS — the vendor controls the underlying virtual machines and can patch hardware directly",
+            "PaaS — the platform automatically propagates security updates to all hosted applications"
+          ],
+          "correct": 0,
+          "explanation": "Multi-tenant runs all customers on one shared application instance — a single deployment immediately affects all tenants simultaneously. Multi-instance requires updating each customer's separate environment one by one, creating significant management overhead. This centralized update capability is one of multi-tenant's key advantages."
+        },
+        {
+          "question": "A security breach compromises the application database in a SaaS system. What is the worst-case impact difference between multi-tenant and multi-instance architectures?",
+          "options": [
+            "Multi-tenant breaches are easier to detect since all tenant audit logs share one centralized store",
+            "Multi-tenant systems are safer because tenant ID tags provide strong cryptographic data separation",
+            "Multi-tenant breaches expose only configuration records since per-tenant schemas block data leakage",
+            "A multi-tenant breach exposes every tenant's data at once; multi-instance limits it to one tenant"
+          ],
+          "correct": 3,
+          "explanation": "In multi-tenant SaaS, all customers share one database isolated only by TenantID (logical separation). A database breach can expose all tenants' data simultaneously. In multi-instance, each customer has a physically separate database — a breach would typically affect only that one tenant. This is the primary security tradeoff of multi-tenant architecture."
+        }
+      ],
+      "createdAt": "2026-05-31T17:46:24.625Z",
       "tags": [],
       "difficulty": null,
       "source": null,
