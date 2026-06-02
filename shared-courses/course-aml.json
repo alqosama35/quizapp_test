@@ -1,7 +1,7 @@
 {
   "type": "course-export",
   "version": 1,
-  "exportDate": "2026-05-30T12:50:27.251Z",
+  "exportDate": "2026-06-02T02:40:09.866Z",
   "course": {
     "id": "033cab92-bc1f-4047-ba27-4641eefb1e64",
     "name": "aml",
@@ -18,10 +18,10 @@
     },
     "stats": {
       "totalQuizzes": 10,
-      "totalAttempts": 0,
-      "averageScore": 0,
-      "bestScore": 0,
-      "totalMistakes": 0
+      "totalAttempts": 7,
+      "averageScore": 75,
+      "bestScore": 80,
+      "totalMistakes": 39
     }
   },
   "quizzes": [
@@ -278,9 +278,9 @@
       "difficulty": null,
       "source": null,
       "stats": {
-        "attempts": 0,
-        "bestScore": 0,
-        "lastAttempt": null
+        "attempts": 1,
+        "bestScore": 77,
+        "lastAttempt": "2026-06-01T09:25:31.599Z"
       }
     },
     {
@@ -492,9 +492,9 @@
       "difficulty": null,
       "source": null,
       "stats": {
-        "attempts": 0,
-        "bestScore": 0,
-        "lastAttempt": null
+        "attempts": 1,
+        "bestScore": 78,
+        "lastAttempt": "2026-05-30T14:57:04.785Z"
       }
     },
     {
@@ -761,444 +761,444 @@
       "name": "All",
       "jsonData": [
         {
-          "question": "Which ML paradigm trains on (x, y) labeled pairs to learn a predictive mapping f: x → y?",
+          "question": "Which of the following best defines 'inductive bias' in machine learning?",
           "options": [
-            "Supervised learning",
-            "Unsupervised learning",
-            "Reinforcement learning",
-            "Self-supervised learning"
-          ],
-          "correct": 0,
-          "explanation": "Supervised learning uses labeled (x, y) pairs to learn f: x → y. Unsupervised learning finds structure in unlabeled data; reinforcement learning maximizes reward through agent-environment interaction — no predefined labels in either case."
-        },
-        {
-          "question": "In the ML pipeline, which stage is most directly responsible for transforming raw input data into model-ready numerical representations?",
-          "options": [
-            "Model training and parameter optimization",
-            "Feature engineering and data preprocessing",
-            "Deployment and model serving to end users",
-            "Continuous monitoring and retraining in production"
-          ],
-          "correct": 1,
-          "explanation": "Feature engineering converts raw signals (text, pixels, timestamps) into informative numerical inputs the model can learn from. Training comes after features are prepared; deployment and monitoring come after training. Students commonly conflate feature engineering with model training."
-        },
-        {
-          "question": "In PAC learning, what does the confidence parameter δ represent?",
-          "options": [
-            "The maximum acceptable generalization error on examples drawn from D",
-            "The minimum number of training samples required to learn the concept",
-            "The failure probability that the learned hypothesis exceeds error ε",
-            "The total number of hypotheses in the hypothesis class H"
+            "The error rate observed on the training data used to fit the model parameters",
+            "The tendency of a model to assign higher weights to recently seen training examples during each optimization step",
+            "The assumptions a learning algorithm makes to prefer certain hypotheses over others when generalizing",
+            "The difference between training error and test error that reveals a model is overfitting"
           ],
           "correct": 2,
-          "explanation": "In PAC learning, δ is the failure probability — with probability at least 1−δ, the algorithm returns an ε-accurate hypothesis. ε is the error tolerance (option A). Sample complexity N depends on both ε and δ (option B). |H| is the hypothesis class size (option D)."
+          "explanation": "Inductive bias is the set of assumptions built into a learning algorithm that allow it to choose among the infinitely many hypotheses consistent with training data. Without it, no generalization is possible. Option A describes training error; B is a fabricated concept; D describes the overfitting gap, not inductive bias."
         },
         {
-          "question": "According to Sauer's Lemma, if a hypothesis class H has VC dimension d = 5, how does the growth function m_H(N) scale with N?",
+          "question": "Why is inductive bias necessary for a learning algorithm to generalize to unseen data?",
           "options": [
-            "Exponentially as 2^N, meaning H can shatter any set of N points",
-            "As a constant 2^d = 32, determined entirely by the VC dimension",
-            "As N^2, since Sauer's Lemma uses the square of the VC dimension as exponent",
-            "As N^d ≈ N^5, polynomial in N with degree equal to the VC dimension"
-          ],
-          "correct": 3,
-          "explanation": "Sauer's Lemma states m_H(N) ≤ Σ C(N,i) for i=0..d, which is bounded by N^d. For d=5, growth is polynomial O(N^5), not exponential — a critical distinction enabling PAC learnability. If m_H(N) = 2^N (option A), the class is infinite-VC and not PAC-learnable."
-        },
-        {
-          "question": "A model has low training error but persistently high test error across multiple experiments. What is the best diagnosis and corrective action?",
-          "options": [
-            "High variance — reduce complexity, add regularization, or gather more training data",
-            "High bias — the model is too simple and must be made more complex",
-            "Irreducible noise — the data has contradictory labels that no model can resolve",
-            "Data leakage — test set features were inadvertently included during training"
+            "Without assumptions, infinitely many hypotheses fit the same training data, so the algorithm cannot choose one to generalize with",
+            "Without inductive bias the algorithm converges to the global optimum too slowly during gradient descent",
+            "Inductive bias prevents the algorithm from evaluating too many feature combinations simultaneously, which would otherwise cause overfitting during training",
+            "It guarantees the training set is large enough to cover the full target data distribution"
           ],
           "correct": 0,
-          "explanation": "Low training error with high test error is the signature of high variance (overfitting). The model has memorized training noise. Fixes: regularization, more data, or reduced complexity. High bias (option B) would show both train and test errors being high and converging."
+          "explanation": "Training data alone cannot uniquely determine the true hypothesis — infinitely many functions can perfectly fit any finite set of training points. Inductive bias (prior assumptions about the form of solutions) breaks this tie and enables generalization. B confuses inductive bias with optimization convergence speed; C and D describe unrelated phenomena."
         },
         {
-          "question": "In Hoeffding's Inequality where N ≥ (1/2ε²)·ln(2|H|/δ), if ε is halved from 0.1 to 0.05, by what factor does required N change?",
+          "question": "Which learning algorithm uses the inductive bias of locality, assuming nearby data points belong to the same class?",
           "options": [
-            "N doubles, since ε appears linearly in the denominator of the formula",
-            "N quadruples, since (ε/2)² = ε²/4 and N ∝ 1/ε² means halving ε multiplies N by 4",
-            "N increases eightfold, since both the log term and the inverse-square term scale with ε",
-            "N stays the same, since ε is enclosed inside a logarithm and has little absolute effect"
+            "Naive Bayes, which assumes conditional feature independence given the class label",
+            "K-Nearest Neighbors, which classifies by majority vote among the closest training examples",
+            "Linear Regression, which assumes the output is a linear combination of inputs",
+            "K-Means, which assumes clusters are spherical and representable by a single centroid"
           ],
           "correct": 1,
-          "explanation": "N ∝ 1/ε². Halving ε to ε/2 means 1/(ε/2)² = 4/ε², so N quadruples. The log term ln(2|H|/δ) does not depend on ε. Option C incorrectly claims the log term scales with ε."
+          "explanation": "KNN's inductive bias is locality — it assigns a new point to the class most common among its k nearest neighbors, directly assuming spatial proximity implies class membership. Naive Bayes assumes conditional feature independence; Linear Regression assumes linearity; K-Means assumes spherical clusters."
         },
         {
-          "question": "What is the key conceptual difference between bias and variance as sources of prediction error?",
+          "question": "A decision tree achieves 2% training error but 35% test error. What is the correct diagnosis?",
           "options": [
-            "Bias is measured on training data while variance quantifies the train–test error gap across multiple splits",
-            "Adding more training data always reduces both bias and variance proportionally in any model",
-            "Bias reflects wrong model assumptions causing systematic errors; variance reflects sensitivity to training-data fluctuations",
-            "Bias applies only to linear models whereas variance only affects non-linear models with high capacity"
-          ],
-          "correct": 2,
-          "explanation": "Bias is a systematic error from the model's oversimplified assumptions (it consistently misses patterns). Variance is instability — small changes in training data cause large changes in predictions. Option A is wrong: bias appears in training error too. Option B is wrong: more data reduces variance, not bias."
-        },
-        {
-          "question": "The 'Curse of Dimensionality' primarily describes which phenomenon in machine learning?",
-          "options": [
-            "Decision trees overfit when the number of features exceeds the sample count in the training data",
-            "Kernel-based methods become computationally intractable as feature dimensionality increases",
-            "Gradient descent slows down as the number of model parameters grows with feature dimensions",
-            "Data becomes exponentially sparse as dimensions grow, making distance metrics increasingly unreliable"
+            "Underfitting, because training and test errors should be approximately equal in a well-fitted model",
+            "Underfitting, because a 2% training error is too low relative to the complexity of the task",
+            "Generalizing well, since achieving near-zero training error is the primary goal of supervised learning",
+            "Overfitting, because the model memorized training-set noise rather than learning the true underlying pattern"
           ],
           "correct": 3,
-          "explanation": "In d dimensions, the data volume grows as r^d, so points become exponentially sparse. Nearest-neighbor distances lose meaning because all points become equidistant. This is the core curse. Options A, B, C describe related but different issues (overfitting, kernel cost, optimization) that are not the definition."
+          "explanation": "The formal overfitting condition is error_true(h) > error_train(h). A 2% train error versus 35% test error is the textbook signature of overfitting — the model has memorized noise rather than the true pattern. Underfitting produces high error on BOTH sets. The goal in ML is never zero training error; it is low test error."
         },
         {
-          "question": "What is the key advantage of Wrapper methods over Filter methods for feature selection?",
+          "question": "A researcher tunes regularization strength by selecting the best value based on test-set performance. What is wrong with this approach?",
           "options": [
-            "Wrappers evaluate feature subsets using actual model performance, capturing feature interactions",
-            "Filters rank features individually using statistical scores, making them faster to compute than Wrappers",
-            "Wrappers run faster than Filters because they skip the cross-validation scoring step entirely",
-            "Filters capture feature interactions better than Wrappers by using mutual information jointly"
+            "Regularization strength is a fixed default and should never be tuned after the model is trained",
+            "The test set must contain at least 50% of all data before any hyperparameter tuning can proceed",
+            "Using the test set for tuning leaks information and produces an overly optimistic performance estimate",
+            "Tuning on the test set always causes underfitting because test labels are withheld from the optimization objective and cannot guide learning"
+          ],
+          "correct": 2,
+          "explanation": "The test set must remain completely unseen until the final evaluation. Selecting hyperparameters based on test-set performance is data leakage — the model selection process has effectively 'seen' the test data, so the reported accuracy overstates true generalization performance. The development (validation) set should be used for all hyperparameter decisions."
+        },
+        {
+          "question": "Which formula correctly computes Precision in binary classification?",
+          "options": [
+            "TP / (TP + FP)",
+            "TP / (TP + FN)",
+            "(TP + TN) / (TP + TN + FP + FN)",
+            "2 × Precision × Recall / (Precision + Recall)"
           ],
           "correct": 0,
-          "explanation": "Wrappers use model performance (e.g., cross-validation accuracy) as the selection criterion, so they implicitly capture interactions between features. Filter methods rank features individually using statistics like mutual information or chi-square, which is exactly why they miss interactions (option B correctly describes Filter, not Wrapper)."
+          "explanation": "Precision = TP/(TP+FP) — of all examples predicted positive, what fraction are truly positive. It measures the false-alarm rate from the prediction side. B is Recall (sensitivity); C is Accuracy; D is the F1-Measure."
         },
         {
-          "question": "A dataset has 500 highly correlated features, and you need to reduce dimensionality to 20 for visualization before training. Which method is most appropriate?",
+          "question": "A hospital deploys a model to screen patients for a rare but treatable disease. To minimize missed diagnoses, which metric should be prioritized?",
           "options": [
-            "Wrapper selection with forward search across 500-feature subsets using CV",
-            "PCA — reduces correlated features to orthogonal maximum-variance components",
-            "Filter method using chi-square statistics to rank each feature independently",
-            "LASSO regularization with an embedded selection criterion during model training"
-          ],
-          "correct": 1,
-          "explanation": "PCA is ideal for correlated features: it finds orthogonal directions of maximum variance, compressing 500 correlated dimensions to 20 uncorrelated components. Wrapper search over 500 features is computationally explosive (2^500 subsets). LASSO selects features but doesn't produce a fixed target dimensionality."
-        },
-        {
-          "question": "Which limitation does PCA have that filter-based feature selection methods do NOT share?",
-          "options": [
-            "PCA is computationally prohibitive and cannot scale to datasets with more than a few hundred features",
-            "PCA requires class labels and therefore cannot be used in unsupervised dimensionality reduction tasks",
-            "PCA produces components that are linear combinations of all original features, losing individual interpretability",
-            "PCA is highly sensitive to outliers whereas filter methods using mutual information are always outlier-robust"
-          ],
-          "correct": 2,
-          "explanation": "PCA components are weighted sums of ALL original features — you cannot say 'component 1 corresponds to feature X.' Filter methods select original features by name, preserving interpretability. PCA is actually unsupervised (option B is wrong); filter methods can also be sensitive to outliers in their statistics."
-        },
-        {
-          "question": "Before applying PCA to a dataset, which preprocessing step is mandatory for correct results?",
-          "options": [
-            "Apply feature selection to remove all irrelevant features before computing the covariance matrix",
-            "Apply PCA to the full dataset including the test set, then split into train and test afterward",
-            "One-hot encode all categorical features to ensure compatibility with eigendecomposition",
-            "Standardize all features to zero mean and unit variance before eigendecomposition"
+            "Precision, to ensure every patient flagged as positive is a confirmed true positive",
+            "Accuracy, since it provides the single most complete performance summary across all prediction outcomes",
+            "F1-score, to balance equally the cost of false positives and false negatives across the entire patient population",
+            "Recall, because a missed diagnosis (false negative) is far more costly than a false alarm (false positive)"
           ],
           "correct": 3,
-          "explanation": "PCA finds directions of maximum variance in the data. Without standardization, high-variance features (e.g., income in thousands vs. age in years) dominate the principal components regardless of their predictive value. Option B describes data leakage — PCA must be fit on training data only, then applied to test data."
+          "explanation": "Recall = TP/(TP+FN) measures the fraction of actually sick patients the model correctly identifies. In medical screening, a false negative (sick patient sent home) is far more dangerous than a false positive (healthy patient flagged for follow-up). High recall minimizes FN. Precision becomes primary when false positives are costly — as in spam detection."
         },
         {
-          "question": "In a binary classification confusion matrix, False Negatives (FN) represent which outcome?",
+          "question": "A COVID screening model always predicts 'Negative' for every patient. The test population is 99% healthy. Which statement is TRUE?",
           "options": [
-            "Actual positives the model incorrectly labeled as negative",
-            "Actual negatives the model incorrectly labeled as positive",
-            "Actual positives the model correctly identified as positive",
-            "Actual negatives the model correctly identified as negative"
+            "This model is clinically useful because 99% accuracy is excellent performance for a medical diagnostic tool",
+            "This model achieves 99% accuracy but zero recall, making it completely useless as a diagnostic tool",
+            "This model overfits because consistently predicting one class is a form of training-data memorization",
+            "This model underfits, but predicting a constant output at least avoids introducing false positives into the screening pipeline"
+          ],
+          "correct": 1,
+          "explanation": "The model trivially achieves 99% accuracy by always predicting negative — a classic demonstration of accuracy's failure on imbalanced data. Its Recall = TP/(TP+FN) = 0 since it never predicts positive, meaning it identifies exactly zero sick patients. This is neither overfitting nor underfitting; it is a metric-selection failure. Precision/Recall/F1 are the appropriate metrics here."
+        },
+        {
+          "question": "A classifier achieves Precision = 0.60 and Recall = 0.90. What is its F1-score?",
+          "options": [
+            "0.75, using the arithmetic mean: (0.60 + 0.90) / 2",
+            "0.54, using the product divided by the sum: (0.60 × 0.90) / (0.60 + 0.90)",
+            "0.72, using the harmonic mean: 2 × 0.60 × 0.90 / (0.60 + 0.90)",
+            "0.90, since F1 always defaults to the higher of Precision and Recall when they differ"
+          ],
+          "correct": 2,
+          "explanation": "F1 = 2×P×R/(P+R) = 2×0.60×0.90/(0.60+0.90) = 1.08/1.50 = 0.72. The harmonic mean is used rather than arithmetic because it penalizes extreme imbalance — a model with P=0 and R=1 gets F1=0, correctly indicating it is useless, while the arithmetic mean would wrongly give 0.50."
+        },
+        {
+          "question": "Compared to 10-fold cross-validation, Leave-One-Out CV (LOO CV) has which combination of properties?",
+          "options": [
+            "Lower bias and higher variance, at the cost of training N models instead of K models",
+            "Lower variance and higher bias, making it generally less preferred than standard K-fold CV",
+            "Higher bias because each training fold is smaller, while variance stays comparable to K-fold",
+            "Higher variance only when the dataset exhibits severe class imbalance across folds"
           ],
           "correct": 0,
-          "explanation": "FN = actual positives that the model failed to detect (predicted negative). These are 'missed' positive cases. FP (option B) are actual negatives wrongly flagged as positive. TP (option C) are correctly identified positives. TN (option D) are correctly rejected negatives."
+          "explanation": "LOO CV uses N−1 examples per training fold — nearly the full dataset — so bias is very low. However, training sets across iterations are nearly identical (differing by exactly one example), making individual error estimates highly correlated and producing high variance. It also requires training N models, making it expensive. K-fold (K=10) has slightly higher bias but lower variance at far lower cost."
         },
         {
-          "question": "A cancer screening model achieves 98% accuracy on a dataset where 98% of patients are healthy. A colleague calls this performance excellent. What is wrong with this reasoning?",
+          "question": "Leave-One-Out Cross-Validation is a special case of K-Fold CV where K equals which value?",
           "options": [
-            "Accuracy is unreliable only when the positive-class rate exceeds 50%, not when it is below 10%",
-            "A model always predicting 'healthy' also achieves 98% accuracy with 0% recall, so accuracy hides complete failure",
-            "The 98% accuracy figure is mathematically impossible to achieve on a 2% prevalence dataset without leakage",
-            "Precision should be the sole metric for medical screening since false positives are always more costly"
-          ],
-          "correct": 1,
-          "explanation": "When the negative class is 98% of data, a trivial model predicting 'healthy' for everyone achieves 98% accuracy while detecting zero diseases (recall = 0). Accuracy is misleading on imbalanced data regardless of which class is dominant (option A is wrong). For medical diagnosis, recall (sensitivity) is critical."
-        },
-        {
-          "question": "What is the key difference between the ROC curve and the Precision-Recall (PR) curve for classifier evaluation?",
-          "options": [
-            "The ROC curve requires a predefined classification threshold; the PR curve is threshold-independent",
-            "The ROC curve plots precision vs. recall while the PR curve plots TPR vs. FPR across thresholds",
-            "The PR curve is more informative for rare positive classes; ROC-AUC can be misleadingly optimistic on imbalanced data",
-            "ROC is valid only for binary classification while the PR curve generalizes to multi-class settings"
-          ],
-          "correct": 2,
-          "explanation": "When the positive class is rare (e.g., 1%), ROC-AUC can look high because the large true-negative pool keeps FPR low. The PR curve focuses on precision and recall — both directly tied to the positive class — and reveals poor detection performance. Option B has the axes reversed."
-        },
-        {
-          "question": "A spam filter has precision = 0.9 and recall = 0.4. Which statement correctly interprets these values?",
-          "options": [
-            "The filter correctly blocks 90% of all incoming emails in the user's inbox",
-            "60% of actual spam emails slip through the filter undetected and reach the inbox",
-            "90% of all actual spam emails in the dataset are correctly flagged by the filter",
-            "Of all flagged emails, 90% are truly spam; but only 40% of actual spam is caught"
+            "10, the most common practical default for most cross-validation experiments",
+            "The square root of N, balancing bias and variance for any dataset size",
+            "2, creating exactly one training partition and one validation partition per iteration",
+            "N, the total number of training examples so each single example serves once as the held-out test"
           ],
           "correct": 3,
-          "explanation": "Precision = TP/(TP+FP) = 0.9 means 90% of flagged emails are genuine spam. Recall = TP/(TP+FN) = 0.4 means only 40% of actual spam is found — 60% escapes. Option B is partially correct (60% missed) but incomplete. Option C confuses precision with recall."
+          "explanation": "LOO CV sets K = N, so the dataset splits into N folds of one example each. Each single example serves once as the held-out validation set while the remaining N−1 examples form the training set. This is the most data-efficient CV variant and is especially natural for kNN, which has no retraining cost between examples."
         },
         {
-          "question": "Why does k-fold cross-validation produce a more reliable generalization estimate than a single 80/20 train/test split?",
+          "question": "During debugging, a model achieves 42% training error and 44% test error — both considered too high. What is the most appropriate next step?",
           "options": [
-            "Averaging validation error over k different held-out subsets reduces the variance of the estimate",
-            "It uses more data for training overall since every sample appears in k-1 training folds",
-            "It automatically balances class distributions across folds, preventing evaluation bias",
-            "It prevents overfitting by forcing the model to train on smaller datasets in each round"
+            "Add regularization to reduce the gap between training and test error and prevent further overfitting",
+            "Increase model complexity or engineer more informative features to address the systematic underfitting",
+            "Collect more training data to allow the existing model architecture to memorize better representations",
+            "Decrease the learning rate so that gradient descent can converge more precisely on the training set"
+          ],
+          "correct": 1,
+          "explanation": "When training error ≈ test error and both are high, the model underfits — it is too simple to capture the true pattern. The fix is to increase complexity (e.g., deeper tree, more features) or engineer better features. If overfitting were the problem, training error would be much lower than test error. Regularization addresses overfitting, not underfitting."
+        },
+        {
+          "question": "Which of the following is the most fundamental limitation of the Bag-of-Words (BoW) text representation?",
+          "options": [
+            "It discards word order entirely, so 'dog bites man' and 'man bites dog' produce identical representations",
+            "It cannot represent any word that appears more than once within the same document",
+            "It requires a pre-trained language model to map each word into a fixed-dimensional numerical vector",
+            "It assigns equal weight to every word regardless of how often that word appears across the full corpus"
           ],
           "correct": 0,
-          "explanation": "A single split's error estimate depends heavily on which samples fell into the test set (high variance). k-fold averages k estimates, reducing this variance. While option B is true (more training data coverage), it is not the main reason for reliability — variance reduction is the core benefit."
+          "explanation": "BoW treats a document as an unordered multiset of words — word order and syntactic structure are completely discarded. Two sentences with opposite meanings produce identical BoW representations. B is false — BoW does count word frequencies; C describes word embeddings, not BoW; D is true for raw BoW counts but is addressed by TF-IDF weighting, not a limitation of BoW itself."
         },
         {
-          "question": "A learning curve shows training error ≈ 0.05 and validation error ≈ 0.50, and this large gap remains constant as training set size increases. What is the correct diagnosis and fix?",
+          "question": "A kNN model uses age (range 18–80) and salary (range $20,000–$200,000) as raw features without normalization. What is the likely outcome?",
           "options": [
-            "High bias — both errors should converge at a high level; add model complexity or more features",
-            "High variance — regularize the model, gather more data, or reduce model complexity to close the gap",
-            "Irreducible noise — the persistent gap proves the dataset has too many contradictory labels",
-            "Data leakage — test samples were inadvertently used in training, artificially lowering training error"
-          ],
-          "correct": 1,
-          "explanation": "A large and persistent gap between low training error and high validation error is the classic high-variance (overfitting) signature. The model memorizes training data. Fixes: regularization, simpler model, more training data. High bias (option A) would show both errors high and converging, not a large gap."
-        },
-        {
-          "question": "When is Leave-One-Out Cross Validation (LOOCV) preferred over standard 10-fold cross-validation?",
-          "options": [
-            "When the dataset is very large and full k-fold computation is prohibitively expensive",
-            "When the class distribution is severely imbalanced and per-fold stratification is needed",
-            "When the dataset is very small and using maximum training data per estimate is critical",
-            "When the model trains very quickly and parallel evaluation across all folds is trivial"
+            "The model fails to converge because kNN optimization requires all features to be on the same scale",
+            "Age and salary contribute equally since kNN computes ratios of feature values, not absolute differences",
+            "Salary dominates the Euclidean distance calculation, effectively making age irrelevant to classification",
+            "Both features get treated as categorical variables by the kNN algorithm, losing their numeric ordering"
           ],
           "correct": 2,
-          "explanation": "LOOCV uses N-1 samples for training in each fold, maximizing training data usage — ideal for small datasets where leaving out 10% for validation would significantly shrink the training set. However, LOOCV is very expensive for large N (option A gets this backwards) and has high variance in its estimates."
+          "explanation": "kNN computes Euclidean distance. A 1-year age difference contributes 1 to distance, while a $1,000 salary difference contributes 1,000. Large-scale features dominate the metric, making small-scale features negligible. Min-max or z-score normalization equalizes feature scales before distance computation. This is why normalization is mandatory before using any distance-based algorithm."
         },
         {
-          "question": "A learning curve shows both training error and validation error plateauing at a high level (e.g., 0.35) as more data is added. What will happen if you double the training set size?",
+          "question": "A dataset has 200 features, of which only 5 are genuinely predictive. Which algorithm is MOST harmed by the 195 irrelevant features without preprocessing?",
           "options": [
-            "Validation error drops significantly as the extra samples give the model more signal to learn from",
-            "Training error rises while validation error falls slightly, slowly closing the persistent gap",
-            "Both errors converge to a lower plateau since all models benefit from substantially more data",
-            "Almost no improvement — the bottleneck is insufficient model complexity, not insufficient data"
+            "Decision Trees, which must evaluate and assign information-gain scores to all 200 features at every node split regardless of relevance",
+            "Random Forest, because random feature subsets at each split are more likely to select irrelevant features than the 5 relevant ones",
+            "Gradient Boosting, because fitting residuals amplifies the noise contribution from irrelevant features over successive iterations",
+            "K-Nearest Neighbors, because all 200 features contribute equally to distance, drowning the 5 meaningful signals in noise"
           ],
           "correct": 3,
-          "explanation": "Both errors high and plateaued is the signature of high bias. The model cannot represent the true function regardless of how much data you add. The fix is a more complex model or better features — not more data. Adding more data helps variance problems but NOT bias problems (a key exam distinction)."
+          "explanation": "kNN classifies by Euclidean distance — every feature dimension contributes to the calculation equally. With 195 irrelevant features, distance is dominated by noise, making 'nearest neighbors' essentially random. Decision Trees can simply ignore irrelevant features by never selecting them for splitting. The course notes specifically: 'Irrelevant features distort distance measurements' for kNN."
         },
         {
-          "question": "In a trained SVM, which training points are called 'support vectors'?",
+          "question": "In a trained SVM, which data points are the sole determinants of the decision boundary's position?",
           "options": [
-            "Points that lie exactly on the margin boundaries H1 and H2",
-            "All training points located anywhere inside the margin region between H1 and H2",
-            "The class centroids computed to define the decision hyperplane normal vector w",
-            "Training points randomly selected to initialize the optimization at the start"
+            "All training points, each weighted by their signed distance from the separating hyperplane",
+            "Only the support vectors — the training points lying closest to the decision boundary",
+            "A randomly selected subset of training examples chosen at the start of each training epoch",
+            "Only the misclassified training points, which receive weight updates until correctly classified"
+          ],
+          "correct": 1,
+          "explanation": "Support vectors are the training examples lying closest to the decision hyperplane. They are the only points that define the SVM solution — moving a support vector changes the hyperplane, but moving any other training example has no effect whatsoever. This sparsity distinguishes SVM from neural networks, where all training points influence the final model."
+        },
+        {
+          "question": "In an SVM with weight vector magnitude ||w|| = 4, what is the total margin width?",
+          "options": [
+            "0.5, since margin = 2/||w|| = 2/4",
+            "4.0, since the margin width equals the magnitude of the weight vector directly",
+            "2.0, since margin = ||w||/2 = 4/2",
+            "8.0, since margin = 2 × ||w|| = 2 × 4"
           ],
           "correct": 0,
-          "explanation": "Support vectors are the training points satisfying y_i(w·x_i + b) = 1, lying exactly on the margin boundaries. They are the only points that determine the decision boundary — all other points could be removed and the SVM would be identical. There are typically very few support vectors relative to N."
+          "explanation": "The SVM margin formula is 2/||w||. Substituting ||w|| = 4 gives margin = 2/4 = 0.5. Maximizing the margin requires minimizing ||w|| — a larger weight vector means a narrower margin. Options B, C, and D each invert or misapply this relationship."
         },
         {
-          "question": "In a soft-margin SVM, what is the effect of setting the regularization parameter C to a very large value?",
+          "question": "What is the key advantage of SVM over neural networks from an optimization perspective?",
           "options": [
-            "Larger margin with more misclassifications allowed, producing a simpler and smoother boundary",
-            "Smaller margin with fewer misclassifications tolerated, increasing the risk of overfitting",
-            "The kernel automatically switches to linear as complexity is capped by the large C value",
-            "The dual variables α_i are driven to zero, effectively removing support vectors from the model"
-          ],
-          "correct": 1,
-          "explanation": "Large C penalizes misclassification heavily, forcing the SVM to shrink the margin to classify all points correctly. This reduces bias but increases variance (overfitting risk). Small C allows misclassifications in exchange for a wider, more generalizable margin. C controls the bias-variance tradeoff in SVM."
-        },
-        {
-          "question": "Why does the dual formulation of SVM enable the kernel trick, while the primal formulation does not?",
-          "options": [
-            "The dual has more free variables than the primal, allowing it to represent richer decision boundaries",
-            "The primal becomes unbounded when training data is linearly separable, making it numerically unstable for kernel use",
-            "The dual depends on training data only through dot products x_i·x_j, which can be replaced by K(x_i, x_j) without computing φ explicitly",
-            "The primal requires solving for w directly, and w cannot represent the kernel mapping in finite memory"
+            "SVM trains significantly faster because it uses simple gradient descent while neural networks require slower quadratic programming solvers with cubic time complexity",
+            "SVM can model non-linear boundaries natively while neural networks are fundamentally restricted to learning linear decision surfaces",
+            "SVM solves a convex optimization problem with a unique global optimum, completely avoiding the local-minima problem",
+            "SVM gives equal influence to every training point, producing a more stable solution than neural networks with random initialization"
           ],
           "correct": 2,
-          "explanation": "The dual objective max Σα_i − ½ Σα_iα_j y_i y_j x_i·x_j depends on data only via dot products. Replacing x_i·x_j with K(x_i, x_j) = φ(x_i)·φ(x_j) implicitly computes in a potentially infinite-dimensional feature space without ever computing φ. The primal requires w explicitly, which would be infinite-dimensional for RBF."
+          "explanation": "SVM's objective — minimize ||w||² subject to margin constraints — is a convex quadratic program with exactly one global optimum, which any valid optimizer is guaranteed to find. Neural networks have non-convex loss surfaces with many saddle points and local minima, making them sensitive to initialization. D is wrong: SVM uses ONLY support vectors, not all training points equally."
         },
         {
-          "question": "An RBF kernel SVM is trained with a very large γ value. What decision boundary behavior should you expect?",
+          "question": "What is the primary purpose of a kernel function in a Support Vector Machine?",
           "options": [
-            "Very smooth, wide boundary with low sensitivity to individual training points — underfitting risk",
-            "A near-linear boundary since large γ makes the RBF kernel converge toward the linear dot product",
-            "The model ignores all training points since large γ zeros out the RBF kernel similarity scores",
-            "A tight, complex boundary wrapping closely around individual training points — overfitting risk"
+            "To remove non-support-vector training examples from memory before the quadratic optimization begins",
+            "To normalize the weight vector ||w|| to unit length before computing the margin width",
+            "To speed up gradient descent by precomputing and caching all pairwise dot products in a lookup table",
+            "To implicitly map data into a higher-dimensional space where linear separation becomes possible"
           ],
           "correct": 3,
-          "explanation": "γ = 1/(2σ²) in the RBF kernel. Large γ means narrow Gaussians — each training point influences only a tiny region around itself. The decision boundary becomes highly complex, fitting training data tightly. This is high-variance/overfitting behavior. Small γ (wide Gaussians) gives smooth boundaries — underfitting risk."
+          "explanation": "Kernels compute similarities between data points as if they existed in an implicit high-dimensional feature space, without explicitly computing that costly mapping. Data that is not linearly separable in the original feature space may become separable in a higher dimension. This gives SVM the ability to learn non-linear decision boundaries at the cost of only a similarity function."
         },
         {
-          "question": "A dataset has 1,000 features and only 500 samples that appear to be linearly separable. Which SVM configuration is most appropriate?",
+          "question": "To maximize the SVM margin, which mathematical objective must be solved?",
           "options": [
-            "Linear kernel SVM — high dimensionality often implies linear separability, and dot products are computationally cheap",
-            "RBF kernel SVM with small γ — RBF should always be the default choice as a general-purpose kernel",
-            "Polynomial kernel of degree 10 to model complex high-dimensional feature interactions explicitly",
-            "Hard-margin SVM with no regularization, since data is stated to be linearly separable and slack is unnecessary"
+            "Maximize the count of support vectors to define the most robust decision boundary possible",
+            "Minimize ||w|| subject to the constraint y_i(x_i · w + b) >= 1 for all training points",
+            "Minimize total training error on both support-vector and non-support-vector examples jointly",
+            "Maximize the learning rate η used in the SVM stochastic gradient update rule at each step"
+          ],
+          "correct": 1,
+          "explanation": "Margin = 2/||w||. To maximize the margin, we minimize ||w|| (equivalently ||w||²) subject to the constraint that every point is correctly classified outside the margin: y_i(x_i·w + b) >= 1. This single inequality combines both class conditions. Minimizing training error is a different objective that does not guarantee a maximum-margin solution."
+        },
+        {
+          "question": "A bagged ensemble achieves 75% training accuracy and 73% test accuracy — both well below target performance. Which technique most directly addresses this failure?",
+          "options": [
+            "Boosting (e.g., XGBoost), which sequentially corrects the high bias that Bagging cannot reduce",
+            "Increasing the number of bootstrap samples B from 100 to 10,000 to reduce prediction variance further",
+            "Applying feature normalization, since individual decision trees inside Bagging are sensitive to raw feature scale",
+            "Switching to Leave-One-Out CV to get a more reliable hyperparameter estimate for the ensemble"
           ],
           "correct": 0,
-          "explanation": "When N << d (500 samples, 1000 features), data is typically linearly separable in high-dimensional spaces and a linear kernel suffices. RBF adds unnecessary complexity in this regime. Hard-margin SVM (option D) should not be used in practice — virtually all real data contains some noise, making soft-margin preferable even with apparent separability."
+          "explanation": "When both training and test accuracy are similarly low, the problem is high bias (underfitting). Bagging reduces variance but does NOT reduce bias — the individual trees and the ensemble systematically underfit. Boosting addresses bias by training each new model to correct the previous ensemble's errors, placing higher weight on misclassified examples. B, C, and D do not address systematic underfitting."
         },
         {
-          "question": "Why does Bagging reduce variance but NOT bias in an ensemble?",
+          "question": "What distinguishes Random Forest from plain Bagging and makes it produce less correlated, better-performing trees?",
           "options": [
-            "Bagging applies L2 regularization to each base learner, shrinking coefficients without changing model assumptions",
-            "Averaging many models trained on different bootstrap samples smooths random fluctuations without altering systematic errors",
-            "Bagging trains each learner on a random subset of features, which corrects wrong feature-selection assumptions",
-            "Bagging selects only the best model from each bootstrap round, which naturally concentrates on low-variance predictions"
-          ],
-          "correct": 1,
-          "explanation": "Averaging over B bootstrap models converges to E[h(x)] — the expected model. This cancels out the random fluctuations (variance) of individual models but preserves the average systematic error (bias) of the base learner. If the base learner has high bias, the average also has high bias — Bagging cannot fix this."
-        },
-        {
-          "question": "In AdaBoost, a weak learner h_t achieves weighted error ε_t = 0.5. What is the value of its model weight α_t = 0.5·ln((1−ε_t)/ε_t)?",
-          "options": [
-            "α_t → very large, giving this model dominant influence in the ensemble",
-            "α_t = 1.0, giving this model the same weight as a perfect learner",
-            "α_t = 0, so this model contributes nothing to the final ensemble prediction",
-            "α_t → negative, so this model's predictions are inverted in the final vote"
-          ],
-          "correct": 2,
-          "explanation": "α_t = 0.5·ln((1−0.5)/0.5) = 0.5·ln(1) = 0. A learner performing at chance (50% weighted error) is as useful as random guessing and contributes zero weight. AdaBoost requires ε_t < 0.5 (better than chance) for α_t > 0. If ε_t > 0.5, α_t is negative (option D) — but ε_t = 0.5 exactly gives α_t = 0."
-        },
-        {
-          "question": "Random Forest adds an extra randomization step beyond standard Bagging that further reduces tree correlation. What is this mechanism?",
-          "options": [
-            "Each tree is trained on a randomly drawn subset of the training labels rather than all available labels",
-            "Bootstrap sampling is replaced by random subsampling without replacement for each tree in the forest",
-            "Each tree's maximum depth is randomly sampled from a preset distribution at training time",
-            "At each node split, only a random subset of √p features (classification) or p/3 features (regression) is evaluated"
+            "Random Forest grows fully deeper trees compared to the shallow, pruned trees used inside Bagging ensembles",
+            "Random Forest applies gradient updates to retrain the individual trees that perform worst on held-out validation data",
+            "Random Forest augments each bootstrap sample with synthetic data points to introduce additional diversity",
+            "Random Forest randomly restricts the feature subset at each split, preventing dominant features from always being selected"
           ],
           "correct": 3,
-          "explanation": "Random Forest decorrelates trees by restricting each split to a random subset of √p features. This prevents all trees from splitting on the same dominant features, reducing inter-tree correlation and achieving greater variance reduction than Bagging alone. Options A, B, and C are not part of the Random Forest algorithm."
+          "explanation": "In Bagging, all trees use the full feature set — dominant features (highest information gain) are always chosen first, making trees correlated. Random Forest breaks this by selecting a random subset of k < m features at each split. Different trees focus on different features, reducing inter-tree correlation. Less correlated trees cancel each other's errors more effectively when aggregated, reducing ensemble variance."
         },
         {
-          "question": "A dataset has 20% mislabeled examples. You must choose between AdaBoost and Random Forest. Which is more appropriate?",
+          "question": "A classifier consistently fails on a hard subset of examples even after bagging 500 trees. Which technique most directly targets this systematic failure?",
           "options": [
-            "Random Forest — AdaBoost upweights misclassified points each round, amplifying label noise over iterations",
-            "AdaBoost — its sequential design iteratively identifies and corrects mislabeled samples automatically",
-            "Both perform equally on noisy data since both use decision trees with the same noise sensitivity",
-            "AdaBoost — later boosting rounds override the corrupted predictions from the noisy earlier rounds"
+            "Adding more bootstrap samples to give each tree a higher probability of seeing the hard examples during training",
+            "Applying Leave-One-Out CV instead of K-fold to better tune the ensemble's hyperparameters on limited data",
+            "Using Boosting (AdaBoost or XGBoost), which increases weights on consistently misclassified examples each round",
+            "Switching to Stacking with multiple diverse base models to average out the systematic prediction error"
+          ],
+          "correct": 2,
+          "explanation": "Boosting directly targets systematic misclassification: after each iteration, it increases the weight of misclassified examples so the next model focuses on the hard cases. This is exactly the scenario described — a consistent failure pattern that Bagging (which only adds data diversity) cannot fix, because all 500 trees share the same systematic bias on those examples."
+        },
+        {
+          "question": "In Gradient Boosting, what does each new tree added to the ensemble learn to predict?",
+          "options": [
+            "The full target label y for the entire training set, used as a warm-start initialization for the existing ensemble",
+            "The residual errors (negative gradient of the loss function) left uncorrected by the current ensemble",
+            "A random subset of the target labels sampled to introduce prediction diversity among successive trees",
+            "A weighted average of all previous trees' output probabilities computed on the validation fold"
+          ],
+          "correct": 1,
+          "explanation": "Each tree in Gradient Boosting fits the residuals — the prediction errors left by the current ensemble. Mathematically, this is gradient descent in function space: h_2 is trained on the negative gradient of the loss evaluated at F_1(x). The update F_2(x) = F_1(x) + η·h_2(x) incrementally corrects the ensemble's errors. This is what reduces bias, unlike AdaBoost which reweights training examples."
+        },
+        {
+          "question": "In Stacking (Stacked Generalization), what data is used as input features when training the meta-model?",
+          "options": [
+            "The out-of-fold predictions made by the base models on held-out validation data",
+            "The raw original feature vectors passed directly from the training set to the meta-model",
+            "The averaged predicted probabilities from all base models computed on the full training set",
+            "The residuals from the lowest-performing base model computed on the complete training data"
           ],
           "correct": 0,
-          "explanation": "AdaBoost is particularly sensitive to label noise: misclassified examples (including mislabeled ones) receive exponentially increasing weights, causing the ensemble to focus on and memorize noise. Random Forest, using independent bootstrap samples and majority voting, dilutes the impact of any individual noisy sample."
+          "explanation": "Stacking trains the meta-model on the base models' out-of-fold (hold-out) predictions to prevent leakage. Process: (1) split data → train base models → (2) have base models predict on the held-out portion → (3) train a meta-model (e.g., Logistic Regression) on those predictions as features. The meta-model learns how to best combine the diverse base model outputs."
         },
         {
-          "question": "Gradient Boosting generalizes AdaBoost by fitting each new model to the negative gradient of the loss. What key practical advantage does this provide?",
+          "question": "A streaming service launches a new film that has received no user ratings yet. Which recommendation approach can still suggest this film, and why?",
           "options": [
-            "Gradient Boosting converges faster because negative gradient residuals are always smaller than AdaBoost errors",
-            "It supports arbitrary differentiable loss functions, enabling regression, ranking, and custom objectives beyond classification",
-            "It eliminates the need for a learning rate hyperparameter since gradient steps automatically self-normalize",
-            "It gives equal weight to all training samples since gradient signals treat every data point identically"
-          ],
-          "correct": 1,
-          "explanation": "AdaBoost is tied to exponential loss and binary classification. By framing boosting as gradient descent on a loss function, Gradient Boosting works with any differentiable loss — squared error for regression, cross-entropy, ranking losses — making it a general-purpose framework. XGBoost and LightGBM are implementations of this idea."
-        },
-        {
-          "question": "In Collaborative Filtering, what is the 'cold start problem'?",
-          "options": [
-            "System latency spikes when too many users send recommendation requests at the same time",
-            "Initial model training takes extremely long when the user-item interaction matrix is very sparse",
-            "New users or new items have no interaction history, so the system cannot produce recommendations",
-            "The system over-recommends popular items to all users regardless of individual preferences"
-          ],
-          "correct": 2,
-          "explanation": "CF relies on patterns in the user-item interaction matrix. A new user has no ratings history → no similar users can be found. A new item has no ratings → it cannot be recommended. This cold-start problem is CF's fundamental limitation; content-based filtering handles new-item cold start using metadata."
-        },
-        {
-          "question": "Content-based filtering resolves the cold-start problem for new items but NOT for new users. Why?",
-          "options": [
-            "Content-based systems require user interaction data to compute the item feature vectors used for similarity search",
-            "New items are absent from the similarity index until enough users interact with them in the early launch period",
-            "Item metadata is derived from user reviews, so items without reviews lack the feature vectors needed for comparison",
-            "New items ship with metadata enabling feature-based matching, but new users have no rating history to build a preference profile against"
+            "User-Based Collaborative Filtering, because shared latent factors from similar users can partially reconstruct the unrated item's hidden representation vector",
+            "Memory-Based CF, because cosine similarity between raw rating vectors can match the unrated film to semantically similar content",
+            "Hybrid RS with implicit feedback, because behavioral signals like watch time eliminate the cold-start constraint for all new items",
+            "Content-Based Filtering, because item metadata such as genre, cast, and keywords exists before any user ratings are collected"
           ],
           "correct": 3,
-          "explanation": "Content-based filtering matches items to a user preference profile built from past liked items. New items have metadata (genre, tags, description) available at launch — the system can find similar items immediately. New users have no liked-items history, so no preference profile can be constructed. Cold start remains for users."
+          "explanation": "The new-item cold-start problem is a fundamental limitation of Collaborative Filtering: without ratings, the item has no representation in the user-item matrix and cannot be matched to users. Content-Based Filtering bypasses this entirely — as long as item metadata (genre, director, cast) is known, the item can be immediately compared to users' historical preferences and recommended."
         },
         {
-          "question": "A term appears in 100 out of 10,000 documents in a corpus. What is its Inverse Document Frequency (IDF) score?",
+          "question": "Why does TF-IDF assign a score near zero to the word 'the' even in documents where it appears many times?",
           "options": [
-            "log(10000 / 100) = log(100) ≈ 2.0, indicating this term is highly distinctive",
-            "log(100 / 10000) ≈ −2.0, a negative value meaning this term is heavily penalized",
-            "100 / 10000 = 0.01, the raw document-frequency ratio without logarithmic scaling",
-            "log(10000 × 100) ≈ 6.0, since IDF multiplies total documents by the document frequency"
+            "TF-IDF caps term frequencies at 1 to prevent any single word from dominating the document vector",
+            "The TF component is zero for stopwords because they are filtered out before IDF is ever computed",
+            "The IDF component approaches log(1) = 0 when a word appears in nearly every document, collapsing the full product to zero",
+            "TF-IDF applies global min-max normalization that compresses all high-frequency words proportionally toward zero"
+          ],
+          "correct": 2,
+          "explanation": "IDF(t) = log(N / df), where df is the number of documents containing term t. For 'the', df ≈ N, so IDF = log(N/N) = log(1) = 0. The TF-IDF product = TF × IDF = 0, regardless of how often 'the' appears in a specific document. Only words rare across the corpus (high IDF) but frequent within a specific document (high TF) receive high TF-IDF scores."
+        },
+        {
+          "question": "Why is implicit feedback more commonly used than explicit feedback in modern recommender systems?",
+          "options": [
+            "Implicit feedback is more accurate than explicit ratings because users systematically lie or inflate star ratings",
+            "Implicit feedback is collected passively and abundantly, while explicit ratings are sparse since users rarely rate items",
+            "Explicit ratings are legally restricted in many countries due to user privacy and data protection regulations",
+            "Implicit signals can be mapped directly to a 1–5 star scale using a simple confidence-weighting formula"
+          ],
+          "correct": 1,
+          "explanation": "The core problem with explicit feedback is sparsity — most users never rate items even after interacting with them. Only a tiny fraction of user-item interactions result in a star rating. Implicit signals (watch time, clicks, purchases) are collected automatically and passively, producing dense interaction data. The trade-off is noise: watching a video does not necessarily mean the user liked it."
+        },
+        {
+          "question": "In Probabilistic Matrix Factorization (PMF), how is the predicted rating r̂_ui computed?",
+          "options": [
+            "As the dot product of the user latent vector p_u and the item latent vector q_i: r̂_ui = q_i^T * p_u",
+            "As the sum of the global mean rating μ plus the user bias b_u plus the item bias b_i",
+            "As the cosine similarity between the user's historical preference vector and the item's feature vector",
+            "As the weighted average of ratings from the k most similar users, weighted by cosine similarity scores"
           ],
           "correct": 0,
-          "explanation": "IDF(t, D) = log(N / df_t) = log(10000 / 100) = log(100) ≈ 2.0. A term appearing in only 1% of documents is highly distinctive — high IDF rewards rare, informative terms. A term in all 10,000 documents would have IDF = log(1) = 0, effectively muting it. Option B inverts the fraction, giving a negative value which is not how IDF is defined."
+          "explanation": "PMF predicts r̂_ui = q_i^T · p_u — the dot product of the user latent vector p_u (encoding hidden preferences) and item latent vector q_i (encoding hidden characteristics). A high dot product signals strong alignment between user preferences and item attributes. B describes SVD which adds bias terms on top of PMF; C is content-based filtering; D is memory-based CF."
         },
         {
-          "question": "In Probabilistic Matrix Factorization (PMF), what do the k latent dimensions in user matrix P and item matrix Q represent?",
+          "question": "The SVD model extends PMF with the formula r̂_ui = μ + b_u + b_i + q_i^T p_u. What does the addition of b_u and b_i capture that PMF alone cannot model?",
           "options": [
-            "The k most popular items in the catalog, used as reference anchors for computing user affinities",
-            "Hidden abstract factors — such as genre preference or production style — not directly observable in raw data",
-            "The k principal components from PCA applied directly to the raw user-item rating matrix rows",
-            "The k nearest-neighbor users whose historical ratings are weighted to produce each prediction"
-          ],
-          "correct": 1,
-          "explanation": "Latent factors are not pre-defined features — they emerge from the factorization and capture abstract patterns (a user's preference for 'action films' or 'indie music') that are not labeled in the data. PCA (option C) and k-NN (option D) describe different methods; the popular-item anchor idea (option A) is not part of MF."
-        },
-        {
-          "question": "A production recommender system serves millions of users and items. What is the primary reason to prefer Model-Based CF (matrix factorization) over Memory-Based CF?",
-          "options": [
-            "Memory-based CF cannot incorporate implicit feedback signals like clicks or watch time at all",
-            "Memory-based CF requires explicit star ratings, which are never available at production scale",
-            "Memory-based CF has O(N·M) inference cost; model-based CF amortizes this via latent factor compression",
-            "Memory-based CF cannot recommend new items because it stores raw interaction counts without generalizing"
-          ],
-          "correct": 2,
-          "explanation": "Memory-based CF must compare a query user against all N users or all M items at inference time — O(N·M) cost is infeasible at scale. Matrix factorization compresses users and items to k-dimensional vectors; inference is a single dot product O(k). Options A and B overstate limitations; memory-based CF can process implicit data."
-        },
-        {
-          "question": "In a Markov Decision Process (S, A, R, P, γ), what does the component P represent?",
-          "options": [
-            "The policy function π mapping each state to the action the agent should select",
-            "The penalty matrix of negative rewards assigned to undesirable state transitions",
-            "The priority ordering over states used by the agent for greedy value-based action selection",
-            "The transition probability distribution P(s' | s, a) over next states given current state and action"
+            "How a user's preferences gradually drift over time as their tastes and interests slowly evolve",
+            "The number of latent factor dimensions needed to represent a user's preference profile at adequate resolution",
+            "A recency confidence weight that discounts ratings submitted long ago more than those from recent interactions",
+            "Systematic rating tendencies: some users always rate higher or lower than average (b_u), and some items are consistently over- or under-rated (b_i)"
           ],
           "correct": 3,
-          "explanation": "P is the environment's transition dynamics: P(s' | s, a) gives the probability of moving to state s' when taking action a in state s. The policy π (option A) is what the agent learns. The reward function R (option B partially describes) is a separate component. Greedy selection is a policy execution detail, not a component."
+          "explanation": "SVD's formula adds three bias terms to PMF's q_i^T p_u. The global mean μ, user bias b_u (a harsh critic always rates 1 star below average), and item bias b_i (an unpopular genre is systematically rated lower) capture rating variance that is orthogonal to user-item preference alignment. These bias terms alone explain a large fraction of the total rating variance in real datasets."
         },
         {
-          "question": "The Bellman Equation states V(s) = r_{s+1} + γ·V(s+1). Why is this recursive structure useful for solving RL problems?",
+          "question": "In the MDP tuple (S, A, R, P, γ), which component defines the probability of reaching state s' when taking action a from state s?",
           "options": [
-            "It enables iterative computation by linking each state's value to the next state's value, allowing V to be solved by dynamic programming",
-            "It directly computes the optimal policy π* without needing transition probabilities P(s'|s,a)",
-            "It averages Q-values over all possible actions weighted by their probability under the current policy",
-            "It eliminates the discount factor γ from optimization by converting infinite sums to finite closed-form expressions"
+            "R — the reward distribution giving expected feedback for each (state, action) pair",
+            "P — the transition probability function P(s' | s, a)",
+            "S — the complete set of all possible environmental states the agent can occupy",
+            "γ — the discount factor controlling how much future rewards are valued relative to immediate rewards"
+          ],
+          "correct": 1,
+          "explanation": "P is the transition probability: P(s' | s, a) gives the probability of landing in state s' after taking action a from state s. This models stochastic environment dynamics — for example, a robot moving North might slip to an adjacent cell with 10% probability. R gives rewards; S is the state space; γ controls temporal discounting."
+        },
+        {
+          "question": "The Markov Property states that future states depend only on the current state and action. What does this imply about how an RL agent should make decisions?",
+          "options": [
+            "The agent only needs the current state to make an optimal decision — the full history of past states is unnecessary",
+            "The agent must maintain a growing memory buffer of all past states to accurately predict future transition probabilities",
+            "The agent's optimal policy must be updated after every time step as the sequence of past states accumulates",
+            "The agent cannot learn from experience because each state is treated as independent of every prior state"
           ],
           "correct": 0,
-          "explanation": "The Bellman Equation decomposes the value of state s into immediate reward r_{s+1} plus discounted future value γV(s+1). This recursive structure lets us compute all state values iteratively (dynamic programming) without enumerating all possible futures. Q-learning uses this backbone as its update target."
+          "explanation": "The Markov Property means state s_t contains all information needed for optimal decisions — no history is required. This is what makes value functions tractable: the agent evaluates Q(s, a), not the full sequence (s_0, a_0, ..., s_t, a_t). Without the Markov Property, optimal decision-making would require tracking exponentially growing history sequences."
         },
         {
-          "question": "In the Q-learning update Q(s,a) ← Q(s,a) + α[r + γ·max_a' Q(s',a') − Q(s,a)], what does the target r + γ·max_a' Q(s',a') represent?",
+          "question": "With α=0.1, γ=0.9, current Q(s,a)=0, reward r=−1, and max Q(s',a')=8, what is the updated Q(s,a) after one Q-learning step?",
           "options": [
-            "The average Q-value over all possible next actions weighted by the current policy probabilities",
-            "The estimated total discounted return if the agent greedily takes the best action from s' onward",
-            "Only the immediate reward r; the γ term discounts future rewards close to zero when γ is small",
-            "A penalty term discouraging the agent from revisiting previously explored state-action pairs"
-          ],
-          "correct": 1,
-          "explanation": "r + γ·max_a' Q(s',a') is the bootstrapped estimate of the true Q-value: immediate reward r plus the discounted best possible return from the next state s'. This is the 'target' the current Q(s,a) is updated toward. Option A describes the on-policy update (SARSA), not the off-policy greedy target used in Q-learning."
-        },
-        {
-          "question": "An RL agent's discount factor is set to γ = 0. What behavior will result?",
-          "options": [
-            "The agent ignores all rewards and explores randomly since no learning signal propagates through the Q-table",
-            "The agent learns the optimal long-term policy by treating all current and future rewards as equally important",
-            "The agent acts purely myopically, maximizing only the immediate next reward and ignoring all future consequences",
-            "Q-values converge in a single step since zero discounting simplifies the Bellman equation to V(s) = r_s"
-          ],
-          "correct": 2,
-          "explanation": "With γ = 0, the discounted return G = r_1 + 0·r_2 + 0²·r_3 + … = r_1. The agent cares only about the immediate reward, making it myopic. It will take the action with the highest immediate reward even if it leads to very poor long-term outcomes. Option D is partially true (Bellman simplifies) but convergence in 'one step' is incorrect — the agent still needs many episodes."
-        },
-        {
-          "question": "A practitioner fits PCA on the entire dataset (train + test combined), then splits it for model evaluation. What problem does this introduce?",
-          "options": [
-            "Underfitting — PCA discards variance components that the model relies on to distinguish the classes",
-            "Label leakage — PCA incorporates class labels from the test set into the principal component directions",
-            "Computational inefficiency — fitting PCA on the full dataset is more expensive than on training data alone",
-            "Data leakage — test set statistics contaminate the PCA transformation applied to training data, inflating evaluation scores"
+            "−0.10, because only the immediate reward r enters the one-step TD update and all future Q-values are ignored entirely",
+            "7.00, computed as the Bellman target r + max Q(s',a') = −1 + 8 = 7 applied directly without a learning rate",
+            "5.58, obtained by applying the full multi-step discounted return summed across all remaining episode steps",
+            "0.62, computed as Q + α[r + γ·max Q(s',a') − Q] = 0 + 0.1 × [−1 + 0.9×8 − 0] = 0.1 × 6.2"
           ],
           "correct": 3,
-          "explanation": "PCA computes eigenvectors from the covariance matrix of whatever data it sees. Fitting on train + test means test-set variance influences the transformation used to preprocess training data. The model is indirectly 'seeing' test distribution information during training, producing optimistically biased evaluation results. PCA is unsupervised so it uses no labels (option B is wrong)."
+          "explanation": "Q-Learning update: Q(s,a) ← Q(s,a) + α[r + γ·max_a' Q(s',a') − Q(s,a)]. Substituting: 0 + 0.1×[−1 + 0.9×8 − 0] = 0.1×[−1 + 7.2] = 0.1×6.2 = 0.62. A ignores future rewards; B ignores the discount factor γ and the learning rate α; C applies full-episode discounting instead of the one-step TD update."
+        },
+        {
+          "question": "An RL agent uses a discount factor of γ = 0.01. What is the most likely consequence for the agent's behavior?",
+          "options": [
+            "The agent plans farther into the future because a small γ reduces the penalization of distant rewards",
+            "The agent learns very slowly because a near-zero γ causes Q-value updates to be negligibly small",
+            "The agent acts myopically, optimizing only for immediate rewards while ignoring long-term consequences",
+            "The agent explores more aggressively since a low γ lowers the exploitation pressure from existing Q-values"
+          ],
+          "correct": 2,
+          "explanation": "γ controls how much future rewards are discounted. With γ ≈ 0, rewards more than a few steps ahead are multiplied by near-zero factors and contribute essentially nothing to the total return. The agent becomes purely myopic — only the immediate reward r_t matters. This fails for sequential tasks with delayed rewards (chess, robotics) but may suit purely reactive, single-step problems."
+        },
+        {
+          "question": "In ε-greedy Q-learning, ε starts at 0.9 and decays to 0.05 over training. What is the main purpose of starting with a high ε?",
+          "options": [
+            "High ε ensures faster convergence by committing early to the best-known action in the Q-table",
+            "High ε forces the agent to explore many state-action pairs before Q-values have learned reliable estimates",
+            "High ε reduces Q-value variance by averaging across many random actions sampled in each visited state",
+            "High ε prevents the learning rate α from growing too large and destabilizing updates in the early training phase"
+          ],
+          "correct": 1,
+          "explanation": "ε-greedy selects a random action with probability ε and the greedy best-known action with probability 1−ε. Early in training, all Q-values are near zero (uninitialized), so the 'best known' action is essentially arbitrary. High ε forces deliberate exploration of the state space to discover which actions lead to rewards. As training progresses, ε decays — the agent shifts from exploration to exploiting well-learned Q-values."
+        },
+        {
+          "question": "What is the most fundamental difference between Reinforcement Learning and Supervised Learning?",
+          "options": [
+            "RL relies exclusively on neural networks for function approximation, while Supervised Learning uses classical statistical models",
+            "RL requires manually labeled training data, while Supervised Learning infers labels from environment interactions",
+            "RL receives delayed reward signals from environment interactions rather than immediate ground-truth labels for each example",
+            "RL handles only discrete action spaces, while Supervised Learning supports both discrete and continuous output prediction"
+          ],
+          "correct": 2,
+          "explanation": "In Supervised Learning, each example (x, y) provides an immediate correct label, enabling direct error computation. In RL, the agent receives a reward signal that may be delayed by many steps — a chess agent only gets +1 when the game ends. The agent must solve credit assignment: which earlier actions caused the eventual reward? This fundamental difference drives the need for value functions, policies, and temporal difference learning."
+        },
+        {
+          "question": "When evaluating an ML paper's experimental section, which characteristic is the strongest red flag against trusting its claims?",
+          "options": [
+            "The paper compares only against weak or outdated baselines rather than current state-of-the-art methods",
+            "The paper uses a dedicated validation set for hyperparameter tuning rather than the held-out test set",
+            "The paper includes a discussion section that explicitly acknowledges the method's limitations and failure cases",
+            "The paper was submitted to a conference venue rather than published in a peer-reviewed archival journal"
+          ],
+          "correct": 0,
+          "explanation": "The absence of strong, up-to-date baselines is the primary red flag in any ML paper. A new method appears impressive when compared against weak competitors, but may be no better than current state-of-the-art. The course warns explicitly: 'If the paper doesn't compare against strong baselines, its results may not be reliable.' B describes correct methodology; C shows healthy transparency; D reflects venue preference, not result validity."
+        },
+        {
+          "question": "A paper formally proves that a proposed learning algorithm converges with high probability under specified distributional assumptions. What category of ML research paper is this?",
+          "options": [
+            "Application-based, which applies existing methods to a new domain and measures empirical performance gains",
+            "Experimental, which proposes and empirically tests a new method against baseline models on standard benchmarks",
+            "Survey, which reviews and systematically classifies convergence results across the existing published literature",
+            "Theoretical, which proves mathematical properties of an algorithm given formally stated conditions and assumptions"
+          ],
+          "correct": 3,
+          "explanation": "Theoretical papers prove mathematical properties — convergence guarantees, generalization bounds, sample complexity — using rigorous formal proofs. They focus on theorem statements and their required assumptions. Application-based papers apply existing methods to new domains; Experimental papers propose and test methods empirically on benchmarks; Survey papers review and classify prior literature."
+        },
+        {
+          "question": "According to the 6-step ML paper reading process, what is the recommended first action when encountering a new paper?",
+          "options": [
+            "Read the Methodology section fully to understand the technical contribution before judging the paper's relevance",
+            "Skim the Title, Abstract, key figures and tables, and the Conclusion to assess relevance before investing in a deep read",
+            "Begin with the References section to identify which prior works the paper's contribution is built upon",
+            "Read the Introduction and Related Work together to immediately establish the full problem context and novelty"
+          ],
+          "correct": 1,
+          "explanation": "Step 1 is a relevance skim: Title → Abstract → Figures/Tables → Conclusion. The goal is to quickly decide whether the paper warrants a deep read before investing significant time. Only if the paper appears relevant do you proceed to Steps 2–6 (Introduction, Related Work, Methodology, Experiments, Discussion/Conclusion). Starting with Methodology wastes time if the paper later proves irrelevant to your work."
+        },
+        {
+          "question": "Team A spends a week engineering features and trains logistic regression. Team B uses a deep neural network on raw features without any feature engineering. Which outcome is most consistent with the course's principle on feature quality?",
+          "options": [
+            "Team B wins because deep neural networks are specifically designed to automatically learn optimal feature representations",
+            "Team B wins because more complex models always outperform simpler models on any sufficiently large dataset",
+            "Team A wins because well-engineered features can contribute more to model performance than the choice of algorithm itself",
+            "The outcome depends entirely on dataset size, with Team B winning only above a specific data volume threshold"
+          ],
+          "correct": 2,
+          "explanation": "The course states explicitly: 'Feature design can have bigger impact on performance than the choice of learning algorithm.' Well-engineered features that capture the true structure of the problem can make logistic regression outperform a deep neural network on raw data. The 'garbage in, garbage out' principle means no algorithm — however sophisticated — can compensate for poor or irrelevant input representations."
         }
       ],
       "createdAt": "2026-05-30T12:50:04.694Z",
@@ -1464,9 +1464,9 @@
       "difficulty": null,
       "source": null,
       "stats": {
-        "attempts": 0,
-        "bestScore": 0,
-        "lastAttempt": null
+        "attempts": 1,
+        "bestScore": 77,
+        "lastAttempt": "2026-06-01T15:45:32.734Z"
       }
     },
     {
@@ -1700,9 +1700,9 @@
       "difficulty": null,
       "source": null,
       "stats": {
-        "attempts": 0,
-        "bestScore": 0,
-        "lastAttempt": null
+        "attempts": 1,
+        "bestScore": 75,
+        "lastAttempt": "2026-05-31T11:25:20.457Z"
       }
     },
     {
@@ -2046,9 +2046,9 @@
       "difficulty": null,
       "source": null,
       "stats": {
-        "attempts": 0,
-        "bestScore": 0,
-        "lastAttempt": null
+        "attempts": 1,
+        "bestScore": 77,
+        "lastAttempt": "2026-06-01T20:44:52.601Z"
       }
     },
     {
@@ -2595,9 +2595,9 @@
       "difficulty": null,
       "source": null,
       "stats": {
-        "attempts": 0,
-        "bestScore": 0,
-        "lastAttempt": null
+        "attempts": 1,
+        "bestScore": 64,
+        "lastAttempt": "2026-06-01T12:54:43.927Z"
       }
     },
     {
@@ -2886,9 +2886,9 @@
       "difficulty": null,
       "source": null,
       "stats": {
-        "attempts": 0,
-        "bestScore": 0,
-        "lastAttempt": null
+        "attempts": 1,
+        "bestScore": 80,
+        "lastAttempt": "2026-06-01T16:50:26.308Z"
       }
     }
   ]
