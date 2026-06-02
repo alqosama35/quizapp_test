@@ -1,7 +1,7 @@
 {
   "type": "course-export",
   "version": 1,
-  "exportDate": "2026-06-02T21:00:15.238Z",
+  "exportDate": "2026-06-02T21:02:02.816Z",
   "course": {
     "id": "99db0919-6919-4ef3-bf03-cb5cfa2866bb",
     "name": "robotics",
@@ -17,7 +17,7 @@
       "shuffleOptions": false
     },
     "stats": {
-      "totalQuizzes": 6,
+      "totalQuizzes": 7,
       "totalAttempts": 0,
       "averageScore": 0,
       "bestScore": 0,
@@ -25,6 +25,462 @@
     }
   },
   "quizzes": [
+    {
+      "id": "4d488bc9-15b5-4b98-a283-9ed3ae49128e",
+      "courseId": "99db0919-6919-4ef3-bf03-cb5cfa2866bb",
+      "name": "All",
+      "jsonData": [
+        {
+          "question": "What single characteristic most fundamentally distinguishes a robot from a simple machine or appliance, according to the CS perspective?",
+          "options": [
+            "A closed-loop feedback system between sensing and physical actuation",
+            "The ability to execute a fixed, predetermined sequence of physical movements",
+            "The use of digital computation to process incoming sensor voltage signals",
+            "A mechanical body designed to produce force or motion in the real world"
+          ],
+          "correct": 0,
+          "explanation": "A robot is defined by its closed-loop feedback — it senses the environment and corrects its behavior accordingly. A washing machine executes a fixed cycle regardless of input (no feedback), whereas a Roomba adapts to obstacles (feedback). The presence of motors, sensors, or processors alone does not make a robot."
+        },
+        {
+          "question": "Which of the following correctly classifies the ABS braking system's 5ms timing requirement?",
+          "options": [
+            "A soft deadline, since occasional delays only slightly degrade braking performance",
+            "A hard deadline, since missing it leads to catastrophic loss of vehicle control",
+            "A soft deadline, since brake signals can be buffered and applied in the next available cycle",
+            "A hard deadline only above a minimum speed where vehicle braking dynamics become unstable"
+          ],
+          "correct": 1,
+          "explanation": "A hard deadline is one where missing it causes catastrophic failure — for ABS, a 5ms miss means loss of wheel-slip control and a potential accident. Soft deadlines (like a mapping update at 100ms) merely degrade performance. The speed-threshold option is wrong: the timing requirement is fixed regardless of speed."
+        },
+        {
+          "question": "An IMU reads [9.80, 9.82, 47.00, 9.79, 9.81] m/s². Which filter should be applied, and why does simple averaging fail for this data?",
+          "options": [
+            "EMA; averaging fails because the spike decays too slowly when exponentially weighted history is maintained",
+            "High-pass filter; averaging fails because it removes the constant gravity DC component along with the spike",
+            "Median filter; averaging fails because a single extreme spike pulls the mean far from the true signal",
+            "Low-pass filter; averaging fails because IMU spikes represent high-frequency noise that a low-pass cannot block over time"
+          ],
+          "correct": 2,
+          "explanation": "The spike (47.00) is impulse noise. Averaging gives (9.8+9.82+47+9.79+9.81)/5 ≈ 17.2 — completely wrong. The median (sorted: 9.79, 9.80, 9.81, 9.82, 47.00; middle = 9.81) correctly ignores the spike. A low-pass filter is tempting but incorrect — it smooths Gaussian noise, not impulse spikes."
+        },
+        {
+          "question": "A drone's balance controller must adjust rotor speeds within 2–5 ms. Which computing architecture is mandatory for this function?",
+          "options": [
+            "Cloud computing, since remote servers can process the IMU data with the lowest possible computational latency",
+            "Fog computing, since a nearby server provides more compute power with only minor communication overhead",
+            "A hybrid of cloud and edge, balancing compute resources to meet the stringent timing requirement",
+            "Edge computing on the robot itself, since any network hop exceeds the 2–5 ms time budget"
+          ],
+          "correct": 3,
+          "explanation": "Network latency (even to a nearby fog node) introduces variable delays that make sub-5ms guarantees impossible. Emergency control must run on-robot (edge) with deterministic timing. Cloud and fog are appropriate for path planning (seconds) or complex perception (hundreds of milliseconds), not sub-millisecond control."
+        },
+        {
+          "question": "According to the Nyquist-Shannon theorem, what is the minimum required sampling frequency to correctly reconstruct a signal with a 50 Hz maximum frequency component?",
+          "options": [
+            "Greater than 100 Hz",
+            "Exactly 50 Hz",
+            "Greater than 25 Hz",
+            "At least 500 Hz, matching the engineering practice of sampling 10× the maximum frequency"
+          ],
+          "correct": 0,
+          "explanation": "The Nyquist criterion states fs > 2·fmax. For fmax = 50 Hz, fs must exceed 100 Hz. Sampling at exactly 50 Hz or 100 Hz risks aliasing. The 500 Hz option describes the engineering best practice of 5–10× oversampling, which is recommended but not the theoretical minimum."
+        },
+        {
+          "question": "A drone's motor vibrates at 100 Hz, and the IMU is sampled at exactly 100 Hz. What is the direct consequence for state estimation?",
+          "options": [
+            "The gyroscope locks into resonance with the motor and begins recording only amplified positive velocities",
+            "Samples hit the same wave phase, making vibration invisible or appearing as a false lower-frequency signal",
+            "The accelerometer output saturates at the ADC maximum because vibration exceeds the sensor's dynamic range",
+            "The Kalman Filter's innovation term spikes periodically, triggering the auto-zeroing calibration routine"
+          ],
+          "correct": 1,
+          "explanation": "When the sampling rate equals the vibration frequency, every sample captures the signal at the same phase. Vibration appears to vanish (reads as 0,0,0…) or appears at a false lower frequency (the wagon-wheel effect). This corrupts EKF/SLAM with false pose updates and drift. None of the other options describe the fundamental aliasing phenomenon."
+        },
+        {
+          "question": "A robot uses a 60 Hz camera generating megabytes per second of image data. Which data acquisition method is most appropriate?",
+          "options": [
+            "Polling, where the main loop checks for new frame availability every millisecond",
+            "Interrupt-driven I/O, triggering a CPU interrupt for each incoming byte of image data",
+            "DMA, which bypasses the CPU entirely and transfers image data directly to memory",
+            "Fog computing, since high-bandwidth sensors should be offloaded to a nearby server"
+          ],
+          "correct": 2,
+          "explanation": "DMA transfers data directly between peripheral hardware and RAM without CPU intervention, enabling deterministic high-throughput capture. Polling wastes CPU cycles with variable latency. Interrupt-driven I/O would fire thousands of interrupts per second for raw image data, overwhelming the CPU. Fog computing is a deployment choice, not a data acquisition method."
+        },
+        {
+          "question": "In Bayes' theorem $P(A|B) = \\frac{P(B|A)P(A)}{P(B)}$ applied to robot localization, what does the term $P(B|A)$ represent?",
+          "options": [
+            "The posterior probability: the updated robot position belief after observing the measurement",
+            "The prior probability: the robot's position belief before any new sensor reading arrives",
+            "The normalization constant η that ensures all position probabilities sum to exactly one",
+            "The likelihood: how probable the sensor measurement B is if the robot is actually at position A"
+          ],
+          "correct": 3,
+          "explanation": "P(B|A) is the likelihood — it answers: 'If the robot were at position A, how likely is it that the sensor would produce reading B?' P(A|B) is the posterior (what we compute). P(A) is the prior. P(B) is the normalization. The most common confusion is between posterior P(A|B) and likelihood P(B|A)."
+        },
+        {
+          "question": "What happens to the spread of the robot's belief distribution when the prediction step of the Bayes Filter is executed?",
+          "options": [
+            "Uncertainty increases because motion is imperfect, adding error that widens the distribution",
+            "Uncertainty decreases because the physics model provides a precise forward prediction of the state",
+            "Uncertainty stays constant because the prediction does not incorporate any new sensor observations",
+            "Uncertainty resets to the process noise Q value, starting fresh after each motion command"
+          ],
+          "correct": 0,
+          "explanation": "During the prediction step, the robot's belief 'blurs' — the distribution shifts forward but becomes wider and shorter. This happens because the motion model is imperfect (wheel slip, motor variation). Uncertainty only decreases in the correction step when sensor data sharpens the distribution. Staying constant (option C) ignores the accumulated model error."
+        },
+        {
+          "question": "A robot has just been 'kidnapped' and placed at an unknown location in a building it has mapped previously. Which state estimator is most appropriate and why?",
+          "options": [
+            "The Kalman Filter, since maintaining a Gaussian belief is the most computationally efficient approach for any localization task",
+            "The Particle Filter, since it can represent the multimodal uncertainty needed for global localization",
+            "The Histogram Filter, since its discrete grid representation works well for small and medium environments",
+            "The Kalman Filter with a very large initial covariance, since high variance can represent any distribution shape"
+          ],
+          "correct": 1,
+          "explanation": "Global localization requires representing multiple equally likely positions simultaneously (multimodal belief). A Gaussian distribution has only one peak — it cannot represent 'I might be in corridor A OR corridor B.' The Particle Filter can represent any arbitrary distribution. The tempting wrong answer is D: a large Gaussian covariance covers a wide area but stays unimodal and cannot represent distinct disconnected hypotheses."
+        },
+        {
+          "question": "When the Kalman Gain K is close to 1, what does this indicate about the filter's current behavior?",
+          "options": [
+            "The filter is relying almost entirely on its physics prediction, nearly ignoring the sensor measurement",
+            "The filter has converged and the state estimate has reached its minimum achievable uncertainty level",
+            "The filter weights the new measurement heavily because current uncertainty P is high relative to sensor noise R",
+            "The sensor noise matrix R is very large, so the filter discounts measurements significantly"
+          ],
+          "correct": 2,
+          "explanation": "K close to 1 means the filter trusts the measurement more than the prediction. This happens when P (prediction uncertainty) is large relative to R (sensor noise). Option A describes K close to 0, not K close to 1. Option D is the opposite scenario — large R shrinks K, meaning measurements are distrusted."
+        },
+        {
+          "question": "A developer sets the process noise matrix Q = 0 in their Kalman Filter. What failure will emerge over time?",
+          "options": [
+            "The filter will converge faster because the zero noise assumption creates a perfect model to track against",
+            "The filter weights measurements more aggressively since no process noise penalizes the state transition",
+            "The filter oscillates between trusting prediction and measurement in unpredictable alternating cycles",
+            "The filter becomes overconfident in predictions and progressively ignores new measurements"
+          ],
+          "correct": 3,
+          "explanation": "Q represents 'healthy doubt' in the physics model. With Q = 0, the predicted covariance P_pred never grows, so K → 0 over time: the filter trusts its prediction perfectly and eventually ignores all sensor data. This is dangerous because the physics model is never perfect. The fix: always include a small nonzero Q."
+        },
+        {
+          "question": "Why do occupancy grid algorithms use log-odds rather than raw probabilities for cell updates?",
+          "options": [
+            "To avoid saturation at 0 or 1, so the robot can reverse its belief when the environment changes",
+            "To reduce memory footprint since logarithm values occupy fewer bits than standard floating-point numbers",
+            "To align the update rule with the Gaussian noise distribution assumed by sensors like LIDAR or cameras",
+            "To allow direct integration with Kalman Filter covariance update equations in the SLAM back-end"
+          ],
+          "correct": 0,
+          "explanation": "Raw probability multiplications eventually saturate at exactly 1.0 or 0.0 in floating-point. Once saturated, no new evidence can change the value. Log-odds converts [0,1] to (-∞,+∞), keeping updates additive and reversible. When a door initially marked 'closed' is later seen open, the log-odds value reverses — raw probability cannot."
+        },
+        {
+          "question": "With L = 1,000 landmarks, what is the dimension N of the EKF-SLAM state vector, and why is this problematic?",
+          "options": [
+            "N = 1,000 — storing only landmark coordinates in a separate feature map submatrix",
+            "N = 2,003 — the robot pose (3) plus two coordinates per landmark, producing an ~4 million-element covariance matrix",
+            "N = 3 — only the robot pose is stored; landmarks are maintained in a separate uncorrelated structure",
+            "N = 1,003 — adding only the landmark count to the robot pose without needing coordinate pairs"
+          ],
+          "correct": 1,
+          "explanation": "EKF-SLAM state = [x, y, θ, l1x, l1y, ..., lLx, lLy]^T, so N = 3 + 2L = 3 + 2000 = 2003. The covariance matrix is N × N ≈ 4 million elements, with O(N²) update cost per step. This makes real-time operation infeasible for large maps — exactly why Graph-SLAM (which avoids full covariance maintenance) was developed."
+        },
+        {
+          "question": "What is the fundamental architectural difference between EKF-SLAM and Graph-Based SLAM?",
+          "options": [
+            "EKF-SLAM uses grid maps while Graph-SLAM uses feature landmarks, requiring different sensor modalities",
+            "EKF-SLAM runs offline on collected data while Graph-SLAM processes sensor streams in real time",
+            "EKF-SLAM maintains a recursive Gaussian belief while Graph-SLAM optimizes a constraint graph globally",
+            "EKF-SLAM is more accurate in all scenarios because it explicitly maintains all pairwise uncertainty correlations"
+          ],
+          "correct": 2,
+          "explanation": "EKF-SLAM is filter-based — it recursively updates a joint Gaussian over robot pose and landmarks. Graph-SLAM accumulates constraints (odometry + loop closures) as edges and performs global optimization when needed. This allows Graph-SLAM to scale to large environments, whereas EKF-SLAM's O(N²) covariance breaks down. Option D is wrong: EKF-SLAM is not always more accurate — it fails at large scale where graph methods excel."
+        },
+        {
+          "question": "The Mercedes Drive Pilot operates fully autonomously on certified highway segments but requires a human fallback for edge cases outside its operational design domain. Which autonomy level does this represent?",
+          "options": [
+            "Level 5, since the system achieves full autonomy within a precisely specified operational domain",
+            "Level 2, since the human must maintain full situational awareness and be ready to override at any moment",
+            "Level 1, since the system only handles either steering or braking assistance individually, not both",
+            "Level 3–4, since it handles full operation in defined conditions but depends on human fallback"
+          ],
+          "correct": 3,
+          "explanation": "Level 3–4 (conditional autonomy) is defined as full operation within a defined Operational Design Domain (ODD), with the key limitation being the need for a human to take over outside that ODD. Level 5 (not yet achieved) would require full autonomy in all conditions. Level 2 requires the human to remain actively in the loop at all times."
+        },
+        {
+          "question": "Why is jitter often more harmful than a fixed latency in a robot's control system?",
+          "options": [
+            "Jitter creates unpredictable timing variation that control loops cannot compensate for by design",
+            "Jitter forces the robot to buffer extra sensor readings, consuming significantly more memory than steady-state latency",
+            "Jitter produces out-of-order sensor readings that cause false positive detections in the perception pipeline",
+            "Jitter only affects wireless communication links and has no impact on wired onboard sensor sampling rates"
+          ],
+          "correct": 0,
+          "explanation": "A fixed latency (e.g., always 35ms) can be compensated by designing the controller with that known delay in mind. Jitter means the delay varies — 30ms, 40ms, 35ms — so the controller cannot predict when data will arrive. This unpredictability destabilizes feedback loops. Option B (memory) is unrelated to jitter's core impact on control stability."
+        },
+        {
+          "question": "A gyroscope bias calibration (auto-zeroing) routine runs continuously while the robot navigates. What critical error does this cause?",
+          "options": [
+            "The calibration updates too slowly to track gyroscope drift because the robot's motion fills the update buffer",
+            "The calibration treats actual angular velocity as sensor bias and subtracts it, blinding the orientation estimate",
+            "The calibration permanently offsets the sensor zero toward positive angular velocities over time",
+            "The calibration conflicts with the complementary filter by removing the gyroscope's long-term stability signal"
+          ],
+          "correct": 1,
+          "explanation": "Auto-zeroing estimates bias by averaging readings assumed to come from a stationary robot. If run during motion, the real rotation signal gets averaged into the 'bias estimate' and is then subtracted from future readings — the robot cancels its own rotation measurements. The correct rule: auto-zeroing must only execute when encoders and accelerometers confirm the robot is stationary."
+        },
+        {
+          "question": "A position sensor has ±1mm noise and samples at 100 Hz (Δt = 0.01s). What velocity noise magnitude results from direct numerical differentiation?",
+          "options": [
+            "±0.001 m/s, because differentiation preserves the original noise amplitude without any amplification factor",
+            "±1 mm/s, since numerical differentiation keeps the noise in the same units as the input signal",
+            "±0.1 m/s, because dividing ±1mm by the 0.01s sample period amplifies noise by a factor of 100",
+            "±10 m/s, since high-frequency noise components are squared during the differentiation process"
+          ],
+          "correct": 2,
+          "explanation": "Numerical differentiation: v_noise = position_noise / Δt = 0.001m / 0.01s = 0.1 m/s. Tiny 1mm position noise becomes 0.1 m/s velocity noise — making the robot think it is shaking violently when stationary. This is why the golden rule is: filter position FIRST, then differentiate. Option B ignores the division by Δt that the formula requires."
+        },
+        {
+          "question": "Without the Markov Assumption, what memory complexity would a probabilistic state estimator require over a mission of duration t?",
+          "options": [
+            "O(1), because recursive Bayes updates only need the most recent prior and the new measurement",
+            "O(log t), because the robot can summarize its trajectory into a progressively smaller compressed state",
+            "O(n²), because pairs of historical states must all be cross-correlated with each new observation",
+            "O(t), since every past state and control would need to be stored to compute the current distribution"
+          ],
+          "correct": 3,
+          "explanation": "Without the Markov Assumption, P(x_t | x_0,...,x_{t-1}, u_0,...,u_t) requires storing the entire history — O(t) memory that grows indefinitely. The Markov Assumption reduces this to P(x_t | x_{t-1}, u_t), needing only the previous state: O(1) memory. This makes long-duration missions computationally feasible. Option A describes the memory requirement WITH the Markov Assumption."
+        },
+        {
+          "question": "What is the primary computational bottleneck of the classic Sense → Plan → Act (SPA) architecture compared to modern parallel designs?",
+          "options": [
+            "It is sequential — sensing, planning, and acting cannot overlap, creating pipeline bottlenecks at each phase",
+            "It requires dedicated hardware for each phase, increasing the robot's overall power consumption significantly",
+            "It cannot handle probabilistic sensor data because each phase assumes perfectly accurate digital inputs",
+            "It blocks feedback between phases since all information flows strictly in a single forward direction only"
+          ],
+          "correct": 0,
+          "explanation": "In SPA, the robot must fully complete sensing before planning begins, and planning before acting. This creates a worst-case delay equal to the sum of all three phase durations (like texting while walking). Modern architectures run all three concurrently. The bottleneck is temporal — not hardware, not probabilism, not feedback architecture."
+        },
+        {
+          "question": "What mathematical quantity does SLAM estimate, fundamentally distinguishing it from pure localization (known map) or pure mapping (known pose)?",
+          "options": [
+            "The robot trajectory $x_{1:t}$ alone, conditioned on a pre-existing map that is treated as fixed and correct",
+            "The joint posterior over both the robot trajectory and the environment map simultaneously",
+            "The marginal map probability $p(m \\mid z_{1:t})$ assuming the full robot trajectory is already available",
+            "The occupancy probability of individual grid cells, each updated independently via Bayesian inference"
+          ],
+          "correct": 1,
+          "explanation": "SLAM's formulation is p(x_{1:t}, m | z_{1:t}, u_{1:t}) — the joint posterior over robot trajectory AND map. Neither is assumed known. In pure localization m is given; in pure mapping x_{1:t} is given. SLAM's difficulty arises because these two unknowns are statistically dependent and must be estimated together."
+        },
+        {
+          "question": "In real-time robotics, why is the Exponential Moving Average (EMA) often preferred over the standard moving average for high-rate IMU filtering?",
+          "options": [
+            "EMA reacts faster to step changes because it assigns a higher weight coefficient to the newest measurement",
+            "EMA is more robust to impulse spikes because it effectively computes a median over an exponential window",
+            "EMA requires O(1) memory (only the previous output), whereas the moving average needs an O(N) sample buffer",
+            "EMA requires no tuning parameter while the moving average requires explicit selection of the window size N"
+          ],
+          "correct": 2,
+          "explanation": "The EMA formula y_k = α·z_k + (1-α)·y_{k-1} only needs to store the previous output y_{k-1} — O(1) memory. A moving average must store the last N samples in a circular buffer — O(N). For high-rate sensors (1kHz IMU), O(N) buffers consume significant memory. Option D is wrong — EMA has α as its tuning parameter, equivalent to N in the moving average."
+        },
+        {
+          "question": "In the Kalman Filter equations, what is the specific role of the measurement matrix H?",
+          "options": [
+            "It encodes the physics model describing how the state vector evolves across consecutive time steps",
+            "It quantifies sensor noise characteristics, indicating how much to trust each observation",
+            "It stores the full uncertainty about the current state estimate as a symmetric covariance matrix",
+            "It translates between state space and sensor space, extracting the measurable state components"
+          ],
+          "correct": 3,
+          "explanation": "H is the translator. If the state x = [position, velocity]^T but the sensor only measures position, then H = [1, 0] extracts position from x via H·x = position. This solves the dimensional mismatch between state and measurement vectors. Option A describes the state transition matrix A. Option B describes measurement noise R. Option C describes covariance matrix P."
+        },
+        {
+          "question": "The 'Kidnapped Robot Problem' is a specific instance of which localization category, and why?",
+          "options": [
+            "Global localization, because the robot starts with zero information about its current position",
+            "Position tracking, because the robot can use its valid map to re-match sensor readings to a prior pose",
+            "Dead reckoning, because wheel encoders can accumulate displacement to recover the original coordinates",
+            "Position tracking with high uncertainty, since the previous pose still acts as a very weak distant prior"
+          ],
+          "correct": 0,
+          "explanation": "When kidnapped, the robot has no knowledge of its starting position — maximum entropy (uniform distribution over the entire map). This is the defining criterion for global localization. Dead reckoning (option C) requires a known starting point to integrate from. Option D is incorrect because a physically moved robot's old pose provides zero useful positional information."
+        },
+        {
+          "question": "Which of the following sensors is classified as proprioceptive, and what distinguishes it from exteroceptive sensors?",
+          "options": [
+            "LIDAR — it measures distances from the robot to surrounding objects in the environment",
+            "IMU — it measures the robot's own internal acceleration and angular velocity, not the external world",
+            "Camera — it captures visual information about the surrounding environment from the robot's perspective",
+            "Microphone — it detects acoustic events generated by objects or activities in the surrounding area"
+          ],
+          "correct": 1,
+          "explanation": "Proprioceptive sensors measure the robot's own internal state (IMU measures acceleration/rotation; encoders measure wheel motion). Exteroceptive sensors measure the external environment. Key distinction: if the sensor would read zero in a vacuum with the robot moving, it is proprioceptive. LIDAR, camera, and microphone all depend on the external environment to produce meaningful readings."
+        },
+        {
+          "question": "A stationary accelerometer reads [9.78, 9.83, 9.80, 9.79, 9.81] m/s². Why does simple averaging effectively recover the true value from this data?",
+          "options": [
+            "Because the noise is bounded between a known minimum and maximum, so averaging recovers the arithmetic midpoint",
+            "Because the noise is periodic with a known frequency, so averaging cancels each complete cycle automatically",
+            "Because the noise has zero mean, so positive and negative deviations cancel out over sufficient samples",
+            "Because each sample is independent, so averaging eliminates correlated error components between readings"
+          ],
+          "correct": 2,
+          "explanation": "Gaussian (white) noise is characterized by zero mean — it is equally likely to push readings above or below the true value. Therefore, averaging causes deviations to cancel: Σ(noise_i)/N → 0 as N grows. This works for Gaussian noise but FAILS for salt-and-pepper noise (a single spike dominates the mean) or drift (systematic shift means mean ≠ truth)."
+        },
+        {
+          "question": "Why is ROS (Robot Operating System) described as a 'traffic director' rather than a true operating system?",
+          "options": [
+            "Because ROS includes its own memory management kernel that operates below the hardware abstraction layer",
+            "Because ROS fully replaces the OS scheduler to guarantee deterministic timing across all robot processes",
+            "Because ROS provides hardware device drivers for all standard sensors, removing the need for a real OS",
+            "Because ROS runs on top of Linux/Windows and coordinates inter-process communication between nodes, not hardware"
+          ],
+          "correct": 3,
+          "explanation": "ROS is middleware — it runs on top of a real operating system (typically Linux) and provides a publish-subscribe communication framework between independent software modules called nodes. It does NOT manage hardware directly, replace the OS scheduler, or provide device drivers. Its role is routing messages between nodes. Standard OSes are unsuitable for hard real-time robotics because background tasks (GC, updates) violate timing requirements."
+        },
+        {
+          "question": "What is the primary significance of successful loop closure detection in a SLAM system?",
+          "options": [
+            "It corrects accumulated odometry drift by aligning the estimated trajectory with the revisited location",
+            "It resets the entire occupancy grid and replaces all probability estimates with newly confirmed binary values",
+            "It verifies global map consistency, allowing the SLAM system to stop incorporating any further observations",
+            "It switches the back-end from a filter-based to a graph-based representation for improved scalability"
+          ],
+          "correct": 0,
+          "explanation": "Odometry error accumulates during robot motion. When the robot returns to a previously visited location and detects the match, the loop closure constraint connects the current pose to the past pose. Graph optimization then redistributes accumulated drift across the entire trajectory, dramatically reducing global error. Options B and C are incorrect — the map is updated, not reset or frozen."
+        },
+        {
+          "question": "A gyroscope reads 0.01, 0.02, 0.03, 0.05, 0.08 rad/s while the robot is completely stationary. What type of noise is this, and what makes it uniquely dangerous?",
+          "options": [
+            "Gaussian noise — it cancels over time through averaging, so no long-term angle error accumulates",
+            "Drift — it integrates over time into large angle errors that wheel odometry cannot detect or correct",
+            "Impulse noise — these are random spikes to the max/min ADC value that a median filter will quickly eliminate",
+            "Quantization noise — produced by insufficient ADC bit depth creating discrete steps between consecutive readings"
+          ],
+          "correct": 1,
+          "explanation": "The slow, monotonically increasing readings (0.01 → 0.08) while stationary are characteristic of gyroscope drift (bias instability). When integrated to estimate orientation, this small bias accumulates: 0.05 rad/s × 60 seconds = 3 radians of false rotation. Drift cannot cancel like Gaussian noise because it is systematic (non-zero mean). The fix: sensor fusion with an accelerometer, periodic recalibration, or a complementary filter."
+        },
+        {
+          "question": "In the state update equation $x_{new} = x_{pred} + K \\times (z - H \\times x_{pred})$, what does the term $(z - H \\times x_{pred})$ represent?",
+          "options": [
+            "The Kalman Gain, which determines the optimal weighting between the prediction and the measurement",
+            "The residual covariance, encoding the remaining uncertainty after incorporating the sensor reading",
+            "The innovation: the difference between the actual sensor measurement and the predicted measurement",
+            "The normalization factor that keeps the state vector within physically meaningful value bounds"
+          ],
+          "correct": 2,
+          "explanation": "z is the actual sensor measurement; H·x_pred is what the sensor should have read if the prediction were perfectly correct. Their difference (the innovation) means: 'how surprised was the sensor?' If the prediction was perfect, innovation = 0 and the state does not change. A large innovation means the sensor strongly disagreed with the model. The Kalman Gain K scales how much of this disagreement to incorporate."
+        },
+        {
+          "question": "In a corridor with ten identical white doors, why is data association uncertainty a critical challenge for SLAM?",
+          "options": [
+            "Because identical landmarks cause the EKF covariance matrix to become rank-deficient and non-invertible in larger environments",
+            "Because the SLAM system must maintain a separate signature entry for every single observation of each door instance",
+            "Because the sensor model assigns equal posterior probability to all doors, permanently locking the belief as a uniform distribution",
+            "Because matching an observation to the wrong door propagates an irrecoverable error that corrupts the entire map"
+          ],
+          "correct": 3,
+          "explanation": "Data association decides which stored landmark matches the current sensor reading. With ten identical doors, the system cannot distinguish them visually. One wrong association creates an inconsistent constraint in the map — unlike small Gaussian uncertainty, this is a discrete error that cascades: future poses are estimated relative to the wrongly-labeled landmark, distorting the entire trajectory."
+        },
+        {
+          "question": "After executing a 'move forward 1 meter' command, what effect does the Bayes Filter prediction step have on the robot's belief distribution before any new sensor reading?",
+          "options": [
+            "The distribution shifts forward and widens because motion uncertainty causes the belief to spread out",
+            "The distribution sharpens around the commanded endpoint because the robot knows exactly where it moved",
+            "The distribution splits into two peaks: one at the starting position and one at the intended destination",
+            "The distribution resets to a uniform prior since any motion command introduces maximum uncertainty"
+          ],
+          "correct": 0,
+          "explanation": "The prediction (action update) convolves the current belief with the motion model p(x_t | u_t, x_{t-1}). Because the motion model has uncertainty (wheel slip, motor variation), the result is a distribution that has shifted forward but is wider and shorter (variance increases). High certainty at one position becomes spreading uncertainty after moving — like the warehouse robot shifting from shelf 5 toward shelf 6 with increasing spread."
+        },
+        {
+          "question": "What fundamental property most distinguishes a drone stabilization system from a chess-playing AI in terms of computational requirements?",
+          "options": [
+            "The drone uses reinforcement learning while chess AI uses tree search, requiring entirely different hardware accelerators",
+            "The drone must complete its control cycle within 2–5 ms (hard temporal constraint) while chess AI has no real-time deadline",
+            "The drone processes continuous sensor streams while chess AI works on a discrete fully observable board state",
+            "The drone requires probabilistic uncertainty handling while chess AI operates on a deterministic perfect-information game"
+          ],
+          "correct": 1,
+          "explanation": "The defining CS distinction is temporal obligation. A chess engine can take 10 seconds or 10 milliseconds — deeper search produces better moves, but timing is flexible. A drone stabilization controller MUST produce its output within 2–5 ms or the vehicle crashes. This hard deadline forces robotics to prioritize timing guarantees over computational depth, a concern absent from most AI systems."
+        },
+        {
+          "question": "Which statement correctly describes a key stability difference between open-loop and closed-loop control systems?",
+          "options": [
+            "Open-loop systems are prone to instability when they receive contradictory readings from multiple sensors",
+            "Closed-loop systems are always more stable than open-loop because sensor feedback continuously corrects drift",
+            "Open-loop systems are generally stable while closed-loop systems can oscillate if the feedback is not properly tuned",
+            "Closed-loop stability depends entirely on actuator precision and is independent of the feedback gain parameters"
+          ],
+          "correct": 2,
+          "explanation": "Paradoxically, adding feedback (closed-loop) can destabilize a system if the gain is too high or loop delay causes phase problems. A washing machine (open-loop) is stable — it just executes the cycle. A robot arm with PID control (closed-loop) can oscillate if the proportional gain is too high. The lecture table explicitly states: closed-loop 'can become unstable if not tuned (oscillation).' Options B and D are wrong."
+        },
+        {
+          "question": "A robot detects a door, but four identical doors exist in the corridor. Which probability distribution best represents the robot's updated belief about its position?",
+          "options": [
+            "A uniform distribution with equal probability spread across all possible positions throughout the building",
+            "A single wide Gaussian centered between all four doors, with variance covering the entire corridor span",
+            "A single narrow Gaussian centered at the nearest door, since the robot should commit to the most likely hypothesis",
+            "A multimodal distribution with four separate probability peaks, one centered at each door's known location"
+          ],
+          "correct": 3,
+          "explanation": "When sensor information is ambiguous (identical doors), the correct Bayesian representation has one peak per possible location — a multimodal distribution. Option A ignores the information that a door was detected (versus blank wall). Options B and C are unimodal and cannot simultaneously represent four distinct equally-likely positions. This is exactly why particle filters are needed for global localization."
+        },
+        {
+          "question": "In the Kalman Filter, how does the covariance matrix P influence the computed Kalman Gain K?",
+          "options": [
+            "A large P causes K to grow, making the filter place more trust in new measurements than in its own prediction",
+            "A large P causes K to shrink, so the filter relies primarily on its physics model and resists measurements",
+            "P has no effect on K; only the sensor noise matrix R controls how much weight measurements receive",
+            "P represents measurement noise, so a higher P value indicates each sensor reading is considered more reliable"
+          ],
+          "correct": 0,
+          "explanation": "From the Kalman Gain equation K = P_pred·H^T / (H·P_pred·H^T + R): as P_pred grows, K → 1 (trust the measurement). High uncertainty → trust the measurement. Option B is the opposite and wrong. Option C is wrong — P directly appears in the gain formula. Option D confuses P (prediction uncertainty) with R (measurement noise)."
+        },
+        {
+          "question": "A 100m × 100m environment is mapped at 5cm resolution. How many grid cells does the occupancy grid require?",
+          "options": [
+            "400 cells, obtained by dividing each 100m dimension by 25cm intervals to give 400 grid positions",
+            "4,000,000 cells, computed as (100 ÷ 0.05) × (100 ÷ 0.05) = 2,000 × 2,000",
+            "40,000 cells, resulting from counting cells in only one dimension instead of squaring for the 2D grid",
+            "200,000 cells, from dividing total area (10,000 m²) by the resolution value (0.05m) directly"
+          ],
+          "correct": 1,
+          "explanation": "Resolution 5cm = 0.05m. Each dimension: 100/0.05 = 2,000 cells. For a 2D grid: 2,000 × 2,000 = 4,000,000 cells (4 MB at 1 byte/cell). Key insight: memory grows quadratically with decreasing resolution — halving the resolution quadruples the cell count. Options A, C, and D all contain arithmetic errors that trap students who confuse 1D vs. 2D counting or mix units."
+        },
+        {
+          "question": "A robot uses only a gyroscope for orientation estimation over a 30-minute mission. What failure mode should the system designer anticipate?",
+          "options": [
+            "The gyroscope will saturate at its maximum angular rate limit due to accumulated mechanical wear",
+            "The readings will become progressively noisier as the MEMS gyroscope heats up from continuous operation",
+            "The orientation estimate will drift significantly from truth as small bias errors integrate over time",
+            "The gyroscope will lose synchronization with the Kalman Filter after exceeding its rated update frequency"
+          ],
+          "correct": 2,
+          "explanation": "Gyroscopes suffer from bias instability — a small constant error (e.g., 0.1 rad/s) that integrates over time. After 30 minutes: 0.1 × 1800 = 180 radians of false orientation. This is why sensor fusion (complementary filter: gyro + accelerometer) is essential for long-duration operation — the accelerometer's gravity reference provides the long-term correction that the gyro cannot self-correct. Options A and D describe hardware failures, not the fundamental drift behavior."
+        },
+        {
+          "question": "A student writes `if sensor_reading == 1.5: turn_left()`. What fundamental reason explains why this approach fails in real robotics?",
+          "options": [
+            "Because Python's floating-point comparisons introduce rounding errors that make equality tests unreliable even for exact values",
+            "Because turn_left() does not account for the robot's angular momentum, causing overshoot at any nonzero velocity",
+            "Because real-time Python execution cannot guarantee the conditional check completes within any specific time budget",
+            "Because real sensors never return exact values — the reading will be 1.497, 1.503, or similar noisy variants, never exactly 1.5"
+          ],
+          "correct": 3,
+          "explanation": "This illustrates the core principle: robotics is a probabilistic estimation problem, not a deterministic one. Sensor readings are noisy (LIDAR returns 5.0 ± 0.2m, never exactly 5.0). A deterministic equality check will NEVER fire in practice. The correct approach: `if abs(sensor_reading - 1.5) < tolerance`. Option A describes a real float issue but is secondary — the fundamental problem is sensor noise, which motivates all of probabilistic robotics."
+        }
+      ],
+      "createdAt": "2026-06-02T21:01:58.336Z",
+      "tags": [],
+      "difficulty": null,
+      "source": null,
+      "stats": {
+        "attempts": 0,
+        "bestScore": 0,
+        "lastAttempt": null
+      }
+    },
     {
       "id": "50963943-ba1c-4b08-b42a-51c7cf23852b",
       "courseId": "99db0919-6919-4ef3-bf03-cb5cfa2866bb",
