@@ -191,11 +191,9 @@ function applyInstantFeedback(questionIdx, selectedIndex) {
                 submitQuizConfirm();
             }
         };
-        // Correct: move on instantly for fast practice. Wrong: pause so the mistake is noticed.
+        // Correct: brief pause then move on for fast practice. Wrong: stay put so the mistake is noticed.
         if (isCorrect) {
-            advance();
-        } else {
-            setTimeout(advance, 2000);
+            setTimeout(advance, 250);
         }
     }
 }
