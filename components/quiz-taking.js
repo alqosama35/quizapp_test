@@ -184,13 +184,19 @@ function applyInstantFeedback(questionIdx, selectedIndex) {
     if (AppState.quizSession.autoScroll) {
         const session = AppState.quizSession;
         const totalQuestions = session.quiz.jsonData.length;
-        setTimeout(() => {
+        const advance = () => {
             if (session.currentQuestion < totalQuestions - 1) {
                 nextQuestion();
             } else {
                 submitQuizConfirm();
             }
-        }, 1000);
+        };
+        // Correct: move on instantly for fast practice. Wrong: pause so the mistake is noticed.
+        if (isCorrect) {
+            advance();
+        } else {
+            setTimeout(advance, 2000);
+        }
     }
 }
 
