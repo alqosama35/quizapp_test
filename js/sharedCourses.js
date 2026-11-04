@@ -13,5 +13,5 @@ const SHARED_COURSES_REGISTRY = {
     "se2": "shared-courses/course-se2.json",
     "aml": "shared-courses/course-aml.json",
     "robotics": "shared-courses/course-robotics.json",
-    "deep-learning": "shared-courses/course-deep-learning.json",
+    "deep-learning": "shared-courses/course-deep_learning.json",
 };

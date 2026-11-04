@@ -1,0 +1,485 @@
+{
+  "type": "course-export",
+  "version": 1,
+  "exportDate": "2026-11-04T16:38:44.873Z",
+  "course": {
+    "id": "a687b66d-73ab-43c7-a0b8-85bbee0bb154",
+    "name": "deep-learning",
+    "description": "",
+    "color": "#3B82F6",
+    "icon": "📘",
+    "createdAt": "2026-11-04T16:38:16.658Z",
+    "updatedAt": "2026-11-04T16:38:16.658Z",
+    "settings": {
+      "passingScore": 70,
+      "defaultTimeLimit": null,
+      "shuffleQuestions": false,
+      "shuffleOptions": false
+    },
+    "stats": {
+      "totalQuizzes": 1,
+      "totalAttempts": 0,
+      "averageScore": 0,
+      "bestScore": 0,
+      "totalMistakes": 0
+    }
+  },
+  "quizzes": [
+    {
+      "id": "f119ef59-62c8-4f83-8edc-84e61c3352fe",
+      "courseId": "a687b66d-73ab-43c7-a0b8-85bbee0bb154",
+      "name": "midterm-exercise",
+      "jsonData": [
+        {
+          "question": "In the lecture's technical sense, what is a language model?",
+          "options": [
+            "A computational system that predicts the next word from the previous words",
+            "A rule-based parser that assigns a grammatical dependency structure to every input sentence",
+            "A classifier that assigns each input document to one topic from a fixed set of categories",
+            "A lookup table that maps each source word to its dictionary translation in another language"
+          ],
+          "correct": 0,
+          "explanation": "A language model is defined as a system that predicts upcoming words from earlier words. Parsers, classifiers and dictionaries are NLP tools, but none of them is what the lecture calls a language model."
+        },
+        {
+          "question": "How does the training objective of an encoder such as BERT differ from that of a decoder-only model such as GPT?",
+          "options": [
+            "Encoders predict each next word strictly left to right; decoders fill in masked words using both sides",
+            "Encoders generate output tokens one at a time; decoders are only trained to emit class labels",
+            "Encoders and decoders share the same left-to-right objective but differ in training-set size",
+            "Encoders predict words from context on both sides; decoders predict from earlier words only"
+          ],
+          "correct": 3,
+          "explanation": "Encoders (masked LMs) learn by predicting words from surrounding context on both sides and are usually finetuned for classification. Decoders are causal/autoregressive and predict left to right. The second option swaps the two."
+        },
+        {
+          "question": "A team must build a system that maps an audio recording's acoustics to a written transcript. Which architecture family from the lecture fits this sequence-to-sequence task best?",
+          "options": [
+            "An encoder-only masked LM, since it reads context on both sides and outputs class labels",
+            "An encoder-decoder model, which is trained to map one sequence to another (as Whisper does)",
+            "A decoder-only model, since speech recognition is trained purely as next-word prediction over text",
+            "An n-gram model, since counting word frequencies suffices to convert acoustics into words"
+          ],
+          "correct": 1,
+          "explanation": "Encoder-decoders are trained to map one sequence to another, e.g. machine translation and speech recognition (acoustics to words, as in Whisper). Encoder-only models are finetuned for classification, not for producing a new sequence."
+        },
+        {
+          "question": "Which of the following is NOT another name for the decoder-only models that the lecture focuses on?",
+          "options": [
+            "Causal LLMs that predict each word from earlier words",
+            "Masked language models trained on both-sided context",
+            "Autoregressive LLMs that generate output one token at a time",
+            "Left-to-right LLMs that predict words in reading order"
+          ],
+          "correct": 1,
+          "explanation": "Masked language models are the encoder family (BERT). Causal, autoregressive and left-to-right are all names the lecture gives to decoder-only LLMs."
+        },
+        {
+          "question": "After the network outputs a distribution over next tokens, why might the chosen token be a slightly less probable one rather than the single most probable token?",
+          "options": [
+            "The tokenizer replaces rare tokens with the next most frequent entry in its vocabulary at every step",
+            "Token selection depends on a temperature setting, so sampling can pick less probable tokens",
+            "The end-of-response token overrides the distribution whenever the top-ranked token is a content word",
+            "The embeddings are recomputed after each step, which randomly reorders the probabilities of all tokens"
+          ],
+          "correct": 1,
+          "explanation": "In the inference walkthrough, step 6 says the token may be the most probable one or a slightly less probable one depending on the temperature setting. The other options invent mechanisms that are not part of generation."
+        },
+        {
+          "question": "A German sentence of 12 words is split by an LLM tokenizer into 27 tokens. What does this example illustrate?",
+          "options": [
+            "German text contains hidden filler words that the tokenizer inserts as padding tokens before processing",
+            "In other languages tokens tend to be smaller than words, so one word can span several tokens",
+            "BPE assigns one token to every individual character in languages that form long compound words",
+            "The tokenizer has malfunctioned, because English-trained tokenizers should return one token per word"
+          ],
+          "correct": 1,
+          "explanation": "The lecture uses this Einstein-title example to show that English tokens roughly match words, while in other languages tokens are often smaller than words. Tokens are subword units, not a one-to-one word mapping."
+        },
+        {
+          "question": "Why does running BPE on the UTF-8 bytes of the input remove the problem of unknown tokens?",
+          "options": [
+            "The vocabulary is expanded at test time with every word that was missing from the training corpus",
+            "BPE re-learns its merges on each new sentence, so an unseen word always receives its own new token",
+            "UTF-8 guarantees that each code point is exactly one byte, so no merges are ever needed for rare words",
+            "Only 256 byte values exist, so any text can be built from base byte tokens"
+          ],
+          "correct": 3,
+          "explanation": "Because a byte can take only 256 values, every input can be represented from byte-level base tokens, so nothing is unknown. UTF-8 code points are not all one byte; BPE merges begin by rediscovering multi-byte sequences."
+        },
+        {
+          "question": "A trained BPE tokenizer must segment a new test sentence. Which procedure does it follow?",
+          "options": [
+            "Apply merges in order of how frequent each pair is in the test data, starting with the most frequent",
+            "Learn a fresh set of merges from the test corpus and use those to segment each test sentence",
+            "Split words into characters, then apply the learned merges greedily in the order they were learned",
+            "Look up each whole word in the vocabulary and mark it as unknown whenever it is not found there"
+          ],
+          "correct": 2,
+          "explanation": "At test time BPE runs the merges greedily in the order learned from training data; test-set frequencies play no role. Relearning merges or word lookup would defeat the point of subword tokenization."
+        },
+        {
+          "question": "What is a parameter in a neural network, as defined in the lecture?",
+          "options": [
+            "A single real-valued number, such as a weight or bias, that is trained and used for computation",
+            "A setting chosen by the developer before training begins, such as the learning rate or batch size",
+            "A token in the vocabulary whose embedding vector is looked up each time it appears in the text",
+            "A fixed instruction text that is prepended to every user prompt before the model processes it"
+          ],
+          "correct": 0,
+          "explanation": "Parameters are the trainable real numbers (weights and biases); a model like Llama 3.1 405B has 405 billion of them. Learning rate is a hyperparameter, and the prepended text describes a system prompt."
+        },
+        {
+          "question": "According to Hoffmann et al. (2022), for a fixed compute cost $C$, how should the optimal parameter count $N_{opt}$ and optimal data size $D_{opt}$ scale?",
+          "options": [
+            "$N_{opt}$ grows in proportion to $C$ while $D_{opt}$ stays fixed at a constant",
+            "Both grow roughly equally, each following a power law of the form $C^{1/2}$",
+            "$D_{opt}$ grows as $C^{2}$ while $N_{opt}$ shrinks as compute increases",
+            "$N_{opt}$ grows as $C^{1/2}$ while $D_{opt}$ grows more slowly, roughly as $C^{1/4}$"
+          ],
+          "correct": 1,
+          "explanation": "The scaling-law equation is $N_{opt} \\propto C^{1/2}$ and $D_{opt} \\propto C^{1/2}$: parameters and data should grow equally. The last option is tempting because it keeps the exponent 1/2 for parameters but gets the data exponent wrong."
+        },
+        {
+          "question": "A company has a fixed training budget and expects heavy inference traffic after deployment. Based on the lecture's discussion of scaling laws, which strategy is most sensible?",
+          "options": [
+            "Maximize parameter count, because performance depends only on model size and inference cost is negligible",
+            "Use as little training data as possible, since scaling laws show data matters less than parameters do",
+            "Train for as few iterations as possible, because extra training on the same data lowers model performance",
+            "Train a smaller model for longer on more data, since huge models are costly at every inference call"
+          ],
+          "correct": 3,
+          "explanation": "The lecture notes that very big models are expensive at inference every time they are prompted, so it is often better to train a smaller model for more time over more data. Performance depends on size, data and compute together, not size alone."
+        },
+        {
+          "question": "Which statement correctly distinguishes open-weight from closed-weight (proprietary) models?",
+          "options": [
+            "Open-weight developers release all weights for others to run; closed-weight models are reached only via apps or APIs",
+            "Open-weight models always publish their full training corpus, whereas closed-weight models are trained without any web text",
+            "Closed-weight developers release the weights but forbid finetuning, whereas open-weight developers host the model and expose an API",
+            "Open-weight models consist of weights only with no biases, whereas closed-weight models use both weights and biases"
+          ],
+          "correct": 0,
+          "explanation": "Open-weight means the parameters are released; closed-weight means the developer hosts the model and permits only app/API access. Releasing weights does not imply releasing training data, and both kinds use weights and biases."
+        },
+        {
+          "question": "A reader has never seen 'difficult' but sees it in contexts like 'a difficult decision', and knows 'hard' from 'a very hard decision'. Which principle supports inferring similar meanings?",
+          "options": [
+            "Conditional generation: the next word is chosen given the prompt, which makes synonyms interchangeable",
+            "Instruction tuning: supervised examples explicitly label which pairs of words are synonyms of each other",
+            "The distributional hypothesis: aspects of meaning can be learned from which words occur together",
+            "Preference alignment: humans rank candidate words, so near-synonyms are grouped by those rankings"
+          ],
+          "correct": 2,
+          "explanation": "The distributional hypothesis (Joos, Harris, Firth) says meaning can be learned from co-occurrence contexts, which is the intuition behind learning from text alone. The other stages operate on already-pretrained models and do not label synonyms."
+        },
+        {
+          "question": "Why is next-word pretraining of LLMs described as 'self-supervised'?",
+          "options": [
+            "The model ranks its own candidate outputs and reinforces whichever it judges to be the best one",
+            "The next word in the text itself serves as the label, so no human annotation is needed",
+            "Humans first label sentiment for each sentence, and the model then supervises itself on the remaining text",
+            "The model is trained without any loss function and relies only on its internal consistency to improve"
+          ],
+          "correct": 1,
+          "explanation": "Self-supervised means the supervision signal comes from the data itself: the true next word. Training uses cross-entropy loss and gradient descent. Ranking its own outputs describes a different technique, not pretraining."
+        },
+        {
+          "question": "A pretrained LM given 'Q: Who wrote The Origin of Species? A:' tends to output 'Charles'. What best explains this behavior?",
+          "options": [
+            "The model contains a built-in database module that retrieves facts before any word is generated",
+            "The prompt activates a separate question-answering architecture that bypasses next-word prediction",
+            "The prompt updates the model's weights through gradient descent so it learns the answer on the spot",
+            "Training data has many question-answer patterns and Darwin facts, so answers follow questions"
+          ],
+          "correct": 3,
+          "explanation": "Prompting is just conditional next-word prediction: FAQ sites, the book itself, Wikipedia and instruction data make 'Charles' the likely continuation. No retrieval module exists and no weights change at inference."
+        },
+        {
+          "question": "In Shannon's letter-guessing game, where did players most often need corrections, and what does this reveal?",
+          "options": [
+            "Inside long words where letters are nearly determined, showing that rare words carry little information at all",
+            "At word beginnings and points with many possible continuations, showing where information concentrates",
+            "At the end of sentences only, showing that punctuation is the hardest part of text to predict",
+            "At the same rate everywhere, showing that all letter positions carry equal amounts of information"
+          ],
+          "correct": 1,
+          "explanation": "Players erred most at word starts and where many continuations are possible (e.g. after 'a' or 'the'), so these positions hold most of the information. The game also mirrors pretraining: guess, get corrected, continue."
+        },
+        {
+          "question": "What is an embedding in an LLM?",
+          "options": [
+            "An integer index assigned to each token by the tokenizer, such as 17360 for a given word",
+            "A probability distribution over the whole vocabulary produced at the output layer of the network",
+            "A vector that represents the meaning of a token as a point in high-dimensional space",
+            "A grammatical label such as noun or verb attached to each token by an external parser"
+          ],
+          "correct": 2,
+          "explanation": "An embedding is just a vector, the internal representation of meaning. The integer is the token ID that gets replaced by an embedding, and the distribution is the network's output."
+        },
+        {
+          "question": "Which pairing of historical period and development matches the lecture's four-stage history of the field?",
+          "options": [
+            "Statistical and Neural Foundations (1950s): the Transformer architecture and attention mechanisms are introduced to the field",
+            "Revival of Empiricism (1988-2019): Shannon formalizes word prediction and Rosenblatt invents the perceptron for the first time",
+            "LLM era (2019-): Prolog and SHRDLU-style semantic parsing become the dominant approach to building meaning representations",
+            "Symbolic Turn (1960s-1988): Minsky and Papert's XOR argument against neural nets and Chomsky's case against statistical models"
+          ],
+          "correct": 3,
+          "explanation": "The Symbolic Turn saw formal grammars, logic and arguments against both statistical modeling and neural nets (XOR). Shannon and Rosenblatt belong to the 1950s foundations; attention and the Transformer belong to the empiricism-revival period (2015, 2017)."
+        },
+        {
+          "question": "Which sequence lists these developments in correct chronological order?",
+          "options": [
+            "Bengio neural LM (2003), backprop (1986), Transformer (2017), attention (2015), BERT (2019)",
+            "Backprop (1986), attention (2015), Bengio neural LM (2003), BERT (2019), Transformer (2017)",
+            "Backprop (1986), Bengio neural LM (2003), attention (2015), Transformer (2017), BERT (2019)",
+            "Transformer (2017), BERT (2019), attention (2015), Bengio neural LM (2003), backprop (1986)"
+          ],
+          "correct": 2,
+          "explanation": "The lecture dates backprop to 1986, Bengio's neural LM to 2003, attention to 2015, the Transformer to 2017 and BERT to 2019. The distractors each swap pairs, such as placing the Transformer before attention."
+        },
+        {
+          "question": "A student claims modern LLMs still need explicit parsing of linguistic structure as the central step for building meaning. What is wrong with this reasoning?",
+          "options": [
+            "Parsing is still central, but it happens only at inference inside the attention heads and never during training time",
+            "Linguistic structure has become irrelevant to NLP, including for analyzing what LLMs represent internally",
+            "Meaning now comes from word prediction and embeddings; structure mainly serves interpretability and social science",
+            "LLMs take syntactic parse trees as input but have no need for coreference or semantic information in any form"
+          ],
+          "correct": 2,
+          "explanation": "In early NLP structure was a required step toward meaning; in LLMs word prediction and embeddings do that job, and linguistic structure now plays two new roles: interpretability and applications in social and cognitive science."
+        },
+        {
+          "question": "What did the attention-head studies cited in the lecture find about how LLMs represent language?",
+          "options": [
+            "Attention heads spread weight evenly over all earlier tokens and therefore ignore grammatical relations",
+            "Some object-token heads attend to their governing verb, and others attend to coreferent antecedents",
+            "Attention heads attend almost exclusively to punctuation, which carries the sentence's grammatical structure",
+            "Syntax is stored only in the first layer, while coreference appears only in the final output embeddings"
+          ],
+          "correct": 1,
+          "explanation": "Attention is sensitive to grammar (object-to-verb heads) and to coreference (mention-to-antecedent heads), and embeddings implicitly encode parse trees, semantics and coreference. The distractors contradict these results."
+        },
+        {
+          "question": "In the dialogue 'A: Can you hand me the box? [two boxes present] B: Which one?', what move does B make, and what does research find about LLMs on it?",
+          "options": [
+            "A coreference resolution; LLMs perform it better than humans by tracking the antecedent of 'the box'",
+            "A syntactic dependency; LLMs avoid it because they cannot identify verbs and their objects",
+            "A sycophantic reply; LLMs overuse it to affirm the user's positive face and self-image",
+            "A clarification question for grounding; LLMs tend to avoid it and often assume incorrectly"
+          ],
+          "correct": 3,
+          "explanation": "B asks a clarification question, a way of grounding. Shaikh et al. (2024) found LLMs seldom do this and instead guess what the user meant. Sycophancy is a different behavior concerned with flattering the user."
+        },
+        {
+          "question": "Which statement correctly matches an LLM linguistic behavior with its description?",
+          "options": [
+            "Overconfidence: overusing strengtheners like 'definitely' and avoiding weakeners like 'maybe'",
+            "Sycophancy: overusing weakeners like 'maybe' to avoid ever committing to a definite answer",
+            "Overconfidence: language that affirms and bolsters the user's positive face and self-image in conversation",
+            "Sycophancy: refusing to answer and repeatedly asking the user for clarification questions"
+          ],
+          "correct": 0,
+          "explanation": "Zhou et al. (2024) describe overconfidence as too many strengtheners and too few weakeners; Cheng et al. (2026) describe sycophancy as language that affirms the user's positive face. The distractors swap these definitions."
+        },
+        {
+          "question": "A team filters pretraining data with a toxicity classifier and then trains a model only on the filtered text. Which problem from the lecture should they anticipate?",
+          "options": [
+            "The filter reliably removes all toxic content, but it also deletes Wikipedia and books because those sources are mostly toxic",
+            "The filter works only at the URL level, so duplicated documents and repeated lines remain untouched in the corpus",
+            "Filters can flag non-toxic dialects like African American English, and toxicity-free training hurts toxicity detection",
+            "The filter is unnecessary because open LLMs are trained mainly on curated books rather than on web text"
+          ],
+          "correct": 2,
+          "explanation": "The lecture lists two problems with toxicity detection: it mistakenly flags dialects like African American English, and models trained on toxicity-free text have trouble detecting toxicity. Deduplication is done at many levels, and open LLMs mainly train on web data such as CommonCrawl."
+        },
+        {
+          "question": "Which of the following is NOT listed in the lecture as a problem with scraping pretraining text from the web?",
+          "options": [
+            "Much of the text is copyrighted, and its fair-use status is legally unclear",
+            "Pages can contain private information such as IP addresses and phone numbers",
+            "Data is disproportionately written by US authors, skewing topics and opinions",
+            "Web text is too short to support training beyond about a billion tokens"
+          ],
+          "correct": 3,
+          "explanation": "The listed problems are copyright, privacy and skew. The web is huge: FineWeb has 18.5 trillion English tokens and Dolma has 3 trillion, so data size is not a limit."
+        },
+        {
+          "question": "Why does a pretrained LM prompted with 'Explain the moon landing to a six year old' answer with 'Explain the theory of gravity to a 6 year old'?",
+          "options": [
+            "Its weights were damaged by instruction tuning, which makes it repeat the instruction it was given",
+            "It is a text predictor that continues text and does not know the user wants an assistant",
+            "It lacks an embedding for the word 'moon' and substitutes a nearby physics topic in its place",
+            "Preference alignment penalized explanatory answers, so it generates another prompt instead of a reply"
+          ],
+          "correct": 1,
+          "explanation": "Pretrained LMs just predict likely continuations; they do not know an assistant role is wanted. This is the problem that instruction tuning (SFT) solves. Instruction tuning comes after pretraining and does not cause this behavior."
+        },
+        {
+          "question": "During supervised fine-tuning on (Instruction: 'Write a letter from the perspective of a cat', Output: 'Dear [Owner], ...'), on which tokens is the training loss applied?",
+          "options": [
+            "Only on the output tokens, predicted word by word given the instruction",
+            "Only on the instruction tokens, since the model must first learn to understand the task being posed",
+            "On instruction and response tokens equally, exactly as in pretraining on raw running text",
+            "Only on the final token of the response, because each example supplies a single label to predict"
+          ],
+          "correct": 0,
+          "explanation": "In SFT the model is trained to predict only the response, word by word, conditioned on the instruction. Applying loss to the instruction would teach it to generate prompts rather than answers."
+        },
+        {
+          "question": "What is the key difference in learning signal between instruction tuning (SFT) and preference alignment?",
+          "options": [
+            "Preference alignment also teaches what not to say by penalizing rejected responses, whereas SFT only imitates targets",
+            "SFT uses reinforcement learning with a reward function, whereas preference alignment uses only next-word cross-entropy",
+            "SFT needs human-ranked pairs of responses, whereas preference alignment needs only single demonstration answers",
+            "SFT changes the model weights, whereas preference alignment only modifies the prompt context at inference time"
+          ],
+          "correct": 0,
+          "explanation": "SFT trains on target responses; preference alignment trains on chosen vs rejected responses using RL methods like PPO or DPO, so it also tells the model what NOT to produce. The other options reverse or invent the roles of the two stages."
+        },
+        {
+          "question": "Which dataset row has the form needed for preference alignment training?",
+          "options": [
+            "(instruction, single gold response), e.g. a Spanish translation request with one reference translation",
+            "(math word problem, final numeric answer) that a program can check automatically for correctness",
+            "(raw web page, next token) pairs drawn from a Common Crawl snapshot for self-supervised training",
+            "(prompt, chosen, rejected), e.g. a CDC-based malaria answer preferred over 'I don't know'"
+          ],
+          "correct": 3,
+          "explanation": "Preference data consists of a prompt with a chosen and a rejected response, as in the HH-RLHF malaria example. The other rows are instruction data, verifiable data and pretraining data."
+        },
+        {
+          "question": "How does RL with verifiable rewards (RLVR) differ from preference alignment?",
+          "options": [
+            "RLVR requires humans to rank pairs of outputs, whereas preference alignment checks answers automatically",
+            "RLVR rewards automatically checked correctness in domains like math, without human preference judgments",
+            "RLVR trains by next-word prediction on solutions, whereas preference alignment uses a reward function",
+            "RLVR is applied before pretraining, whereas preference alignment follows instruction tuning"
+          ],
+          "correct": 1,
+          "explanation": "RLVR targets reasoning in verifiable domains (math, formal reasoning) where correctness can be checked automatically, then rewards right answers with RL. Preference alignment instead depends on human or LLM rankings."
+        },
+        {
+          "question": "What is the order of training stages in the pipeline presented in the lecture?",
+          "options": [
+            "Instruction tuning, pretraining, preference alignment, RL with verifiable rewards, in that order",
+            "Pretraining, preference alignment, instruction tuning, RL with verifiable rewards, in that order",
+            "Pretraining, instruction tuning, preference alignment, RL with verifiable rewards",
+            "Pretraining, instruction tuning, RL with verifiable rewards, preference alignment, in that order"
+          ],
+          "correct": 2,
+          "explanation": "The pipeline runs pretraining, then instruction tuning (SFT), then preference alignment, then RL with verifiable rewards. Preference alignment improves an already instruction-tuned model, so it cannot come first."
+        },
+        {
+          "question": "A user adds three worked examples of a new task to a prompt and the model's accuracy improves. Which description of what happened is correct?",
+          "options": [
+            "Fine-tuning: gradient descent updates the weights, so the improvement carries over to later conversations too",
+            "Preference alignment: the examples are ranked and used to train a reward function for the model",
+            "Pretraining on a small corpus: the new task is stored permanently in the token embeddings",
+            "In-context learning: only context and activations change, no weights update, and it ends with the chat"
+          ],
+          "correct": 3,
+          "explanation": "Demonstrations act as a learning signal without changing parameters; this is in-context learning, which must be relearned in the next conversation. Pretraining sets weights through gradient descent, which prompting does not do."
+        },
+        {
+          "question": "In the lecture's inference walkthrough, which ordering of steps is correct after a user submits a question?",
+          "options": [
+            "Tokenize, assemble prompt, run network, embed tokens, choose a token, get distribution, stop after one token",
+            "Assemble prompt, embed raw text, tokenize, get distribution, run network, choose a token, loop until end-of-response",
+            "Assemble prompt, tokenize, embed tokens, run network, get distribution, choose a token, loop until end-of-response",
+            "Tokenize, embed tokens, choose a token, run network, get distribution, update weights, stop at end-of-response"
+          ],
+          "correct": 2,
+          "explanation": "The prompt is assembled (with system prompt), tokenized, converted to embeddings, run through the network to get a distribution, a token is chosen and appended, and the loop repeats until an end-of-response token. No weights are updated at inference."
+        },
+        {
+          "question": "What is a system prompt?",
+          "options": [
+            "Text silently prepended to the user's text that sets the model's role, tone and context",
+            "A special dataset used during instruction tuning to teach the model how to refuse unsafe requests",
+            "A learned embedding vector added to every token in order to encode the identity of the user",
+            "A message that the model generates at the end of each response to summarize the conversation so far"
+          ],
+          "correct": 0,
+          "explanation": "A system prompt is the first instruction to the model, automatically and silently concatenated to the user prompt (Claude Opus 4's runs about 1,700 words). It is part of the context, not a dataset or a learned vector."
+        },
+        {
+          "question": "How does chain-of-thought prompting differ from standard few-shot prompting?",
+          "options": [
+            "Demonstrations contain only final answers, and the model is updated by gradient descent to learn how to reason",
+            "The model's weights are swapped for RLVR-trained weights before each prompt is processed at inference time",
+            "Demonstrations are omitted and the system prompt instead tells the model to refuse any difficult question",
+            "Demonstrations include reasoning steps, leading the model to output similar steps before answering"
+          ],
+          "correct": 3,
+          "explanation": "Chain-of-thought augments each demonstration with text explaining the reasoning steps, so the model outputs similar steps (Wei et al., 2022). It is still prompting: no weights change."
+        },
+        {
+          "question": "How does a ReAct agent work through the Apple Remote question?",
+          "options": [
+            "It loops Thought, Action such as Search[entity], and Observation as context until Finish[answer]",
+            "It repeats prompt, gradient update and evaluation until the training loss falls below a chosen threshold",
+            "It cycles retrieval, pretraining and alignment steps until a human reviewer approves the final response",
+            "It reasons entirely internally in a single Thought step and never calls any external tool or API"
+          ],
+          "correct": 0,
+          "explanation": "ReAct interleaves reasoning traces with actions (Search, Lookup, Finish) and observations, treating the whole history as context. It is an inference-time loop, not a training procedure, and it does call tools."
+        },
+        {
+          "question": "A lab reports 95% on MMLU for a model trained on a web crawl that includes pages hosting MMLU questions. What is the main concern with this result?",
+          "options": [
+            "Data contamination: test items entered the training data, so the metric overstates real performance",
+            "Overfitting to the system prompt: the score understates ability because the prompt consumes context",
+            "Sycophancy: the model agrees with the benchmark's answer key whether or not the answer is correct",
+            "Tokenization drift: MMLU questions are tokenized differently at test time, which lowers measured accuracy"
+          ],
+          "correct": 0,
+          "explanation": "Data contamination is when the test set leaks into training data; since LLMs train on the web and many benchmarks are on the web, the score overstates performance. Releasing training data or reporting overlap helps mitigate it."
+        },
+        {
+          "question": "A team must evaluate poems written by a model. Which approach is consistent with the lecture?",
+          "options": [
+            "Score each poem by exact match against a single reference poem written by one human author",
+            "Rely on LLM judges alone, since pairwise comparison is something only human raters can do",
+            "Use human or LLM judges with a rubric, singly or pairwise, and double-check a portion with humans",
+            "Avoid LLM judges entirely, because only human pairwise rankings are considered a valid evaluation"
+          ],
+          "correct": 2,
+          "explanation": "Subjective tasks use a human-as-judge or LLM-as-a-judge with a rubric; judgments can be single (how good is this?) or pairwise (which is better?), and a portion should be double-checked by humans. Exact match works for accuracy tasks such as '457 + 3'."
+        },
+        {
+          "question": "Which pair contains one user-level harm and one societal-level harm?",
+          "options": [
+            "De-skilling of users, and concentration of wealth and power",
+            "Environmental impact of compute, and job displacement from automation",
+            "Sycophancy toward users, and emotional dependence on chatbots",
+            "Cyber attacks by malicious actors, and existential risk from AI goals"
+          ],
+          "correct": 0,
+          "explanation": "De-skilling is a user-level harm, while wealth and power concentration is societal-level. The other pairs are both societal-level (environment/jobs; attacks/existential risk) or both user-level (sycophancy/dependence)."
+        },
+        {
+          "question": "A model says it is '95% sure' but is right only about 60% of the time on such answers. Which limitation from the lecture does this illustrate?",
+          "options": [
+            "Hallucination: the model fabricates facts because training rewards coherence rather than truth",
+            "Skew: the training data was disproportionately written by authors from one country",
+            "Poor calibration: the model's actual accuracy does not match the confidence it assigns",
+            "Data contamination: benchmark questions leaked into training data and inflated the score"
+          ],
+          "correct": 2,
+          "explanation": "The lecture defines poor calibration as actual accuracy not matching the score or probability the model assigns. Hallucination concerns generating false statements, not a mismatch between stated confidence and accuracy."
+        }
+      ],
+      "createdAt": "2026-11-04T16:38:31.786Z",
+      "tags": [],
+      "difficulty": null,
+      "source": null,
+      "stats": {
+        "attempts": 0,
+        "bestScore": 0,
+        "lastAttempt": null
+      }
+    }
+  ]
+}
